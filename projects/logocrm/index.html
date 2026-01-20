@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>LogoCRM — CRM-система для управления клиентами | Антон Двинянинов</title>
+    <meta name="description" content="LogoCRM — современная CRM-система для управления клиентами и продажами. Разработка: Vue.js, Laravel, MySQL.">
+    <meta name="keywords" content="LogoCRM, CRM система, управление клиентами, веб-приложение, Vue.js, Laravel">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../../public/logo.svg">
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    
+    <link rel="stylesheet" href="../../src/fonts/fonts.css">
+    <link rel="stylesheet" href="../../src/css/styles.css">
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <!-- Навигация -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <span class="logo__bracket">[</span>dvinyaninov<span class="logo__bracket">]</span>
+        </a>
+        <nav class="nav">
+            <a href="../../index.html#work" class="nav__link">
+                <span class="nav__number">01</span>
+                <span class="nav__text">Проекты</span>
+            </a>
+            <a href="../../index.html#services" class="nav__link">
+                <span class="nav__number">02</span>
+                <span class="nav__text">Услуги</span>
+            </a>
+            <a href="../../index.html#contact" class="nav__link">
+                <span class="nav__number">03</span>
+                <span class="nav__text">Контакт</span>
+            </a>
+        </nav>
+        <div class="header__right">
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="project-page">
+        <!-- Hero проекта -->
+        <section class="project-hero">
+            <a href="../../index.html#work" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Назад к проектам</span>
+            </a>
+            
+            <div class="project-hero__content">
+                <span class="project-hero__label">CRM / Бизнес</span>
+                <h1 class="project-hero__title">LogoCRM</h1>
+                <p class="project-hero__desc">Современная CRM-система для управления клиентами, продажами и автоматизации бизнес-процессов</p>
+                
+                <div class="project-hero__meta">
+                    <div class="project-meta">
+                        <span class="project-meta__label">Год</span>
+                        <span class="project-meta__value">2024</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-meta__label">Роль</span>
+                        <span class="project-meta__value">Full-stack разработчик</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-meta__label">Статус</span>
+                        <span class="project-meta__value">В разработке</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-hero__image">
+                <div class="project-hero__bg" style="background: linear-gradient(135deg, #8338ec, #ff006e);"></div>
+            </div>
+        </section>
+
+        <!-- Технологии -->
+        <section class="project-section">
+            <h2 class="project-section__title">Технологии</h2>
+            <div class="project-tech-grid">
+                <div class="tech-card">
+                    <div class="tech-card__icon">⚡</div>
+                    <h3 class="tech-card__title">Vue.js 3</h3>
+                    <p class="tech-card__desc">Composition API, Pinia для state management</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">🔧</div>
+                    <h3 class="tech-card__title">Laravel 10</h3>
+                    <p class="tech-card__desc">REST API, аутентификация, бизнес-логика</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">💾</div>
+                    <h3 class="tech-card__title">MySQL</h3>
+                    <p class="tech-card__desc">Реляционная база данных</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">🎨</div>
+                    <h3 class="tech-card__title">Tailwind CSS</h3>
+                    <p class="tech-card__desc">Utility-first CSS фреймворк</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Описание -->
+        <section class="project-section">
+            <h2 class="project-section__title">О проекте</h2>
+            <div class="project-content">
+                <p>LogoCRM — это комплексная система управления взаимоотношениями с клиентами, разработанная для малого и среднего бизнеса. Система позволяет эффективно управлять клиентской базой, отслеживать продажи и автоматизировать рутинные процессы.</p>
+                
+                <h3>Основные возможности:</h3>
+                <ul>
+                    <li>Управление клиентской базой и контактами</li>
+                    <li>Воронка продаж с визуализацией этапов</li>
+                    <li>Система задач и напоминаний</li>
+                    <li>Аналитика и отчеты по продажам</li>
+                    <li>Интеграция с email и мессенджерами</li>
+                    <li>Мобильная адаптация для работы в пути</li>
+                </ul>
+
+                <h3>Решаемые задачи:</h3>
+                <ul>
+                    <li>Централизация данных о клиентах</li>
+                    <li>Повышение конверсии продаж</li>
+                    <li>Автоматизация рутинных операций</li>
+                    <li>Контроль работы менеджеров</li>
+                    <li>Прогнозирование продаж</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Следующий проект -->
+        <section class="project-next">
+            <a href="../../index.html#work" class="project-next__link">
+                <span class="project-next__label">Все проекты</span>
+                <span class="project-next__arrow">→</span>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__left">
+            <span>© 2026</span>
+            <span class="footer__divider">/</span>
+            <span>Антон Двинянинов</span>
+        </div>
+        <div class="footer__right">
+            <span>Сделано с</span>
+            <span class="footer__heart">♥</span>
+            <span>и кодом</span>
+        </div>
+    </footer>
+
+    <script src="../../src/js/script.js" defer></script>
+</body>
+</html>

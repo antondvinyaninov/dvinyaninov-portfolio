@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Все проекты — Антон Двинянинов</title>
+    <meta name="description" content="Портфолио проектов Антона Двинянинова: веб-приложения, CRM-системы, платформы и интерактивные решения.">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="../public/logo.svg">
+    <link rel="icon" type="image/x-icon" href="../public/favicon.ico">
+    
+    <link rel="stylesheet" href="../src/fonts/fonts.css">
+    <link rel="stylesheet" href="../src/css/styles.css">
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <!-- Навигация -->
+    <header class="header">
+        <a href="../index.html" class="logo">
+            <span class="logo__bracket">[</span>dvinyaninov<span class="logo__bracket">]</span>
+        </a>
+        <nav class="nav">
+            <a href="../index.html#work" class="nav__link">
+                <span class="nav__number">01</span>
+                <span class="nav__text">Проекты</span>
+            </a>
+            <a href="../index.html#services" class="nav__link">
+                <span class="nav__number">02</span>
+                <span class="nav__text">Услуги</span>
+            </a>
+            <a href="../index.html#contact" class="nav__link">
+                <span class="nav__number">03</span>
+                <span class="nav__text">Контакт</span>
+            </a>
+        </nav>
+        <div class="header__right">
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="projects-page">
+        <section class="projects-hero">
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Назад на главную</span>
+            </a>
+            
+            <h1 class="projects-hero__title">Все проекты</h1>
+            <p class="projects-hero__desc">Коллекция моих работ: от веб-приложений до интерактивных платформ</p>
+        </section>
+
+        <section class="projects-grid-section">
+            <div class="projects-grid">
+                <!-- Зооплатформа -->
+                <article class="project-card">
+                    <a href="zooplatforma/" class="project-card__link">
+                        <div class="project-card__image">
+                            <div class="project-card__bg" style="background: linear-gradient(135deg, #00d4ff, #06ffa5);"></div>
+                            <span class="project-card__year">2024</span>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Платформа / Животные</span>
+                            <h3 class="project-card__title">Зооплатформа</h3>
+                            <p class="project-card__desc">Платформа для поиска и помощи животным с интеграцией приютов</p>
+                            <div class="project-card__tech">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- LogoCRM -->
+                <article class="project-card">
+                    <a href="logocrm/" class="project-card__link">
+                        <div class="project-card__image">
+                            <div class="project-card__bg" style="background: linear-gradient(135deg, #8338ec, #ff006e);"></div>
+                            <span class="project-card__year">2024</span>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">CRM / Бизнес</span>
+                            <h3 class="project-card__title">LogoCRM</h3>
+                            <p class="project-card__desc">CRM-система для управления клиентами и продажами</p>
+                            <div class="project-card__tech">
+                                <span>Vue.js</span>
+                                <span>Laravel</span>
+                                <span>MySQL</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Страницы памяти -->
+                <article class="project-card">
+                    <a href="stranicy-pamyati/" class="project-card__link">
+                        <div class="project-card__image">
+                            <div class="project-card__bg" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                            <span class="project-card__year">2023</span>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Мемориал / Социальное</span>
+                            <h3 class="project-card__title">Страницы памяти</h3>
+                            <p class="project-card__desc">Платформа для создания цифровых мемориалов и сохранения памяти</p>
+                            <div class="project-card__tech">
+                                <span>Next.js</span>
+                                <span>Firebase</span>
+                                <span>Tailwind</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Карты помощи -->
+                <article class="project-card">
+                    <a href="karty-pomoshchi/" class="project-card__link">
+                        <div class="project-card__image">
+                            <div class="project-card__bg" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                            <span class="project-card__year">2023</span>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Благотворительность</span>
+                            <h3 class="project-card__title">Карты помощи</h3>
+                            <p class="project-card__desc">Интерактивная карта для координации благотворительной помощи</p>
+                            <div class="project-card__tech">
+                                <span>React</span>
+                                <span>Mapbox</span>
+                                <span>Express</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__left">
+            <span>© 2026</span>
+            <span class="footer__divider">/</span>
+            <span>Антон Двинянинов</span>
+        </div>
+        <div class="footer__right">
+            <span>Сделано с</span>
+            <span class="footer__heart">♥</span>
+            <span>и кодом</span>
+        </div>
+    </footer>
+
+    <script src="../src/js/script.js" defer></script>
+</body>
+</html>
