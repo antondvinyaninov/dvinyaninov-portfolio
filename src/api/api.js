@@ -32,16 +32,18 @@ app.post('/send-message', async (req, res) => {
     
     // Если это чат - всегда отправляем как сообщение из чата
     if (isChat) {
-      const userIdInfo = userId ? `🆔 User #${userId}` : '';
-      const userInfo = name ? `👤 ${name}` : '';
-      const phoneInfo = phone ? `📞 ${phone}` : '';
-      const header = [userIdInfo, userInfo, phoneInfo].filter(Boolean).join('\n');
+      const parts = ['💬 Сообщение из чата:', ''];
       
-      if (header) {
-        text = `💬 Сообщение из чата:\n\n${header}\n\n${message}`;
-      } else {
-        text = `💬 Сообщение из чата:\n\n${message}`;
+      if (userId) parts.push(`🆔 User @${userId}`);
+      if (name) parts.push(`👤 ${name}`);
+      if (phone) parts.push(`📞 ${phone}`);
+      
+      if (userId || name || phone) {
+        parts.push(''); // Пустая строка перед сообщением
       }
+      
+      parts.push(message);
+      text = parts.join('\n');
     } else {
       // Заявка с контактной формы
       text = `🎯 Новая заявка на проект!\n\n👤 Имя: ${name || 'Не указано'}\n📞 Контакт: ${phone || 'Не указан'}\n📝 Описание:\n${message}`;
