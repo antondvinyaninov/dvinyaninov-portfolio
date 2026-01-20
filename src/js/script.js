@@ -478,6 +478,114 @@ setInterval(animateBgSnake, bgSpeed);
 drawBgSnake();
 
 // ============================================
+// ПАСХАЛКА: КЛИКИ ПО ФОТО
+// ============================================
+const heroPhoto = document.querySelector('.hero-photo');
+let photoClickCount = 0;
+let photoClickTimeout;
+
+if (heroPhoto) {
+    heroPhoto.addEventListener('click', () => {
+        photoClickCount++;
+        
+        // Сбрасываем счетчик через 2 секунды если не кликают
+        clearTimeout(photoClickTimeout);
+        photoClickTimeout = setTimeout(() => {
+            photoClickCount = 0;
+        }, 2000);
+        
+        // При 5 кликах запускаем пасхалку
+        if (photoClickCount === 5) {
+            photoClickCount = 0;
+            activateEasterEgg();
+        }
+    });
+}
+
+function activateEasterEgg() {
+    // Создаем конфетти
+    createConfetti();
+    
+    // Показываем секретное сообщение
+    const message = document.createElement('div');
+    message.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--accent);
+        color: white;
+        padding: 30px 50px;
+        border-radius: 20px;
+        font-size: 24px;
+        font-weight: 700;
+        z-index: 10000;
+        animation: easterEggPop 0.5s ease;
+        box-shadow: 0 20px 60px rgba(255, 0, 110, 0.5);
+        text-align: center;
+    `;
+    message.innerHTML = '🎉 Вы нашли пасхалку! 🎉<br><span style="font-size: 16px; opacity: 0.9;">Спасибо, что исследуете мой сайт!</span>';
+    document.body.appendChild(message);
+    
+    // Добавляем анимацию
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes easterEggPop {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Убираем сообщение через 3 секунды
+    setTimeout(() => {
+        message.style.animation = 'easterEggPop 0.3s ease reverse';
+        setTimeout(() => {
+            message.remove();
+        }, 300);
+    }, 3000);
+}
+
+function createConfetti() {
+    const colors = ['#ff006e', '#00d4ff', '#06ffa5', '#8338ec', '#ff006e'];
+    const confettiCount = 100;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = `
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            top: -10px;
+            left: ${Math.random() * 100}vw;
+            z-index: 9999;
+            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+            animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
+            opacity: ${0.5 + Math.random() * 0.5};
+        `;
+        document.body.appendChild(confetti);
+        
+        // Удаляем конфетти после анимации
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+    
+    // Добавляем анимацию падения
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// ============================================
 // 3D TILT ЭФФЕКТ ДЛЯ ФОТО
 // ============================================
 const photoWrapper = document.querySelector('.photo-wrapper');
