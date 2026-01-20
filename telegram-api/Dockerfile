@@ -2,11 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY telegram-api/package*.json ./
 
 RUN npm install --production
 
-COPY . .
+COPY telegram-api/ .
 
 EXPOSE 3001
 
