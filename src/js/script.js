@@ -473,6 +473,8 @@ heroTitleLines.forEach(line => {
 // ============================================
 // ФОНОВАЯ ЗМЕЙКА
 // ============================================
+// ФОНОВАЯ ЗМЕЙКА
+// ============================================
 const bgCanvas = document.getElementById('backgroundSnake');
 const bgCtx = bgCanvas.getContext('2d');
 
@@ -481,7 +483,6 @@ function resizeBgCanvas() {
     bgCanvas.width = window.innerWidth;
     bgCanvas.height = window.innerHeight;
 }
-resizeBgCanvas();
 
 // Оптимизированный resize с debounce
 let resizeTimeout;
@@ -506,7 +507,6 @@ function initBgSnake() {
         bgSnake.push({ x: startX - i, y: startY });
     }
 }
-initBgSnake();
 
 function getBgColors() {
     const theme = document.documentElement.getAttribute('data-theme');
@@ -595,9 +595,13 @@ function animateBgSnake() {
     drawBgSnake();
 }
 
-// Запуск анимации
-setInterval(animateBgSnake, bgSpeed);
-drawBgSnake();
+// Запуск анимации после загрузки страницы
+window.addEventListener('load', function() {
+    resizeBgCanvas();
+    initBgSnake();
+    setInterval(animateBgSnake, bgSpeed);
+    drawBgSnake();
+});
 
 // ============================================
 // ПАСХАЛКА: КЛИКИ ПО ФОТО
