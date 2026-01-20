@@ -14,6 +14,7 @@ COPY src/api/api.js index.js
 WORKDIR /usr/share/nginx/html
 COPY index.html ./
 COPY public/ ./public/
+COPY projects/ ./projects/
 COPY src/css/styles.css ./src/css/
 COPY src/js/script.js ./src/js/
 COPY src/assets/*.webp ./src/assets/
