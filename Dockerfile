@@ -16,7 +16,7 @@ COPY index.html ./
 COPY public/ ./public/
 COPY src/css/styles.css ./src/css/
 COPY src/js/script.js ./src/js/
-COPY src/assets/photo.jpg ./src/assets/
+COPY src/assets/ ./src/assets/
 
 # Настройка nginx
 COPY config/nginx.conf /etc/nginx/http.d/default.conf
