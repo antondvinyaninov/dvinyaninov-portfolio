@@ -37,8 +37,10 @@
             </div>
         </div>
         <form class="chat-form">
-            <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
-            <input type="tel" class="chat-phone" placeholder="Телефон (необязательно)">
+            <div class="chat-initial-fields">
+                <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
+                <input type="tel" class="chat-phone" placeholder="Телефон (необязательно)">
+            </div>
             <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="3"></textarea>
             <button type="submit" class="chat-send">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -395,20 +397,38 @@
                 <h2 class="contact__title">
                     <span class="title-animate">Есть проект?</span><br>
                     <span class="title-animate contact__accent">Давайте создадим</span><br>
-                    <span class="title-animate">что-то крутое</span>
+                    <span class="title-animate">что-то крутое</span><br>
+                    <span class="title-animate">вместе</span>
                 </h2>
-                <a href="mailto:hello@dvinyaninov.com" class="contact__email">
-                    hello@dvinyaninov.com
-                </a>
-                <div class="contact__links">
-                    <a href="#" class="contact__link">Telegram</a>
-                    <a href="#" class="contact__link">GitHub</a>
-                    <a href="#" class="contact__link">LinkedIn</a>
-                    <a href="#" class="contact__link">Dribbble</a>
+                <div class="contact__info">
+                    <a href="mailto:anton@dvinyaninov.ru" class="contact__email">
+                        anton@dvinyaninov.ru
+                    </a>
+                    <div class="contact__links">
+                        <a href="#" class="contact__link">Telegram</a>
+                        <a href="#" class="contact__link">GitHub</a>
+                        <a href="#" class="contact__link">LinkedIn</a>
+                    </div>
                 </div>
             </div>
-            <div class="contact__visual">
-                <div class="contact__circle"></div>
+            <div class="contact__form-wrapper">
+                <form class="contact__form">
+                    <div class="form__group">
+                        <input type="text" class="form__input" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="text" class="form__input" placeholder="Телефон или Email" required>
+                    </div>
+                    <div class="form__group">
+                        <textarea class="form__textarea" placeholder="Расскажите о проекте..." rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="form__submit">
+                        <span>Отправить</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </section>
     </main>

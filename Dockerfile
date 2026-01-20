@@ -6,13 +6,14 @@ RUN apk add --no-cache nginx supervisor
 
 # Копируем и устанавливаем зависимости API
 WORKDIR /app/api
-COPY api-package.json package.json
+COPY src/api/api-package.json package.json
 RUN npm install --production
-COPY api.js index.js
+COPY src/api/api.js index.js
 
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
-COPY index.html styles.css script.js photo.jpg ./
+COPY index.html styles.css script.js ./
+COPY src/assets/photo.jpg ./photo.jpg
 
 # Настройка nginx
 COPY nginx.conf /etc/nginx/http.d/default.conf

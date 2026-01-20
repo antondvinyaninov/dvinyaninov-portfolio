@@ -28,6 +28,9 @@ const chatName = document.querySelector('.chat-name');
 const chatPhone = document.querySelector('.chat-phone');
 const chatMessages = document.querySelector('.chat-messages');
 const chatSend = document.querySelector('.chat-send');
+const chatInitialFields = document.querySelector('.chat-initial-fields');
+
+let isFirstMessage = true;
 
 chatToggle.addEventListener('click', () => {
     chatPanel.classList.add('active');
@@ -78,6 +81,12 @@ chatForm.addEventListener('submit', async (e) => {
             
             if (result.success) {
                 botMessage.innerHTML = `<p>Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊</p>`;
+                
+                // Скрываем поля имени и телефона после первого сообщения
+                if (isFirstMessage) {
+                    chatInitialFields.style.display = 'none';
+                    isFirstMessage = false;
+                }
             } else {
                 botMessage.innerHTML = `<p>Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧</p>`;
             }
@@ -479,3 +488,59 @@ window.addEventListener('load', () => {
 
 console.log('🚀 Portfolio loaded!');
 console.log('Made with ❤️ by Anton Dvinyaninov');
+
+
+// ============================================
+// КОНТАКТНАЯ ФОРМА
+// ============================================
+const contactForm = document.querySelector('.contact__form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = contactForm.querySelector('input[type="text"]').value;
+        const contact = contactForm.querySelectorAll('input[type="text"]')[1].value;
+        const description = contactForm.querySelector('textarea').value;
+        
+        const submitBtn = contactForm.querySelector('.form__submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>Отправка...</span>';
+        submitBtn.disabled = true;
+        
+        try {
+            const message = `🎯 Новая заявка на проект!\n\n👤 Имя: ${name}\n📞 Контакт: ${contact}\n📝 Описание:\n${description}`;
+            
+            const response = await fetch('/api/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message, name, phone: contact })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                submitBtn.innerHTML = '<span>✓ Отправлено!</span>';
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error('Ошибка отправки');
+            }
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            submitBtn.innerHTML = '<span>✗ Ошибка</span>';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
+        }
+    });
+}

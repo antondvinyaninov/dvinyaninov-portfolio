@@ -15,7 +15,7 @@ app.use(express.json());
 // Endpoint для отправки сообщений
 app.post('/send-message', async (req, res) => {
   try {
-    const { message, name, email } = req.body;
+    const { message, name, phone } = req.body;
     
     if (!message) {
       return res.status(400).json({ 
@@ -25,7 +25,14 @@ app.post('/send-message', async (req, res) => {
     }
     
     // Формируем текст сообщения
-    const text = `🔔 Новое сообщение с сайта!\n\n👤 Имя: ${name || 'Не указано'}\n📧 Email: ${email || 'Не указан'}\n💬 Сообщение:\n${message}`;
+    let text = '';
+    if (name || phone) {
+      // Заявка с контактной формы
+      text = `🎯 Новая заявка на проект!\n\n👤 Имя: ${name || 'Не указано'}\n📞 Контакт: ${phone || 'Не указан'}\n📝 Описание:\n${message}`;
+    } else {
+      // Сообщение из чата
+      text = `💬 Сообщение из чата:\n\n${message}`;
+    }
     
     // Отправляем в Telegram
     const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;

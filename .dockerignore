@@ -3,8 +3,7 @@ node_modules
 .gitignore
 .DS_Store
 docs/
-wrangler.toml
-functions/
 .vscode/
 README.md
 INFRASTRUCTURE.md
+*.md
