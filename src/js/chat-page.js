@@ -41,7 +41,7 @@ function loadChatHistoryPage() {
             // Очищаем чат (оставляем только приветствие)
             chatPageMessages.innerHTML = `
                 <div class="chat-message chat-message--bot">
-                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                    <img src="src/assets/photo.webp" alt="Anton" class="chat-avatar">
                     <p>Привет! 👋 Я Антон. Чем могу помочь?</p>
                 </div>
             `;
@@ -53,7 +53,7 @@ function loadChatHistoryPage() {
                 
                 if (msg.type === 'bot') {
                     messageDiv.innerHTML = `
-                        <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                        <img src="src/assets/photo.webp" alt="Anton" class="chat-avatar">
                         <p>${msg.text}</p>
                     `;
                 } else {
@@ -129,7 +129,7 @@ async function checkNewMessagesPage() {
                     const botMessage = document.createElement('div');
                     botMessage.className = 'chat-message chat-message--bot';
                     botMessage.innerHTML = `
-                        <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                        <img src="src/assets/photo.webp" alt="Anton" class="chat-avatar">
                         <p>${msg.text}</p>
                     `;
                     chatPageMessages.appendChild(botMessage);
@@ -206,7 +206,7 @@ chatPageForm.addEventListener('submit', async (e) => {
         const botMessage = document.createElement('div');
         botMessage.className = 'chat-message chat-message--bot';
         botMessage.innerHTML = `
-            <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+            <img src="src/assets/photo.webp" alt="Anton" class="chat-avatar">
             <p>${errorText}</p>
         `;
         chatPageMessages.appendChild(botMessage);
