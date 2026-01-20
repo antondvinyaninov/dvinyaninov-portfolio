@@ -588,7 +588,7 @@ body {
 }
 
 .hero__title {
-    font-size: clamp(50px, 10vw, 110px);
+    font-size: clamp(60px, 12vw, 110px);
     font-weight: 900;
     line-height: 0.95;
     margin-bottom: 30px;
@@ -1735,15 +1735,17 @@ body {
 
 @media (max-width: 480px) {
     .hero__title {
-        font-size: 36px;
+        font-size: 48px;
     }
     
     .hero__skills {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
     
     .hero__skill {
-        flex: 1 1 100%;
+        flex: 1 1 auto;
     }
     
     .photo-container {
