@@ -380,7 +380,7 @@ body {
 }
 
 .chat-name,
-.chat-email {
+.chat-phone {
     padding: 10px 14px;
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -393,7 +393,7 @@ body {
 }
 
 .chat-name:focus,
-.chat-email:focus {
+.chat-phone:focus {
     border-color: var(--accent);
 }
 
