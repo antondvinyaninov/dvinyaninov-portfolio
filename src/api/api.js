@@ -18,7 +18,7 @@ app.use(express.json());
 // Endpoint для отправки сообщений
 app.post('/send-message', async (req, res) => {
   try {
-    const { message, name, phone } = req.body;
+    const { message, name, phone, isChat } = req.body;
     
     if (!message) {
       return res.status(400).json({ 
@@ -29,12 +29,21 @@ app.post('/send-message', async (req, res) => {
     
     // Формируем текст сообщения
     let text = '';
-    if (name || phone) {
+    
+    // Если это чат - всегда отправляем как сообщение из чата
+    if (isChat) {
+      const userInfo = name ? `👤 ${name}` : '';
+      const phoneInfo = phone ? `📞 ${phone}` : '';
+      const header = [userInfo, phoneInfo].filter(Boolean).join(' | ');
+      
+      if (header) {
+        text = `💬 Сообщение из чата:\n${header}\n\n${message}`;
+      } else {
+        text = `💬 Сообщение из чата:\n\n${message}`;
+      }
+    } else {
       // Заявка с контактной формы
       text = `🎯 Новая заявка на проект!\n\n👤 Имя: ${name || 'Не указано'}\n📞 Контакт: ${phone || 'Не указан'}\n📝 Описание:\n${message}`;
-    } else {
-      // Сообщение из чата
-      text = `💬 Сообщение из чата:\n\n${message}`;
     }
     
     // Отправляем в Telegram

@@ -214,7 +214,12 @@ chatForm.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ message, name, phone })
+            body: JSON.stringify({ 
+                message, 
+                name, 
+                phone,
+                isChat: true  // Флаг что это сообщение из чата
+            })
         });
         
         const result = await response.json();
