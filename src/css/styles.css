@@ -6,8 +6,8 @@
 
 :root {
     --bg: #ffffff;
-    --text: #0a0a0a;
-    --text-secondary: #666666;
+    --text: #000000;
+    --text-secondary: #555555;
     --accent: #ff006e;
     --border: #e0e0e0;
     --card-bg: #f8f8f8;
@@ -844,6 +844,7 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     color: var(--accent);
+    font-weight: 700;
 }
 
 .section__title {
