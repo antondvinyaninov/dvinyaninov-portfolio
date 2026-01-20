@@ -299,6 +299,12 @@ body {
     transition: right 0.3s ease;
 }
 
+[data-theme="dark"] .chat-panel {
+    background: #0f0f0f;
+    border-left: 1px solid #555;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
 .chat-panel.active {
     right: 0;
 }
@@ -309,6 +315,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+[data-theme="dark"] .chat-header {
+    border-bottom: 1px solid #555;
+    background: #1a1a1a;
 }
 
 .chat-header h3 {
@@ -361,6 +372,11 @@ body {
 .chat-message--bot {
     background: var(--card-bg);
     align-self: flex-start;
+}
+
+[data-theme="dark"] .chat-message--bot {
+    background: #1a1a1a;
+    border: 1px solid #555;
 }
 
 .chat-message--user {
@@ -421,6 +437,18 @@ body {
     transition: border-color 0.3s ease;
 }
 
+[data-theme="dark"] .chat-name,
+[data-theme="dark"] .chat-phone {
+    background: #0f0f0f;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .chat-name::placeholder,
+[data-theme="dark"] .chat-phone::placeholder {
+    color: #888;
+}
+
 .chat-name:focus,
 .chat-phone:focus {
     border-color: var(--accent);
@@ -438,6 +466,16 @@ body {
     transition: border-color 0.3s ease;
     resize: vertical;
     min-height: 60px;
+}
+
+[data-theme="dark"] .chat-input {
+    background: #0f0f0f;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .chat-input::placeholder {
+    color: #888;
 }
 
 .chat-input:focus {
@@ -1173,6 +1211,12 @@ body {
     z-index: 2;
 }
 
+[data-theme="dark"] .contact__form-wrapper {
+    background: #1a1a1a;
+    border: 1px solid #555;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
 .contact__form {
     display: flex;
     flex-direction: column;
@@ -1197,12 +1241,39 @@ body {
     transition: all 0.3s ease;
 }
 
+[data-theme="dark"] .form__input,
+[data-theme="dark"] .form__select,
+[data-theme="dark"] .form__textarea {
+    background: #0f0f0f;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .form__input::placeholder,
+[data-theme="dark"] .form__select::placeholder,
+[data-theme="dark"] .form__textarea::placeholder {
+    color: #888;
+}
+
+[data-theme="dark"] .form__input:hover,
+[data-theme="dark"] .form__select:hover,
+[data-theme="dark"] .form__textarea:hover {
+    border-color: #777;
+    background: #1a1a1a;
+}
+
 .form__input:focus,
 .form__select:focus,
 .form__textarea:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.1);
+}
+
+[data-theme="dark"] .form__input:focus,
+[data-theme="dark"] .form__select:focus,
+[data-theme="dark"] .form__textarea:focus {
+    box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.2);
 }
 
 .form__select {
