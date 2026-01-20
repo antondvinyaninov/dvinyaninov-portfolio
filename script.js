@@ -25,7 +25,7 @@ const chatClose = document.querySelector('.chat-close');
 const chatForm = document.querySelector('.chat-form');
 const chatInput = document.querySelector('.chat-input');
 const chatName = document.querySelector('.chat-name');
-const chatEmail = document.querySelector('.chat-email');
+const chatPhone = document.querySelector('.chat-phone');
 const chatMessages = document.querySelector('.chat-messages');
 const chatSend = document.querySelector('.chat-send');
 
@@ -42,7 +42,7 @@ chatForm.addEventListener('submit', async (e) => {
     
     const message = chatInput.value.trim();
     const name = chatName.value.trim();
-    const email = chatEmail.value.trim();
+    const phone = chatPhone.value.trim();
     
     if (!message) return;
     
@@ -66,7 +66,7 @@ chatForm.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ message, name, email })
+            body: JSON.stringify({ message, name, phone })
         });
         
         const result = await response.json();
