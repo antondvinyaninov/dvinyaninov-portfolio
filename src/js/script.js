@@ -33,6 +33,20 @@ const chatInitialFields = document.querySelector('.chat-initial-fields');
 let isFirstMessage = true;
 let lastCheckedTime = Date.now();
 
+// Генерация или получение уникального ID пользователя
+function getUserId() {
+    let userId = localStorage.getItem('chatUserId');
+    if (!userId) {
+        // Генерируем короткий уникальный ID (6 символов)
+        userId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        localStorage.setItem('chatUserId', userId);
+    }
+    return userId;
+}
+
+const userId = getUserId();
+console.log('User ID:', userId);
+
 // Загружаем историю чата из localStorage
 function loadChatHistory() {
     const history = localStorage.getItem('chatHistory');
@@ -130,7 +144,7 @@ loadChatHistory();
 // Функция для проверки новых сообщений из Telegram
 async function checkNewMessages() {
     try {
-        const response = await fetch('/api/get-messages');
+        const response = await fetch(`/api/get-messages?userId=${userId}`);
         const result = await response.json();
         
         if (result.success && result.messages && result.messages.length > 0) {
@@ -218,7 +232,8 @@ chatForm.addEventListener('submit', async (e) => {
                 message, 
                 name, 
                 phone,
-                isChat: true  // Флаг что это сообщение из чата
+                userId: userId,  // Уникальный ID пользователя
+                isChat: true     // Флаг что это сообщение из чата
             })
         });
         

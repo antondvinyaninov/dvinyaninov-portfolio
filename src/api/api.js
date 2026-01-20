@@ -18,7 +18,7 @@ app.use(express.json());
 // Endpoint для отправки сообщений
 app.post('/send-message', async (req, res) => {
   try {
-    const { message, name, phone, isChat } = req.body;
+    const { message, name, phone, userId, isChat } = req.body;
     
     if (!message) {
       return res.status(400).json({ 
@@ -32,12 +32,13 @@ app.post('/send-message', async (req, res) => {
     
     // Если это чат - всегда отправляем как сообщение из чата
     if (isChat) {
+      const userIdInfo = userId ? `🆔 User #${userId}` : '';
       const userInfo = name ? `👤 ${name}` : '';
       const phoneInfo = phone ? `📞 ${phone}` : '';
-      const header = [userInfo, phoneInfo].filter(Boolean).join(' | ');
+      const header = [userIdInfo, userInfo, phoneInfo].filter(Boolean).join('\n');
       
       if (header) {
-        text = `💬 Сообщение из чата:\n${header}\n\n${message}`;
+        text = `💬 Сообщение из чата:\n\n${header}\n\n${message}`;
       } else {
         text = `💬 Сообщение из чата:\n\n${message}`;
       }
@@ -81,6 +82,8 @@ app.post('/send-message', async (req, res) => {
 // Endpoint для получения новых сообщений из Telegram
 app.get('/get-messages', async (req, res) => {
   try {
+    const { userId } = req.query;
+    
     const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`;
     const response = await fetch(telegramUrl, {
       method: 'POST',
@@ -97,15 +100,37 @@ app.get('/get-messages', async (req, res) => {
       const messages = result.result
         .filter(update => {
           // Фильтруем только сообщения от меня (владельца)
-          return update.message && 
-                 update.message.from.id.toString() === CHAT_ID &&
-                 !update.message.text.startsWith('💬') && // Исключаем эхо наших сообщений
-                 !update.message.text.startsWith('🎯'); // Исключаем заявки
+          if (!update.message || update.message.from.id.toString() !== CHAT_ID) {
+            return false;
+          }
+          
+          const text = update.message.text || '';
+          
+          // Исключаем эхо наших сообщений и заявки
+          if (text.startsWith('💬') || text.startsWith('🎯')) {
+            return false;
+          }
+          
+          // Если указан userId, проверяем что ответ для этого пользователя
+          if (userId) {
+            // Ответ должен начинаться с @userId или содержать #userId
+            return text.includes(`@${userId}`) || text.includes(`#${userId}`);
+          }
+          
+          return true;
         })
         .map(update => {
           lastUpdateId = Math.max(lastUpdateId, update.update_id);
+          let text = update.message.text;
+          
+          // Убираем @userId из текста ответа
+          if (userId) {
+            text = text.replace(new RegExp(`@${userId}\\s*`, 'gi'), '').trim();
+            text = text.replace(new RegExp(`#${userId}\\s*`, 'gi'), '').trim();
+          }
+          
           return {
-            text: update.message.text,
+            text: text,
             date: update.message.date
           };
         });
