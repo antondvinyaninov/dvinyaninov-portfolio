@@ -313,6 +313,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var(--bg);
 }
 
 [data-theme="dark"] .chat-header {
@@ -323,8 +324,11 @@ body {
 .chat-header h3 {
     font-size: 20px;
     font-weight: 700;
+    flex: 1;
+    text-align: center;
 }
 
+.chat-back,
 .chat-close {
     width: 36px;
     height: 36px;
@@ -339,10 +343,12 @@ body {
     color: var(--text);
 }
 
+.chat-back:hover,
 .chat-close:hover {
     background: var(--card-bg);
 }
 
+.chat-back svg,
 .chat-close svg {
     width: 20px;
     height: 20px;

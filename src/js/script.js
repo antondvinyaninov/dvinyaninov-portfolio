@@ -22,6 +22,7 @@ themeToggle.addEventListener('click', () => {
 const chatToggle = document.querySelector('.chat-toggle');
 const chatPanel = document.querySelector('.chat-panel');
 const chatClose = document.querySelector('.chat-close');
+const chatBack = document.querySelector('.chat-back');
 const chatForm = document.querySelector('.chat-form');
 const chatInput = document.querySelector('.chat-input');
 const chatName = document.querySelector('.chat-name');
@@ -197,6 +198,15 @@ chatToggle.addEventListener('click', () => {
 });
 
 chatClose.addEventListener('click', () => {
+    chatPanel.classList.remove('active');
+    // Останавливаем проверку сообщений
+    if (messageCheckInterval) {
+        clearInterval(messageCheckInterval);
+        messageCheckInterval = null;
+    }
+});
+
+chatBack.addEventListener('click', () => {
     chatPanel.classList.remove('active');
     // Останавливаем проверку сообщений
     if (messageCheckInterval) {
