@@ -1293,23 +1293,45 @@ body {
 /* Адаптивность */
 @media (max-width: 1024px) {
     .vertical-nav {
-        right: 40px;
+        right: 20px;
+        gap: 20px;
     }
+    
     .hero {
         grid-template-columns: 1fr;
+        padding: 100px 40px 60px;
+    }
+    
+    .hero__visual {
+        order: -1;
+        margin-bottom: 40px;
+    }
+    
+    .photo-container {
+        width: 300px;
+        height: 300px;
     }
     
     .work__grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .project--large {
-        grid-column: span 1;
-        aspect-ratio: 1;
+        grid-column: span 2;
+    }
+    
+    .work__more-card {
+        grid-column: span 2;
     }
     
     .contact {
         grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact__form-wrapper {
+        order: 2;
     }
 }
 
@@ -1319,31 +1341,162 @@ body {
     }
     
     .header {
-        padding: 20px;
+        padding: 15px 20px;
+        height: auto;
+    }
+    
+    .logo {
+        font-size: 18px;
     }
     
     .nav {
         display: none;
     }
     
+    .header__status {
+        display: none;
+    }
+    
     .hero {
-        padding: 120px 20px 60px;
+        padding: 100px 20px 60px;
+    }
+    
+    .hero__title {
+        font-size: clamp(40px, 12vw, 60px);
+    }
+    
+    .hero__desc {
+        font-size: 16px;
+    }
+    
+    .hero__skills {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .hero__skill {
+        flex: 1 1 calc(50% - 10px);
+        min-width: 140px;
+    }
+    
+    .photo-container {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .marquee__content span {
+        font-size: 20px;
+    }
+    
+    .section__title {
+        font-size: clamp(40px, 10vw, 60px);
     }
     
     .work,
     .services,
     .contact {
-        padding: 80px 20px;
+        padding: 60px 20px;
+    }
+    
+    .work__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .project--large {
+        grid-column: span 1;
+    }
+    
+    .work__more-card {
+        grid-column: span 1;
+    }
+    
+    .services__list {
+        gap: 20px;
     }
     
     .service {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
+        padding: 30px 20px;
+    }
+    
+    .service__number {
+        font-size: 40px;
+    }
+    
+    .contact__title {
+        font-size: clamp(35px, 10vw, 50px);
+        margin-bottom: 30px;
+    }
+    
+    .contact__email {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .contact__links {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .contact__link {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .contact__form-wrapper {
+        padding: 30px 20px;
+    }
+    
+    .contact__visual {
+        display: none;
     }
     
     .footer {
         padding: 30px 20px;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .chat-panel {
+        width: 100%;
+        right: 0;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__title {
+        font-size: 36px;
+    }
+    
+    .hero__skills {
+        flex-direction: column;
+    }
+    
+    .hero__skill {
+        flex: 1 1 100%;
+    }
+    
+    .photo-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .section__title {
+        font-size: 36px;
+    }
+    
+    .contact__title {
+        font-size: 32px;
+    }
+    
+    .form__input,
+    .form__select,
+    .form__textarea {
+        font-size: 14px;
+        padding: 12px 16px;
     }
 }
