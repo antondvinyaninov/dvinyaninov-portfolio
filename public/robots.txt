@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /api/
 Disallow: /config/
 Disallow: /docs/
 Disallow: /.git/
