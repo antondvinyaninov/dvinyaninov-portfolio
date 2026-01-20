@@ -45,7 +45,10 @@ async function checkNewMessages() {
                 if (msg.date * 1000 > lastCheckedTime) {
                     const botMessage = document.createElement('div');
                     botMessage.className = 'chat-message chat-message--bot';
-                    botMessage.innerHTML = `<p>${msg.text}</p>`;
+                    botMessage.innerHTML = `
+                        <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                        <p>${msg.text}</p>
+                    `;
                     chatMessages.appendChild(botMessage);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 }
@@ -117,7 +120,10 @@ chatForm.addEventListener('submit', async (e) => {
             botMessage.className = 'chat-message chat-message--bot';
             
             if (result.success) {
-                botMessage.innerHTML = `<p>Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊</p>`;
+                botMessage.innerHTML = `
+                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                    <p>Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊</p>
+                `;
                 
                 // Скрываем поля имени и телефона после первого сообщения
                 if (isFirstMessage) {
@@ -125,7 +131,10 @@ chatForm.addEventListener('submit', async (e) => {
                     isFirstMessage = false;
                 }
             } else {
-                botMessage.innerHTML = `<p>Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧</p>`;
+                botMessage.innerHTML = `
+                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                    <p>Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧</p>
+                `;
             }
             
             chatMessages.appendChild(botMessage);
@@ -139,7 +148,10 @@ chatForm.addEventListener('submit', async (e) => {
         setTimeout(() => {
             const botMessage = document.createElement('div');
             botMessage.className = 'chat-message chat-message--bot';
-            botMessage.innerHTML = `<p>Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏</p>`;
+            botMessage.innerHTML = `
+                <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                <p>Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏</p>
+            `;
             chatMessages.appendChild(botMessage);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             chatSend.disabled = false;

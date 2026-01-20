@@ -353,6 +353,9 @@ body {
     padding: 12px 16px;
     border-radius: 16px;
     line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
 }
 
 .chat-message--bot {
@@ -364,11 +367,29 @@ body {
     background: var(--accent);
     color: white;
     align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.chat-message--bot .chat-avatar {
+    border: 2px solid var(--accent);
+}
+
+.chat-message--user .chat-avatar {
+    border: 2px solid white;
 }
 
 .chat-message p {
     margin: 0;
     font-size: 14px;
+    flex: 1;
 }
 
 .chat-form {
