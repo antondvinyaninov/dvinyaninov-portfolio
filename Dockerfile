@@ -1,20 +1,14 @@
-# Stage 1: Build Node.js API
-FROM node:18-alpine AS api-builder
-
-WORKDIR /api
-COPY telegram-api/package*.json ./
-RUN npm install --production
-COPY telegram-api/ ./
-
-# Stage 2: Final image with nginx and Node.js
+# Build Node.js API and serve static files with nginx
 FROM node:18-alpine
 
 # Установка nginx и supervisor
 RUN apk add --no-cache nginx supervisor
 
-# Копируем API
+# Копируем и устанавливаем зависимости API
 WORKDIR /app/api
-COPY --from=api-builder /api ./
+COPY api-package.json package.json
+RUN npm install --production
+COPY api.js index.js
 
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
@@ -27,7 +21,6 @@ COPY nginx.conf /etc/nginx/http.d/default.conf
 RUN mkdir -p /run/nginx
 
 # Настройка supervisor для запуска nginx и Node.js
-RUN mkdir -p /etc/supervisor.d
 COPY supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
