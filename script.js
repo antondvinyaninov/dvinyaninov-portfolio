@@ -61,11 +61,7 @@ chatForm.addEventListener('submit', async (e) => {
     
     try {
         // Отправляем в Telegram через API
-        const apiUrl = window.location.hostname.includes('github.io') 
-            ? 'https://my-projects-dvinyaninov.crv1ic.easypanel.host/send-message'
-            : 'https://my-projects-dvinyaninov.crv1ic.easypanel.host/send-message';
-        
-        const response = await fetch(apiUrl, {
+        const response = await fetch('/api/send-message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
