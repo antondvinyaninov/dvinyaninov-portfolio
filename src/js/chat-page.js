@@ -30,6 +30,13 @@ chatPageInput.addEventListener('input', function() {
     this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 });
 
+// Прокрутка к последнему сообщению при фокусе на input
+chatPageInput.addEventListener('focus', function() {
+    setTimeout(() => {
+        chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
+    }, 300);
+});
+
 // Загружаем историю чата
 function loadChatHistoryPage() {
     const history = localStorage.getItem('chatHistory');
