@@ -1,0 +1,78 @@
+/* Страница чата для мобильных */
+.chat-page-body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.chat-page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--bg);
+}
+
+.chat-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.chat-page-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+    text-align: center;
+}
+
+.chat-page-back {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.chat-page-back:hover {
+    background: var(--card-bg);
+}
+
+.chat-page-back svg {
+    width: 24px;
+    height: 24px;
+}
+
+.chat-page-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-page-form {
+    padding: 15px 20px;
+    padding-bottom: calc(15px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Адаптация под iOS */
+@supports (padding: max(0px)) {
+    .chat-page-form {
+        padding-bottom: max(15px, env(safe-area-inset-bottom));
+    }
+}

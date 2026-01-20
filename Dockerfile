@@ -13,10 +13,13 @@ COPY src/api/api.js index.js
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
 COPY index.html ./
+COPY chat.html ./
 COPY public/ ./public/
 COPY projects/ ./projects/
 COPY src/css/styles.css ./src/css/
+COPY src/css/chat-page.css ./src/css/
 COPY src/js/script.js ./src/js/
+COPY src/js/chat-page.js ./src/js/
 COPY src/assets/*.webp ./src/assets/
 COPY src/fonts/ ./src/fonts/
 

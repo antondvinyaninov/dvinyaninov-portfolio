@@ -186,6 +186,13 @@ async function checkNewMessages() {
 let messageCheckInterval;
 
 chatToggle.addEventListener('click', () => {
+    // На мобильных переходим на отдельную страницу
+    if (window.innerWidth <= 768) {
+        window.location.href = 'chat.html';
+        return;
+    }
+    
+    // На десктопе открываем панель
     chatPanel.classList.add('active');
     // На десктопе показываем поля сразу
     if (window.innerWidth > 768 && !chatInitialFields.classList.contains('show')) {

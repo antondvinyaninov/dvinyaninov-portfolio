@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Чат — Антон Двинянинов</title>
+    
+    <link rel="icon" type="image/svg+xml" href="public/logo.svg">
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+    
+    <link rel="stylesheet" href="src/fonts/fonts.css">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/chat-page.css">
+</head>
+<body class="chat-page-body">
+    <div class="noise"></div>
+    
+    <div class="chat-page-container">
+        <!-- Шапка -->
+        <div class="chat-page-header">
+            <a href="index.html" class="chat-page-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <h1>Напишите мне</h1>
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Сообщения -->
+        <div class="chat-page-messages">
+            <div class="chat-message chat-message--bot">
+                <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                <p>Привет! 👋 Я Антон. Чем могу помочь?</p>
+            </div>
+        </div>
+
+        <!-- Форма -->
+        <form class="chat-page-form">
+            <div class="chat-initial-fields">
+                <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
+                <input type="tel" class="chat-phone" placeholder="Телефон (необязательно)">
+            </div>
+            <div class="chat-input-wrapper">
+                <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="1"></textarea>
+                <button type="submit" class="chat-send" aria-label="Отправить сообщение">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="src/js/script.js" defer></script>
+    <script src="src/js/chat-page.js" defer></script>
+</body>
+</html>
