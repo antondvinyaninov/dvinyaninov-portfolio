@@ -31,13 +31,50 @@ const chatSend = document.querySelector('.chat-send');
 const chatInitialFields = document.querySelector('.chat-initial-fields');
 
 let isFirstMessage = true;
+let lastCheckedTime = Date.now();
+
+// Функция для проверки новых сообщений из Telegram
+async function checkNewMessages() {
+    try {
+        const response = await fetch('/api/get-messages');
+        const result = await response.json();
+        
+        if (result.success && result.messages && result.messages.length > 0) {
+            result.messages.forEach(msg => {
+                // Проверяем что сообщение новое
+                if (msg.date * 1000 > lastCheckedTime) {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'chat-message chat-message--bot';
+                    botMessage.innerHTML = `<p>${msg.text}</p>`;
+                    chatMessages.appendChild(botMessage);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+            lastCheckedTime = Date.now();
+        }
+    } catch (error) {
+        console.error('Ошибка проверки сообщений:', error);
+    }
+}
+
+// Проверяем новые сообщения каждые 3 секунды, когда чат открыт
+let messageCheckInterval;
 
 chatToggle.addEventListener('click', () => {
     chatPanel.classList.add('active');
+    // Начинаем проверять сообщения
+    if (!messageCheckInterval) {
+        messageCheckInterval = setInterval(checkNewMessages, 3000);
+    }
 });
 
 chatClose.addEventListener('click', () => {
     chatPanel.classList.remove('active');
+    // Останавливаем проверку сообщений
+    if (messageCheckInterval) {
+        clearInterval(messageCheckInterval);
+        messageCheckInterval = null;
+    }
 });
 
 chatForm.addEventListener('submit', async (e) => {

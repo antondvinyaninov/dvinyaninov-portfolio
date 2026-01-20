@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3001;
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
+// Хранилище последнего update_id для получения только новых сообщений
+let lastUpdateId = 0;
+
 app.use(cors());
 app.use(express.json());
 
@@ -62,6 +65,58 @@ app.post('/send-message', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       error: 'Не удалось отправить сообщение' 
+    });
+  }
+});
+
+// Endpoint для получения новых сообщений из Telegram
+app.get('/get-messages', async (req, res) => {
+  try {
+    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`;
+    const response = await fetch(telegramUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        offset: lastUpdateId + 1,
+        timeout: 10
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.ok && result.result.length > 0) {
+      const messages = result.result
+        .filter(update => {
+          // Фильтруем только сообщения от меня (владельца)
+          return update.message && 
+                 update.message.from.id.toString() === CHAT_ID &&
+                 !update.message.text.startsWith('💬') && // Исключаем эхо наших сообщений
+                 !update.message.text.startsWith('🎯'); // Исключаем заявки
+        })
+        .map(update => {
+          lastUpdateId = Math.max(lastUpdateId, update.update_id);
+          return {
+            text: update.message.text,
+            date: update.message.date
+          };
+        });
+      
+      res.json({ 
+        success: true, 
+        messages: messages 
+      });
+    } else {
+      res.json({ 
+        success: true, 
+        messages: [] 
+      });
+    }
+    
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Не удалось получить сообщения' 
     });
   }
 });
