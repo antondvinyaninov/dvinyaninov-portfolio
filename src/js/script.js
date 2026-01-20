@@ -33,6 +33,100 @@ const chatInitialFields = document.querySelector('.chat-initial-fields');
 let isFirstMessage = true;
 let lastCheckedTime = Date.now();
 
+// Загружаем историю чата из localStorage
+function loadChatHistory() {
+    const history = localStorage.getItem('chatHistory');
+    if (history) {
+        try {
+            const messages = JSON.parse(history);
+            const savedUserData = localStorage.getItem('chatUserData');
+            
+            // Очищаем чат (оставляем только приветствие)
+            chatMessages.innerHTML = `
+                <div class="chat-message chat-message--bot">
+                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                    <p>Привет! 👋 Я Антон. Чем могу помочь?</p>
+                </div>
+            `;
+            
+            // Восстанавливаем сообщения
+            messages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message chat-message--${msg.type}`;
+                
+                if (msg.type === 'bot') {
+                    messageDiv.innerHTML = `
+                        <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+                        <p>${msg.text}</p>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `<p>${msg.text}</p>`;
+                }
+                
+                chatMessages.appendChild(messageDiv);
+            });
+            
+            // Если есть сохраненные данные пользователя, скрываем поля
+            if (savedUserData) {
+                const userData = JSON.parse(savedUserData);
+                chatName.value = userData.name || '';
+                chatPhone.value = userData.phone || '';
+                
+                if (messages.length > 0) {
+                    chatInitialFields.style.display = 'none';
+                    isFirstMessage = false;
+                }
+            }
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } catch (e) {
+            console.error('Ошибка загрузки истории чата:', e);
+        }
+    }
+}
+
+// Сохраняем сообщение в историю
+function saveChatMessage(text, type) {
+    try {
+        const history = localStorage.getItem('chatHistory');
+        const messages = history ? JSON.parse(history) : [];
+        
+        messages.push({
+            text: text,
+            type: type,
+            timestamp: Date.now()
+        });
+        
+        // Ограничиваем историю последними 50 сообщениями
+        if (messages.length > 50) {
+            messages.shift();
+        }
+        
+        localStorage.setItem('chatHistory', JSON.stringify(messages));
+    } catch (e) {
+        console.error('Ошибка сохранения сообщения:', e);
+    }
+}
+
+// Сохраняем данные пользователя
+function saveUserData(name, phone) {
+    try {
+        localStorage.setItem('chatUserData', JSON.stringify({ name, phone }));
+    } catch (e) {
+        console.error('Ошибка сохранения данных пользователя:', e);
+    }
+}
+
+// Очистка истории чата (можно вызвать из консоли: clearChatHistory())
+window.clearChatHistory = function() {
+    localStorage.removeItem('chatHistory');
+    localStorage.removeItem('chatUserData');
+    location.reload();
+};
+
+// Загружаем историю при загрузке страницы
+loadChatHistory();
+
 // Функция для проверки новых сообщений из Telegram
 async function checkNewMessages() {
     try {
@@ -51,6 +145,9 @@ async function checkNewMessages() {
                     `;
                     chatMessages.appendChild(botMessage);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Сохраняем в историю
+                    saveChatMessage(msg.text, 'bot');
                 }
             });
             lastCheckedTime = Date.now();
@@ -89,11 +186,19 @@ chatForm.addEventListener('submit', async (e) => {
     
     if (!message) return;
     
+    // Сохраняем данные пользователя
+    if (name || phone) {
+        saveUserData(name, phone);
+    }
+    
     // Добавляем сообщение пользователя
     const userMessage = document.createElement('div');
     userMessage.className = 'chat-message chat-message--user';
     userMessage.innerHTML = `<p>${message}</p>`;
     chatMessages.appendChild(userMessage);
+    
+    // Сохраняем в историю
+    saveChatMessage(message, 'user');
     
     // Очищаем форму
     chatInput.value = '';
@@ -120,10 +225,14 @@ chatForm.addEventListener('submit', async (e) => {
             botMessage.className = 'chat-message chat-message--bot';
             
             if (result.success) {
+                const responseText = 'Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊';
                 botMessage.innerHTML = `
                     <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                    <p>Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊</p>
+                    <p>${responseText}</p>
                 `;
+                
+                // Сохраняем ответ в историю
+                saveChatMessage(responseText, 'bot');
                 
                 // Скрываем поля имени и телефона после первого сообщения
                 if (isFirstMessage) {
@@ -131,10 +240,12 @@ chatForm.addEventListener('submit', async (e) => {
                     isFirstMessage = false;
                 }
             } else {
+                const errorText = 'Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧';
                 botMessage.innerHTML = `
                     <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                    <p>Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧</p>
+                    <p>${errorText}</p>
                 `;
+                saveChatMessage(errorText, 'bot');
             }
             
             chatMessages.appendChild(botMessage);
@@ -146,15 +257,18 @@ chatForm.addEventListener('submit', async (e) => {
         console.error('Ошибка отправки:', error);
         
         setTimeout(() => {
+            const errorText = 'Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏';
             const botMessage = document.createElement('div');
             botMessage.className = 'chat-message chat-message--bot';
             botMessage.innerHTML = `
                 <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                <p>Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏</p>
+                <p>${errorText}</p>
             `;
             chatMessages.appendChild(botMessage);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             chatSend.disabled = false;
+            
+            saveChatMessage(errorText, 'bot');
         }, 500);
     }
 });
