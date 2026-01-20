@@ -1,18 +1,6 @@
 User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://dvinyaninov.ru/sitemap.xml
-
-# Yandex
-User-agent: Yandex
-Allow: /
-
-# Google
-User-agent: Googlebot
-Allow: /
-
-# Disallow
 Disallow: /config/
 Disallow: /docs/
 Disallow: /.git/
+
+Sitemap: https://dvinyaninov.ru/sitemap.xml

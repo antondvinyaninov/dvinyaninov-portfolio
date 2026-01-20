@@ -482,7 +482,15 @@ function resizeBgCanvas() {
     bgCanvas.height = window.innerHeight;
 }
 resizeBgCanvas();
-window.addEventListener('resize', resizeBgCanvas);
+
+// Оптимизированный resize с debounce
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(resizeBgCanvas);
+    }, 100);
+});
 
 const bgGridSize = 20;
 let bgSnake = [];
