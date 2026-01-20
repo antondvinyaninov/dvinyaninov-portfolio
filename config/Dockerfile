@@ -16,6 +16,8 @@ COPY index.html ./
 COPY logo.svg ./
 COPY favicon.ico ./
 COPY yandex_150fb61c0511a5cb.html ./
+COPY robots.txt ./
+COPY sitemap.xml ./
 COPY src/css/styles.css ./src/css/
 COPY src/js/script.js ./src/js/
 COPY src/assets/photo.jpg ./src/assets/
