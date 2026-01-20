@@ -30,13 +30,6 @@ chatPageInput.addEventListener('input', function() {
     this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 });
 
-// Прокрутка к последнему сообщению при фокусе на input
-chatPageInput.addEventListener('focus', function() {
-    setTimeout(() => {
-        chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
-    }, 300);
-});
-
 // Загружаем историю чата
 function loadChatHistoryPage() {
     const history = localStorage.getItem('chatHistory');
@@ -82,6 +75,11 @@ function loadChatHistoryPage() {
             }
             
             chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
+            
+            // Прокручиваем страницу вниз
+            setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 100);
         } catch (e) {
             console.error('Ошибка загрузки истории чата:', e);
         }
@@ -140,7 +138,11 @@ async function checkNewMessagesPage() {
                         <p>${msg.text}</p>
                     `;
                     chatPageMessages.appendChild(botMessage);
-                    chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
+                    
+                    // Прокручиваем страницу вниз
+                    setTimeout(() => {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 100);
                     
                     saveChatMessagePage(msg.text, 'bot');
                 }
@@ -182,7 +184,11 @@ chatPageForm.addEventListener('submit', async (e) => {
     // Очищаем форму
     chatPageInput.value = '';
     chatPageInput.style.height = '44px';
-    chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
+    
+    // Прокручиваем страницу вниз
+    setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    }, 100);
     
     // Блокируем кнопку отправки
     chatPageSend.disabled = true;
@@ -219,6 +225,11 @@ chatPageForm.addEventListener('submit', async (e) => {
         chatPageMessages.appendChild(botMessage);
         chatPageMessages.scrollTop = chatPageMessages.scrollHeight;
         chatPageSend.disabled = false;
+        
+        // Прокручиваем страницу вниз
+        setTimeout(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+        }, 100);
         
         saveChatMessagePage(errorText, 'bot');
     }
