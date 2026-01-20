@@ -33,6 +33,12 @@ const chatInitialFields = document.querySelector('.chat-initial-fields');
 let isFirstMessage = true;
 let lastCheckedTime = Date.now();
 
+// Автоматическое изменение высоты textarea
+chatInput.addEventListener('input', function() {
+    this.style.height = '44px';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
 // Генерация или получение уникального ID пользователя
 function getUserId() {
     let userId = localStorage.getItem('chatUserId');
@@ -216,6 +222,7 @@ chatForm.addEventListener('submit', async (e) => {
     
     // Очищаем форму
     chatInput.value = '';
+    chatInput.style.height = '44px';
     chatMessages.scrollTop = chatMessages.scrollHeight;
     
     // Блокируем кнопку отправки

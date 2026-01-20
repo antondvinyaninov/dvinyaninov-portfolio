@@ -96,12 +96,14 @@
                 <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
                 <input type="tel" class="chat-phone" placeholder="Телефон (необязательно)">
             </div>
-            <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="3"></textarea>
-            <button type="submit" class="chat-send" aria-label="Отправить сообщение">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                </svg>
-            </button>
+            <div class="chat-input-wrapper">
+                <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="1"></textarea>
+                <button type="submit" class="chat-send" aria-label="Отправить сообщение">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
+            </div>
         </form>
     </div>
 
