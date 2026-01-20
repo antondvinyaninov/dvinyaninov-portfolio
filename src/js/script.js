@@ -469,10 +469,39 @@ services.forEach(service => {
 });
 
 // ============================================
+// МОБИЛЬНОЕ МЕНЮ
+// ============================================
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu__link');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Закрываем меню при клике на ссылку
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// ============================================
 // АДАПТИВНОСТЬ
 // ============================================
 window.addEventListener('resize', () => {
-    // Адаптивность
+    // Закрываем мобильное меню при изменении размера экрана
+    if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 });
 
 // ============================================
