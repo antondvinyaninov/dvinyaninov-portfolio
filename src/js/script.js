@@ -239,57 +239,29 @@ chatForm.addEventListener('submit', async (e) => {
         
         const result = await response.json();
         
-        // Показываем ответ
-        setTimeout(() => {
-            const botMessage = document.createElement('div');
-            botMessage.className = 'chat-message chat-message--bot';
-            
-            if (result.success) {
-                const responseText = 'Спасибо за сообщение! Я получил его и свяжусь с вами в ближайшее время 😊';
-                botMessage.innerHTML = `
-                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                    <p>${responseText}</p>
-                `;
-                
-                // Сохраняем ответ в историю
-                saveChatMessage(responseText, 'bot');
-                
-                // Скрываем поля имени и телефона после первого сообщения
-                if (isFirstMessage) {
-                    chatInitialFields.style.display = 'none';
-                    isFirstMessage = false;
-                }
-            } else {
-                const errorText = 'Упс! Что-то пошло не так. Попробуйте позже или напишите на email 📧';
-                botMessage.innerHTML = `
-                    <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                    <p>${errorText}</p>
-                `;
-                saveChatMessage(errorText, 'bot');
-            }
-            
-            chatMessages.appendChild(botMessage);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            chatSend.disabled = false;
-        }, 500);
+        // Не показываем автоматический ответ - пользователь получит реальный ответ из Telegram
         
     } catch (error) {
         console.error('Ошибка отправки:', error);
         
-        setTimeout(() => {
-            const errorText = 'Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏';
-            const botMessage = document.createElement('div');
-            botMessage.className = 'chat-message chat-message--bot';
-            botMessage.innerHTML = `
-                <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                <p>${errorText}</p>
-            `;
-            chatMessages.appendChild(botMessage);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            chatSend.disabled = false;
-            
-            saveChatMessage(errorText, 'bot');
-        }, 500);
+        const errorText = 'Упс! Не удалось отправить сообщение. Проверьте интернет или попробуйте позже 🙏';
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chat-message chat-message--bot';
+        botMessage.innerHTML = `
+            <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
+            <p>${errorText}</p>
+        `;
+        chatMessages.appendChild(botMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatSend.disabled = false;
+        
+        saveChatMessage(errorText, 'bot');
+    }
+    
+    // Скрываем поля имени и телефона после первого сообщения
+    if (isFirstMessage) {
+        chatInitialFields.style.display = 'none';
+        isFirstMessage = false;
     }
 });
 
