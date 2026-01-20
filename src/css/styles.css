@@ -1752,6 +1752,11 @@ body {
         display: none;
     }
     
+    .hero__scroll {
+        bottom: 120px;
+        right: 20px;
+    }
+    
     .photo-container {
         width: 200px;
         height: 200px;
