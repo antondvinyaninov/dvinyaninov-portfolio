@@ -70,7 +70,7 @@ body {
 /* Вертикальная навигация */
 .vertical-nav {
     position: fixed;
-    left: 30px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;
@@ -98,7 +98,7 @@ body {
 
 .nav-label {
     position: absolute;
-    left: 25px;
+    right: 25px;
     top: 50%;
     transform: translateY(-50%);
     white-space: nowrap;
@@ -120,7 +120,7 @@ body {
 .nav-dot::before {
     content: attr(data-section);
     position: absolute;
-    left: 25px;
+    right: 25px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 12px;
