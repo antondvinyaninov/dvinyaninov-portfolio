@@ -16,7 +16,7 @@ COPY index.html ./
 COPY public/ ./public/
 COPY src/css/styles.css ./src/css/
 COPY src/js/script.js ./src/js/
-COPY src/assets/ ./src/assets/
+COPY src/assets/*.webp ./src/assets/
 COPY src/fonts/ ./src/fonts/
 
 # Настройка nginx
