@@ -1,8 +1,9 @@
 # Документация с ключами
-docs/
+docs/keys.md
 
 # macOS
 .DS_Store
+**/.DS_Store
 
 # IDE
 .vscode/
@@ -14,3 +15,7 @@ docs/
 # Environment variables
 .env
 .env.local
+
+# Временные файлы
+*.tmp
+*.swp
