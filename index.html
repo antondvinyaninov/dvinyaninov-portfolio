@@ -75,43 +75,6 @@
     <!-- Фоновая змейка -->
     <canvas id="backgroundSnake"></canvas>
     
-    <!-- Боковая панель чата -->
-    <div class="chat-panel">
-        <div class="chat-header">
-            <button class="chat-back" aria-label="Вернуться на сайт">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-            </button>
-            <h3>Напишите мне</h3>
-            <button class="chat-close" aria-label="Закрыть чат">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
-        <div class="chat-messages">
-            <div class="chat-message chat-message--bot">
-                <img src="src/assets/photo.jpg" alt="Anton" class="chat-avatar">
-                <p>Привет! 👋 Я Антон. Чем могу помочь?</p>
-            </div>
-        </div>
-        <form class="chat-form">
-            <div class="chat-initial-fields">
-                <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
-                <input type="tel" class="chat-phone" placeholder="Телефон (необязательно)">
-            </div>
-            <div class="chat-input-wrapper">
-                <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="1"></textarea>
-                <button type="submit" class="chat-send" aria-label="Отправить сообщение">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                    </svg>
-                </button>
-            </div>
-        </form>
-    </div>
-
     <!-- Вертикальная навигация -->
     <nav class="vertical-nav">
         <a href="#home" class="nav-dot active" data-section="01">
@@ -152,11 +115,6 @@
                 <span class="status__dot"></span>
                 <span>Доступен для проектов</span>
             </div>
-            <button class="chat-toggle" aria-label="Открыть чат">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-            </button>
             <button class="theme-toggle" aria-label="Переключить тему">
                 <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"/>
