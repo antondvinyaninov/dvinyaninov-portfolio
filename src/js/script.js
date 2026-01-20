@@ -86,14 +86,13 @@ function loadChatHistory() {
                 chatMessages.appendChild(messageDiv);
             });
             
-            // Если есть сохраненные данные пользователя, скрываем поля
+            // Если есть сохраненные данные пользователя, заполняем поля
             if (savedUserData) {
                 const userData = JSON.parse(savedUserData);
                 chatName.value = userData.name || '';
                 chatPhone.value = userData.phone || '';
                 
                 if (messages.length > 0) {
-                    chatInitialFields.style.display = 'none';
                     isFirstMessage = false;
                 }
             }
@@ -102,6 +101,11 @@ function loadChatHistory() {
         } catch (e) {
             console.error('Ошибка загрузки истории чата:', e);
         }
+    }
+    
+    // На десктопе показываем поля сразу
+    if (window.innerWidth > 768) {
+        chatInitialFields.classList.add('show');
     }
 }
 
@@ -182,6 +186,10 @@ let messageCheckInterval;
 
 chatToggle.addEventListener('click', () => {
     chatPanel.classList.add('active');
+    // На десктопе показываем поля сразу
+    if (window.innerWidth > 768 && !chatInitialFields.classList.contains('show')) {
+        chatInitialFields.classList.add('show');
+    }
     // Начинаем проверять сообщения
     if (!messageCheckInterval) {
         messageCheckInterval = setInterval(checkNewMessages, 3000);
@@ -267,8 +275,18 @@ chatForm.addEventListener('submit', async (e) => {
     
     // Скрываем поля имени и телефона после первого сообщения
     if (isFirstMessage) {
-        chatInitialFields.style.display = 'none';
         isFirstMessage = false;
+        // На мобильном показываем кнопку для добавления контактов
+        if (window.innerWidth <= 768 && !chatInitialFields.classList.contains('show')) {
+            const contactButton = document.createElement('div');
+            contactButton.className = 'chat-add-contact';
+            contactButton.innerHTML = '<span>+ Добавить контакты</span>';
+            contactButton.onclick = () => {
+                chatInitialFields.classList.add('show');
+                contactButton.remove();
+            };
+            chatForm.insertBefore(contactButton, chatForm.firstChild);
+        }
     }
 });
 

@@ -415,11 +415,45 @@ body {
 }
 
 .chat-initial-fields {
-    display: flex;
+    display: none; /* Скрываем по умолчанию */
     flex-direction: column;
     gap: 10px;
     transition: all 0.3s ease;
     overflow: hidden;
+}
+
+.chat-initial-fields.show {
+    display: flex;
+}
+
+.chat-add-contact {
+    padding: 10px;
+    text-align: center;
+    color: var(--accent);
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease;
+}
+
+.chat-add-contact:hover {
+    background: var(--card-bg);
+}
+
+/* На десктопе показываем в одну строку */
+@media (min-width: 769px) {
+    .chat-initial-fields {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .chat-initial-fields.show {
+        flex-direction: row;
+    }
+    
+    .chat-add-contact {
+        display: none;
+    }
 }
 
 .chat-input-wrapper {
