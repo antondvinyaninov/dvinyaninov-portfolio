@@ -1748,6 +1748,10 @@ body {
         flex: 1 1 auto;
     }
     
+    .hero__cta {
+        display: none;
+    }
+    
     .photo-container {
         width: 200px;
         height: 200px;
