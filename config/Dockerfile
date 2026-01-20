@@ -12,17 +12,19 @@ COPY src/api/api.js index.js
 
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
-COPY index.html styles.css script.js ./
-COPY src/assets/photo.jpg ./photo.jpg
+COPY index.html ./
+COPY src/css/styles.css ./src/css/
+COPY src/js/script.js ./src/js/
+COPY src/assets/photo.jpg ./src/assets/
 
 # Настройка nginx
-COPY nginx.conf /etc/nginx/http.d/default.conf
+COPY config/nginx.conf /etc/nginx/http.d/default.conf
 
 # Создаем директорию для логов nginx
 RUN mkdir -p /run/nginx
 
 # Настройка supervisor для запуска nginx и Node.js
-COPY supervisord.conf /etc/supervisord.conf
+COPY config/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
 
