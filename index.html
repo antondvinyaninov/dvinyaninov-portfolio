@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Антон Двинянинов — Создаю цифровые продукты.">
+    <title>Антон Двинянинов — Портфолио</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Кастомный курсор -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Фоновый шум -->
+    <div class="noise"></div>
+    
+    <!-- Фоновая змейка -->
+    <canvas id="backgroundSnake"></canvas>
+    
+    <!-- Боковая панель чата -->
+    <div class="chat-panel">
+        <div class="chat-header">
+            <h3>Напишите мне</h3>
+            <button class="chat-close" aria-label="Закрыть чат">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="chat-messages">
+            <div class="chat-message chat-message--bot">
+                <p>Привет! 👋 Я Антон. Чем могу помочь?</p>
+            </div>
+        </div>
+        <form class="chat-form">
+            <input type="text" class="chat-name" placeholder="Ваше имя (необязательно)">
+            <input type="email" class="chat-email" placeholder="Email (необязательно)">
+            <textarea class="chat-input" placeholder="Напишите сообщение..." required rows="3"></textarea>
+            <button type="submit" class="chat-send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <!-- Вертикальная навигация -->
+    <nav class="vertical-nav">
+        <a href="#home" class="nav-dot active" data-section="01">
+            <span class="nav-label">Главная</span>
+        </a>
+        <a href="#work" class="nav-dot" data-section="02">
+            <span class="nav-label">Проекты</span>
+        </a>
+        <a href="#services" class="nav-dot" data-section="03">
+            <span class="nav-label">Услуги</span>
+        </a>
+        <a href="#contact" class="nav-dot" data-section="04">
+            <span class="nav-label">Контакт</span>
+        </a>
+    </nav>
+
+    <!-- Навигация -->
+    <header class="header">
+        <a href="/" class="logo">
+            <span class="logo__bracket">[</span>dvinyaninov<span class="logo__bracket">]</span>
+        </a>
+        <nav class="nav">
+            <a href="#work" class="nav__link">
+                <span class="nav__number">01</span>
+                <span class="nav__text">Проекты</span>
+            </a>
+            <a href="#services" class="nav__link">
+                <span class="nav__number">02</span>
+                <span class="nav__text">Услуги</span>
+            </a>
+            <a href="#contact" class="nav__link">
+                <span class="nav__number">03</span>
+                <span class="nav__text">Контакт</span>
+            </a>
+        </nav>
+        <div class="header__right">
+            <div class="header__status">
+                <span class="status__dot"></span>
+                <span>Доступен для проектов</span>
+            </div>
+            <button class="chat-toggle" aria-label="Открыть чат">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </button>
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero__content">
+                <div class="hero__label">
+                    <span class="hero__line"></span>
+                    <span>Антон Двинянинов</span>
+                </div>
+                <h1 class="hero__title">
+                    <span class="hero__title-line title-animate">
+                        <span class="word">Создаю</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
+                        <span class="word">цифровые</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
+                        <span class="word hero__accent">шедевры</span>
+                    </span>
+                </h1>
+                <p class="hero__desc">
+                    Превращаю идеи в интерактивные веб-продукты
+                </p>
+                <div class="hero__skills">
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">01</span>
+                        <span class="hero__skill-text">Вайбкодинг</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">02</span>
+                        <span class="hero__skill-text">Frontend</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">03</span>
+                        <span class="hero__skill-text">Backend</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">04</span>
+                        <span class="hero__skill-text">UI/UX</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">05</span>
+                        <span class="hero__skill-text">DevOps</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                </div>
+                <a href="#work" class="hero__cta">
+                    <span class="cta__text">Смотреть проекты</span>
+                    <span class="cta__arrow">→</span>
+                </a>
+            </div>
+            <div class="hero__visual">
+                <div class="photo-container">
+                    <div class="photo-orbit photo-orbit--1"></div>
+                    <div class="photo-orbit photo-orbit--2"></div>
+                    <div class="photo-orbit photo-orbit--3"></div>
+                    <div class="photo-wrapper">
+                        <img src="photo.jpg" alt="Anton Dvinyaninov" class="hero-photo">
+                    </div>
+                </div>
+            </div>
+            <div class="hero__scroll">
+                <span class="scroll__text">Скролл</span>
+                <div class="scroll__line"></div>
+            </div>
+        </section>
+
+        <!-- Бегущая строка -->
+        <div class="marquee">
+            <div class="marquee__track">
+                <div class="marquee__content">
+                    <span>Веб-разработка</span>
+                    <span class="marquee__star">✦</span>
+                    <span>UI/UX Дизайн</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Анимации</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Интерактив</span>
+                    <span class="marquee__star">✦</span>
+                </div>
+                <div class="marquee__content" aria-hidden="true">
+                    <span>Веб-разработка</span>
+                    <span class="marquee__star">✦</span>
+                    <span>UI/UX Дизайн</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Анимации</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Интерактив</span>
+                    <span class="marquee__star">✦</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Работы -->
+        <section class="work" id="work">
+            <div class="section__header">
+                <span class="section__number">01</span>
+                <h2 class="section__title">
+                    <span class="title-animate">Проекты</span>
+                </h2>
+            </div>
+            <div class="work__grid">
+                <article class="project project-3d">
+                    <div class="project__inner">
+                        <div class="project__front">
+                            <div class="project__image">
+                                <div class="project__bg" style="--gradient: linear-gradient(135deg, #00d4ff, #06ffa5);"></div>
+                                <span class="project__year">2024</span>
+                            </div>
+                            <div class="project__info">
+                                <h3 class="project__title">Зооплатформа</h3>
+                                <p class="project__category">Платформа / Животные</p>
+                            </div>
+                        </div>
+                        <div class="project__back">
+                            <div class="project__details">
+                                <h4>О проекте</h4>
+                                <p>Платформа для поиска и помощи животным с интеграцией приютов</p>
+                                <div class="project__tech">
+                                    <span>React</span>
+                                    <span>Node.js</span>
+                                    <span>MongoDB</span>
+                                </div>
+                                <a href="#" class="project__link">Смотреть →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project project-3d">
+                    <div class="project__inner">
+                        <div class="project__front">
+                            <div class="project__image">
+                                <div class="project__bg" style="--gradient: linear-gradient(135deg, #8338ec, #ff006e);"></div>
+                                <span class="project__year">2024</span>
+                            </div>
+                            <div class="project__info">
+                                <h3 class="project__title">LogoCRM</h3>
+                                <p class="project__category">CRM / Бизнес</p>
+                            </div>
+                        </div>
+                        <div class="project__back">
+                            <div class="project__details">
+                                <h4>О проекте</h4>
+                                <p>CRM-система для управления клиентами и продажами</p>
+                                <div class="project__tech">
+                                    <span>Vue.js</span>
+                                    <span>Laravel</span>
+                                    <span>MySQL</span>
+                                </div>
+                                <a href="#" class="project__link">Смотреть →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project project-3d">
+                    <div class="project__inner">
+                        <div class="project__front">
+                            <div class="project__image">
+                                <div class="project__bg" style="--gradient: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                                <span class="project__year">2023</span>
+                            </div>
+                            <div class="project__info">
+                                <h3 class="project__title">Страницы памяти</h3>
+                                <p class="project__category">Мемориал / Социальное</p>
+                            </div>
+                        </div>
+                        <div class="project__back">
+                            <div class="project__details">
+                                <h4>О проекте</h4>
+                                <p>Платформа для создания цифровых мемориалов и сохранения памяти</p>
+                                <div class="project__tech">
+                                    <span>Next.js</span>
+                                    <span>Firebase</span>
+                                    <span>Tailwind</span>
+                                </div>
+                                <a href="#" class="project__link">Смотреть →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project project-3d">
+                    <div class="project__inner">
+                        <div class="project__front">
+                            <div class="project__image">
+                                <div class="project__bg" style="--gradient: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                                <span class="project__year">2023</span>
+                            </div>
+                            <div class="project__info">
+                                <h3 class="project__title">Карты помощи</h3>
+                                <p class="project__category">Благотворительность</p>
+                            </div>
+                        </div>
+                        <div class="project__back">
+                            <div class="project__details">
+                                <h4>О проекте</h4>
+                                <p>Интерактивная карта для координации благотворительной помощи</p>
+                                <div class="project__tech">
+                                    <span>React</span>
+                                    <span>Mapbox</span>
+                                    <span>Express</span>
+                                </div>
+                                <a href="#" class="project__link">Смотреть →</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="work__more-card">
+                    <a href="#" class="work__more-link">
+                        <span class="work__more-text">Все проекты</span>
+                        <span class="work__more-arrow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <a href="#" class="work__more">
+                <span>Связаться</span>
+                <span class="arrow-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </span>
+            </a>
+        </section>
+
+        <!-- Услуги -->
+        <section class="services" id="services">
+            <div class="section__header">
+                <span class="section__number">02</span>
+                <h2 class="section__title">
+                    <span class="title-animate">Чем могу</span><br>
+                    <span class="title-animate">помочь</span>
+                </h2>
+            </div>
+            <div class="services__list">
+                <div class="service">
+                    <div class="service__number">01</div>
+                    <div class="service__content">
+                        <h3 class="service__title">Веб-разработка</h3>
+                        <p class="service__desc">Создаю быстрые, адаптивные сайты и веб-приложения с чистым кодом и современным стеком технологий.</p>
+                    </div>
+                    <div class="service__tags">
+                        <span>React</span>
+                        <span>Next.js</span>
+                        <span>Node.js</span>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="service__number">02</div>
+                    <div class="service__content">
+                        <h3 class="service__title">UI/UX Дизайн</h3>
+                        <p class="service__desc">Проектирую интерфейсы, которые не только красиво выглядят, но и решают бизнес-задачи.</p>
+                    </div>
+                    <div class="service__tags">
+                        <span>Figma</span>
+                        <span>Прототипы</span>
+                        <span>Дизайн-системы</span>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="service__number">03</div>
+                    <div class="service__content">
+                        <h3 class="service__title">Креативные решения</h3>
+                        <p class="service__desc">Интерактивные элементы, микроанимации, WebGL и 3D — всё, что делает сайт запоминающимся.</p>
+                    </div>
+                    <div class="service__tags">
+                        <span>GSAP</span>
+                        <span>Three.js</span>
+                        <span>Motion</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакт -->
+        <section class="contact" id="contact">
+            <div class="contact__content">
+                <span class="section__number">03</span>
+                <h2 class="contact__title">
+                    <span class="title-animate">Есть проект?</span><br>
+                    <span class="title-animate contact__accent">Давайте создадим</span><br>
+                    <span class="title-animate">что-то крутое</span>
+                </h2>
+                <a href="mailto:hello@dvinyaninov.com" class="contact__email">
+                    hello@dvinyaninov.com
+                </a>
+                <div class="contact__links">
+                    <a href="#" class="contact__link">Telegram</a>
+                    <a href="#" class="contact__link">GitHub</a>
+                    <a href="#" class="contact__link">LinkedIn</a>
+                    <a href="#" class="contact__link">Dribbble</a>
+                </div>
+            </div>
+            <div class="contact__visual">
+                <div class="contact__circle"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__left">
+            <span>© 2026</span>
+            <span class="footer__divider">/</span>
+            <span>Антон Двинянинов</span>
+        </div>
+        <div class="footer__right">
+            <span>Сделано с</span>
+            <span class="footer__heart">♥</span>
+            <span>и кодом</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- JivoSite -->
+    <script src="//code.jivo.ru/widget/GoIETYWQYs" async></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Документация с ключами
+docs/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
