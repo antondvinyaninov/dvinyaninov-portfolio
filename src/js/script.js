@@ -615,12 +615,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const overlay = modal?.querySelector('.contact-modal__overlay');
         const form = modal?.querySelector('.contact-modal__form');
 
-        console.log('Modal elements:', { openModalBtn, modal, closeModalBtn, overlay, form });
-
         // Открытие модального окна
         if (openModalBtn) {
             openModalBtn.addEventListener('click', () => {
-                console.log('Opening modal');
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -628,7 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Закрытие модального окна
         const closeModal = () => {
-            console.log('Closing modal');
             modal?.classList.remove('active');
             document.body.style.overflow = '';
         };
@@ -659,8 +655,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     contact: formData.get('contact'),
                     message: formData.get('message')
                 };
-
-                console.log('Submitting form:', data);
 
                 try {
                     const response = await fetch('/api/contact', {
