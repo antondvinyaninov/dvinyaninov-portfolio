@@ -81,6 +81,53 @@ app.post('/send-message', async (req, res) => {
   }
 });
 
+// Endpoint для контактной формы (алиас для send-message)
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, contact, message } = req.body;
+    
+    if (!message) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Сообщение не может быть пустым' 
+      });
+    }
+    
+    // Формируем текст сообщения
+    const text = `🎯 Новая заявка на проект!\n\n👤 Имя: ${name || 'Не указано'}\n📞 Контакт: ${contact || 'Не указан'}\n📝 Описание:\n${message}`;
+    
+    // Отправляем в Telegram
+    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const response = await fetch(telegramUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: text,
+        parse_mode: 'HTML'
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.ok) {
+      res.json({ 
+        success: true, 
+        message: 'Сообщение отправлено!' 
+      });
+    } else {
+      throw new Error('Ошибка Telegram API');
+    }
+    
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Не удалось отправить сообщение' 
+    });
+  }
+});
+
 // Endpoint для получения новых сообщений из Telegram
 app.get('/get-messages', async (req, res) => {
   try {

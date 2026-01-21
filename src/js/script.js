@@ -599,3 +599,79 @@ if (contactForm) {
         }
     });
 }
+
+
+// ============================================
+// МОДАЛЬНОЕ ОКНО КОНТАКТА
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const openModalBtn = document.getElementById('openContactModal');
+    const modal = document.getElementById('contactModal');
+    const closeModalBtn = modal?.querySelector('.contact-modal__close');
+    const overlay = modal?.querySelector('.contact-modal__overlay');
+    const form = modal?.querySelector('.contact-modal__form');
+
+    // Открытие модального окна
+    if (openModalBtn) {
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Закрытие модального окна
+    const closeModal = () => {
+        modal?.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeModal);
+    }
+
+    // Закрытие по Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal?.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Отправка формы
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                contact: formData.get('contact'),
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.');
+                    form.reset();
+                    closeModal();
+                } else {
+                    alert('Произошла ошибка. Попробуйте еще раз или напишите мне напрямую.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка. Попробуйте еще раз или напишите мне напрямую.');
+            }
+        });
+    }
+});

@@ -35,14 +35,14 @@
     <meta name="theme-color" content="#FF0000">
     
     <!-- Preload критических ресурсов -->
-    <link rel="preload" href="src/css/styles.css" as="style">
+    <link rel="preload" href="src/css/styles.css?v=2" as="style">
     <link rel="preload" href="src/assets/photo.webp" as="image" type="image/webp">
     <link rel="preload" href="src/fonts/fonts.css" as="style">
     <link rel="preload" href="src/fonts/space-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="src/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
     
     <link rel="stylesheet" href="src/fonts/fonts.css">
-    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/styles.css?v=2">
     
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
@@ -75,6 +75,9 @@
     <!-- Фоновая змейка -->
     <canvas id="backgroundSnake"></canvas>
     
+    <!-- Header -->
+    <site-header></site-header>
+    
     <!-- Вертикальная навигация -->
     <nav class="vertical-nav">
         <a href="#home" class="nav-dot active" data-section="01">
@@ -90,66 +93,7 @@
             <span class="nav-label">Контакт</span>
         </a>
     </nav>
-
-    <!-- Навигация -->
-    <header class="header">
-        <a href="/" class="logo">
-            <span class="logo__bracket">[</span>dvinyaninov<span class="logo__bracket">]</span>
-        </a>
-        <nav class="nav">
-            <a href="#work" class="nav__link">
-                <span class="nav__number">01</span>
-                <span class="nav__text">Проекты</span>
-            </a>
-            <a href="#services" class="nav__link">
-                <span class="nav__number">02</span>
-                <span class="nav__text">Услуги</span>
-            </a>
-            <a href="#contact" class="nav__link">
-                <span class="nav__number">03</span>
-                <span class="nav__text">Контакт</span>
-            </a>
-        </nav>
-        <div class="header__right">
-            <div class="header__status">
-                <span class="status__dot"></span>
-                <span>Доступен для проектов</span>
-            </div>
-            <button class="theme-toggle" aria-label="Переключить тему">
-                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                </svg>
-                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
-            <button class="mobile-menu-toggle" aria-label="Открыть меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Мобильное меню -->
-    <div class="mobile-menu">
-        <nav class="mobile-menu__nav">
-            <a href="#work" class="mobile-menu__link">
-                <span class="mobile-menu__number">01</span>
-                <span>Проекты</span>
-            </a>
-            <a href="#services" class="mobile-menu__link">
-                <span class="mobile-menu__number">02</span>
-                <span>Услуги</span>
-            </a>
-            <a href="#contact" class="mobile-menu__link">
-                <span class="mobile-menu__number">03</span>
-                <span>Контакт</span>
-            </a>
-        </nav>
-    </div>
-
+    
     <main>
         <!-- Hero -->
         <section id="home" class="hero">
@@ -533,6 +477,7 @@
     <!-- JivoSite -->
     <script src="//code.jivo.ru/widget/TFV7onkuoN" async></script>
 
-    <script src="src/js/script.js" defer></script>
+    <script src="src/js/components.js?v=6" defer></script>
+    <script src="src/js/script.js?v=2" defer></script>
 </body>
 </html>

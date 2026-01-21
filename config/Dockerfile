@@ -15,8 +15,13 @@ WORKDIR /usr/share/nginx/html
 COPY index.html ./
 COPY public/ ./public/
 COPY projects/ ./projects/
+
+# Создаем директории для src
+RUN mkdir -p ./src/css ./src/js ./src/assets ./src/fonts
+
 COPY src/css/styles.css ./src/css/
 COPY src/js/script.js ./src/js/
+COPY src/js/components.js ./src/js/
 COPY src/assets/*.webp ./src/assets/
 COPY src/fonts/ ./src/fonts/
 
