@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Dashboard - Мониторинг Яндекс.Вебмастера</title>
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="src/fonts/fonts.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/css/seo-dashboard.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .info-banner {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-banner h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        
+        .info-banner ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .info-banner li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 SEO Dashboard</h1>
+        <p>Мониторинг индексации и статистики Яндекс.Вебмастера</p>
+    </div>
+
+    <div class="container">
+        <div class="info-banner">
+            <h3>ℹ️ Информация</h3>
+            <p>Этот дашборд показывает актуальную статистику вашего сайта из Яндекс.Вебмастера:</p>
+            <ul>
+                <li><strong>Статистика индексации</strong> - количество проиндексированных, ожидающих и исключенных страниц</li>
+                <li><strong>Проблемы сайта</strong> - критические ошибки, требующие исправления</li>
+                <li><strong>Топ запросов</strong> - популярные поисковые запросы, по которым находят ваш сайт</li>
+            </ul>
+            <p><small>Данные обновляются автоматически каждую минуту</small></p>
+        </div>
+
+        <!-- Контейнер для дашборда -->
+        <div id="seo-dashboard-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/js/seo-dashboard.js"></script>
+    <script>
+        // Конфигурация
+        const API_URL = 'http://localhost:3001'; // URL вашего API сервера
+        const HOST_ID = 'YOUR_HOST_ID'; // Замените на ваш Host ID из Яндекс.Вебмастера
+
+        // Инициализация дашборда
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Проверяем конфигурацию
+            if (HOST_ID === 'YOUR_HOST_ID') {
+                const container = document.getElementById('seo-dashboard-container');
+                container.innerHTML = `
+                    <div class="error-message">
+                        <h3>⚠️ Требуется настройка</h3>
+                        <p>Для работы дашборда необходимо:</p>
+                        <ol>
+                            <li>Получить Host ID из Яндекс.Вебмастера</li>
+                            <li>Заменить <code>YOUR_HOST_ID</code> в файле <code>seo-dashboard.html</code></li>
+                            <li>Убедиться что API сервер запущен на <code>${API_URL}</code></li>
+                        </ol>
+                        <p><strong>Инструкции:</strong> <a href="docs/seo-quickstart.md">docs/seo-quickstart.md</a></p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Создаем и инициализируем дашборд
+            const dashboard = new SEODashboard(API_URL, HOST_ID);
+            
+            try {
+                await dashboard.init('seo-dashboard-container');
+            } catch (error) {
+                console.error('Ошибка инициализации дашборда:', error);
+                
+                const container = document.getElementById('seo-dashboard-container');
+                container.innerHTML = `
+                    <div class="error-message">
+                        <h3>❌ Ошибка подключения</h3>
+                        <p>Не удалось подключиться к API серверу.</p>
+                        <p>Убедитесь что:</p>
+                        <ul>
+                            <li>API сервер запущен: <code>cd src/api && npm start</code></li>
+                            <li>URL сервера правильный: <code>${API_URL}</code></li>
+                            <li>Настроены переменные окружения в <code>.env</code></li>
+                        </ul>
+                        <p><strong>Ошибка:</strong> ${error.message}</p>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

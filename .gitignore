@@ -15,6 +15,13 @@ docs/keys.md
 # Environment variables
 .env
 .env.local
+src/api/.env
+src/api/.env.local
+
+# SEO данные
+ab-tests/
+seo-history/
+*.seo.json
 
 # Временные файлы
 *.tmp

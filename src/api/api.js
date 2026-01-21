@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
+const seoRoutes = require('./seo-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,9 @@ let lastUpdateId = 0;
 
 app.use(cors());
 app.use(express.json());
+
+// SEO роуты для Яндекс.Вебмастера
+app.use('/api/seo', seoRoutes);
 
 // Endpoint для отправки сообщений
 app.post('/send-message', async (req, res) => {

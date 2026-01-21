@@ -7,41 +7,72 @@
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js + Express
 - **Deployment:** Easypanel (Docker)
-- **Интеграции:** Telegram Bot API
+- **Интеграции:** Telegram Bot API, Яндекс.Вебмастер API
+- **SEO:** Автоматизация индексации и мониторинг
 
 ## 📁 Структура проекта
 
 ```
 .
-├── config/               # Конфигурационные файлы
-│   ├── Dockerfile        # Docker конфигурация
-│   ├── .dockerignore     # Исключения для Docker
-│   ├── nginx.conf        # Nginx конфигурация
-│   └── supervisord.conf  # Supervisor конфигурация
+├── config/                      # Конфигурационные файлы
+│   ├── Dockerfile               # Docker конфигурация
+│   ├── .dockerignore            # Исключения для Docker
+│   ├── nginx.conf               # Nginx конфигурация
+│   └── supervisord.conf         # Supervisor конфигурация
 ├── src/
-│   ├── api/              # Backend API
-│   │   ├── api.js        # Express сервер
+│   ├── api/                     # Backend API
+│   │   ├── api.js               # Express сервер
+│   │   ├── yandex-webmaster.js  # Клиент Яндекс.Вебмастера
+│   │   ├── seo-routes.js        # SEO API endpoints
+│   │   ├── seo-automation.js    # Автоматизация SEO задач
+│   │   ├── seo-telegram-notifier.js # Уведомления в Telegram
 │   │   └── api-package.json
-│   ├── assets/           # Изображения и медиа
-│   │   └── photo.jpg
-│   ├── css/              # Стили
-│   │   └── styles.css
-│   └── js/               # JavaScript
-│       └── script.js
-├── docs/                 # Документация (не в Git)
-├── index.html            # Главная страница
-└── README.md             # Документация
+│   ├── assets/                  # Изображения и медиа
+│   ├── css/                     # Стили
+│   │   ├── styles.css
+│   │   └── seo-dashboard.css    # Стили для SEO дашборда
+│   └── js/                      # JavaScript
+│       ├── script.js
+│       └── seo-dashboard.js     # SEO мониторинг
+├── docs/                        # Документация
+│   ├── seo-quickstart.md        # Быстрый старт SEO
+│   └── yandex-webmaster-setup.md # Подробная настройка
+├── public/                      # Публичные файлы
+│   └── sitemap.xml              # Карта сайта
+├── index.html                   # Главная страница
+├── seo-dashboard.html           # SEO дашборд
+└── README.md                    # Документация
 ```
 
 ## 🛠 Локальная разработка
 
+### Frontend
 1. Открой `index.html` в браузере
-2. Для тестирования API запусти:
-   ```bash
-   cd src/api
-   npm install
-   TELEGRAM_BOT_TOKEN=your_token TELEGRAM_CHAT_ID=your_id node api.js
-   ```
+2. Для SEO дашборда открой `seo-dashboard.html`
+
+### Backend API
+```bash
+cd src/api
+npm install
+
+# Создай .env файл (см. .env.example)
+cp .env.example .env
+
+# Запусти сервер
+npm start
+```
+
+### SEO Автоматизация
+```bash
+cd src/api
+
+# Разовый запуск
+npm run seo
+
+# Настрой cron для ежедневного запуска
+crontab -e
+# Добавь: 0 9 * * * cd /path/to/project/src/api && npm run seo
+```
 
 ## 🌐 Деплой
 
@@ -51,8 +82,39 @@
 
 ## 📝 Переменные окружения
 
+### Telegram
 - `TELEGRAM_BOT_TOKEN` - токен Telegram бота
 - `TELEGRAM_CHAT_ID` - ID чата для получения сообщений
+
+### Яндекс.Вебмастер
+- `YANDEX_WEBMASTER_TOKEN` - OAuth токен Яндекс.Вебмастера
+- `YANDEX_USER_ID` - ID пользователя Яндекс
+
+Подробная инструкция: [docs/seo-quickstart.md](docs/seo-quickstart.md)
+
+## 🔍 SEO Возможности
+
+### Автоматизация
+- ✅ Автоматическое добавление сайта в Яндекс.Вебмастер
+- ✅ Отправка и обновление sitemap.xml
+- ✅ Мониторинг статистики индексации
+- ✅ Проверка проблем сайта
+- ✅ Анализ поисковых запросов
+- ✅ Ежедневные отчеты в Telegram
+
+### API Endpoints
+```bash
+GET  /api/seo/sites                    # Список сайтов
+GET  /api/seo/sites/:hostId/stats      # Статистика индексации
+GET  /api/seo/sites/:hostId/problems   # Проблемы сайта
+GET  /api/seo/sites/:hostId/queries    # Поисковые запросы
+POST /api/seo/sites/:hostId/recrawl    # Запрос переобхода
+```
+
+### Дашборд
+Откройте `seo-dashboard.html` для визуального мониторинга SEO метрик в реальном времени.
+
+Документация: [src/api/README.md](src/api/README.md)
 
 ## 📧 Контакты
 
