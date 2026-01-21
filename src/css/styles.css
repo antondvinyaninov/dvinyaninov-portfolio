@@ -1787,6 +1787,36 @@ body {
     padding-top: 100px;
 }
 
+/* Хлебные крошки */
+.breadcrumbs {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.breadcrumbs__link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs__link:hover {
+    color: var(--accent);
+}
+
+.breadcrumbs__separator {
+    color: var(--text-secondary);
+}
+
+.breadcrumbs__current {
+    color: var(--text);
+    font-weight: 500;
+}
+
 /* Back link */
 .back-link {
     display: inline-flex;
@@ -2018,6 +2048,11 @@ body {
 @media (max-width: 768px) {
     .project-page {
         padding-top: 80px;
+    }
+    
+    .breadcrumbs {
+        padding: 0 20px 15px;
+        font-size: 12px;
     }
     
     .project-hero {
