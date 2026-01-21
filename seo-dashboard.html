@@ -101,29 +101,11 @@
     <script src="src/js/seo-dashboard.js"></script>
     <script>
         // Конфигурация
-        const API_URL = 'http://localhost:3001'; // URL вашего API сервера
-        const HOST_ID = 'YOUR_HOST_ID'; // Замените на ваш Host ID из Яндекс.Вебмастера
+        const API_URL = window.location.origin; // Используем текущий домен
+        const HOST_ID = 'https:dvinyaninov.ru:443'; // Host ID из Яндекс.Вебмастера
 
         // Инициализация дашборда
         document.addEventListener('DOMContentLoaded', async () => {
-            // Проверяем конфигурацию
-            if (HOST_ID === 'YOUR_HOST_ID') {
-                const container = document.getElementById('seo-dashboard-container');
-                container.innerHTML = `
-                    <div class="error-message">
-                        <h3>⚠️ Требуется настройка</h3>
-                        <p>Для работы дашборда необходимо:</p>
-                        <ol>
-                            <li>Получить Host ID из Яндекс.Вебмастера</li>
-                            <li>Заменить <code>YOUR_HOST_ID</code> в файле <code>seo-dashboard.html</code></li>
-                            <li>Убедиться что API сервер запущен на <code>${API_URL}</code></li>
-                        </ol>
-                        <p><strong>Инструкции:</strong> <a href="docs/seo-quickstart.md">docs/seo-quickstart.md</a></p>
-                    </div>
-                `;
-                return;
-            }
-
             // Создаем и инициализируем дашборд
             const dashboard = new SEODashboard(API_URL, HOST_ID);
             
