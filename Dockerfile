@@ -11,6 +11,18 @@ COPY src/api/package-lock.json package-lock.json
 RUN npm install --production
 COPY src/api/*.js ./
 
+# Создаём .env файл с переменными окружения
+RUN echo "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}" > .env && \
+    echo "TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}" >> .env && \
+    echo "YANDEX_WEBMASTER_TOKEN=${YANDEX_WEBMASTER_TOKEN}" >> .env && \
+    echo "YANDEX_USER_ID=${YANDEX_USER_ID}" >> .env && \
+    echo "PORT=3001" >> .env
+
+# Устанавливаем cronie для cron задач
+RUN apk add --no-cache cronie && \
+    echo "0 9 * * * cd /app/api && node seo-automation.js >> /var/log/seo-automation.log 2>&1" > /etc/crontabs/root && \
+    mkdir -p /var/log
+
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
 COPY index.html ./
@@ -32,7 +44,7 @@ COPY config/nginx.conf /etc/nginx/http.d/default.conf
 # Создаем директорию для логов nginx
 RUN mkdir -p /run/nginx
 
-# Настройка supervisor для запуска nginx и Node.js
+# Настройка supervisor для запуска nginx, Node.js и cron
 COPY config/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
