@@ -6,22 +6,23 @@ RUN apk add --no-cache nginx supervisor
 
 # Копируем и устанавливаем зависимости API
 WORKDIR /app/api
-COPY src/api/api-package.json package.json
+COPY src/api/package.json package.json
+COPY src/api/package-lock.json package-lock.json
 RUN npm install --production
-COPY src/api/api.js index.js
+COPY src/api/*.js ./
 
 # Копируем статические файлы
 WORKDIR /usr/share/nginx/html
 COPY index.html ./
+COPY seo-dashboard.html ./
 COPY public/ ./public/
 COPY projects/ ./projects/
 
 # Создаем директории для src
 RUN mkdir -p ./src/css ./src/js ./src/assets ./src/fonts
 
-COPY src/css/styles.css ./src/css/
-COPY src/js/script.js ./src/js/
-COPY src/js/components.js ./src/js/
+COPY src/css/ ./src/css/
+COPY src/js/ ./src/js/
 COPY src/assets/*.webp ./src/assets/
 COPY src/fonts/ ./src/fonts/
 
