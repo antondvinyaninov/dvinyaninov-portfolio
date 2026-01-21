@@ -216,16 +216,16 @@ heroTitleLines.forEach(line => {
 // ============================================
 // ФОНОВАЯ ЗМЕЙКА
 // ============================================
-// ФОНОВАЯ ЗМЕЙКА
-// ============================================
 const bgCanvas = document.getElementById('backgroundSnake');
-const bgCtx = bgCanvas.getContext('2d');
 
-// Устанавливаем размер canvas на весь экран
-function resizeBgCanvas() {
-    bgCanvas.width = window.innerWidth;
-    bgCanvas.height = window.innerHeight;
-}
+if (bgCanvas) {
+    const bgCtx = bgCanvas.getContext('2d');
+
+    // Устанавливаем размер canvas на весь экран
+    function resizeBgCanvas() {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+    }
 
 // Оптимизированный resize с debounce
 let resizeTimeout;
@@ -345,6 +345,8 @@ window.addEventListener('load', function() {
     setInterval(animateBgSnake, bgSpeed);
     drawBgSnake();
 });
+
+} // Конец проверки bgCanvas
 
 // ============================================
 // ПАСХАЛКА: КЛИКИ ПО ФОТО
