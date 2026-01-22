@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Название проекта — Антон Двинянинов</title>
+    <meta name="description" content="Описание проекта для SEO">
+    
+    <link rel="icon" type="image/svg+xml" href="../../public/logo.svg">
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    <meta name="theme-color" content="#0D4CD3">
+    
+    <link rel="stylesheet" href="../../src/fonts/fonts.css">
+    <link rel="stylesheet" href="../../src/css/styles.css?v=4">
+    <link rel="stylesheet" href="../../src/css/project-page.css?v=4">
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <site-header></site-header>
+    
+    <!-- 
+        PROJECT LAYOUT COMPONENT
+        
+        Атрибуты:
+        - project-name: Название проекта
+        - project-label: Категория (например: "SaaS / Образование")
+        - project-desc: Краткое описание для hero блока
+        - project-type: Тип проекта
+        - project-client: Заказчик
+        - project-status: Статус проекта
+        - project-site: Ссылка на сайт или статус
+        - project-year: Год
+        - tech-stack: JSON массив технологий [{"name": "Laravel", "icon": "url"}]
+        - navigation: JSON массив навигации [{"id": "about", "label": "О проекте"}]
+    -->
+    <project-layout
+        project-name="Название проекта"
+        project-label="Категория / Тип"
+        project-desc="Краткое описание проекта для hero блока"
+        project-type="Тип проекта"
+        project-client="Заказчик"
+        project-status="Статус"
+        project-site="В разработке"
+        project-year="2025"
+        tech-stack='[
+            {"name": "Laravel", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"},
+            {"name": "PostgreSQL", "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"}
+        ]'
+        navigation='[
+            {"id": "about", "label": "О проекте"},
+            {"id": "features", "label": "Возможности"},
+            {"id": "screenshots", "label": "Интерфейс"}
+        ]'
+    >
+        <!-- КОНТЕНТ ПРОЕКТА -->
+        
+        <!-- About -->
+        <section id="about" style="margin-top: 40px;">
+            <div class="section__header">
+                <span class="section__number">01</span>
+                <h2 class="section__title">О проекте</h2>
+            </div>
+            
+            <div class="project-about-card">
+                <p>
+                    <strong>Название проекта</strong> — описание проекта. Расскажите о целях, задачах и особенностях проекта.
+                </p>
+                <p style="margin-top: 24px;">
+                    Технические детали, архитектура, используемые технологии и подходы.
+                </p>
+                <p style="margin-top: 24px;">
+                    UX/UI решения, особенности интерфейса и пользовательского опыта.
+                </p>
+            </div>
+            
+            <div style="margin-top: 48px;">
+                <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl);">Для кого</h3>
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <div class="audience-card__number">01</div>
+                        <h4 class="audience-card__title">Целевая аудитория 1</h4>
+                        <p class="audience-card__desc">Описание первой целевой аудитории</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-card__number">02</div>
+                        <h4 class="audience-card__title">Целевая аудитория 2</h4>
+                        <p class="audience-card__desc">Описание второй целевой аудитории</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-card__number">03</div>
+                        <h4 class="audience-card__title">Целевая аудитория 3</h4>
+                        <p class="audience-card__desc">Описание третьей целевой аудитории</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">02</span>
+                <h2 class="section__title">Возможности</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Возможность 1</h3>
+                    <ul class="feature-card__list">
+                        <li>Функция 1</li>
+                        <li>Функция 2</li>
+                        <li>Функция 3</li>
+                        <li>Функция 4</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Возможность 2</h3>
+                    <ul class="feature-card__list">
+                        <li>Функция 1</li>
+                        <li>Функция 2</li>
+                        <li>Функция 3</li>
+                        <li>Функция 4</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Возможность 3</h3>
+                    <ul class="feature-card__list">
+                        <li>Функция 1</li>
+                        <li>Функция 2</li>
+                        <li>Функция 3</li>
+                        <li>Функция 4</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section id="screenshots" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">03</span>
+                <h2 class="section__title">Интерфейс</h2>
+            </div>
+            
+            <div class="screenshots-grid">
+                <!-- Большая карточка -->
+                <div class="screenshot-card screenshot-card--large">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--purple"></div>
+                    </div>
+                    <div class="screenshot-info screenshot-info--overlay">
+                        <h3 class="screenshot-title screenshot-title--large">Главный экран</h3>
+                        <p class="screenshot-desc">Описание главного экрана</p>
+                    </div>
+                </div>
+                
+                <!-- Маленькие карточки -->
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--blue"></div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Экран 2</h3>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--green"></div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Экран 3</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </project-layout>
+
+    <footer class="footer">
+        <div class="footer__left">
+            <span>© 2026</span>
+            <span class="footer__divider">/</span>
+            <span>Антон Двинянинов</span>
+        </div>
+        <div class="footer__right">
+            <span>Сделано с</span>
+            <span class="footer__heart">♥</span>
+            <span>и кодом</span>
+        </div>
+    </footer>
+
+    <script src="../../src/js/components.js?v=7" defer></script>
+    <script src="../../src/js/project-layout.js?v=1" defer></script>
+    <script src="../../src/js/script.js?v=9" defer></script>
+</body>
+</html>
