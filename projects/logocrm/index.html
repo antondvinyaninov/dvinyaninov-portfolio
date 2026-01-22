@@ -9,29 +9,46 @@
     
     <link rel="icon" type="image/svg+xml" href="../../public/logo.svg">
     <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    <meta name="theme-color" content="#0D4CD3">
     
     <link rel="stylesheet" href="../../src/fonts/fonts.css">
-    <link rel="stylesheet" href="../../src/css/styles.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'accent': '#ff006e',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="../../src/css/styles.css?v=4">
+    <link rel="stylesheet" href="../../src/css/project-page.css?v=4">
 </head>
 <body>
     <div class="noise"></div>
     
     <site-header></site-header>
+    
+    <!-- Project Sidebar -->
+    <aside class="project-sidebar">
+        <div class="project-sidebar__wrapper">
+            <!-- Навигация -->
+            <div class="project-sidebar__card">
+                <h4 class="project-sidebar__nav-title">Содержание</h4>
+                <nav class="project-sidebar__links">
+                    <a href="#about" class="project-sidebar__link active">О проекте</a>
+                    <a href="#features" class="project-sidebar__link">Возможности</a>
+                    <a href="#screenshots" class="project-sidebar__link">Интерфейс</a>
+                    <a href="#roadmap" class="project-sidebar__link">В планах</a>
+                    <a href="#beta" class="project-sidebar__link">Заявка</a>
+                </nav>
+            </div>
+            
+            <!-- Форма заказа -->
+            <div class="project-sidebar__card project-sidebar__card--cta">
+                <h3 class="project-sidebar__title">Нужно реализовать похожий проект?</h3>
+                <p class="project-sidebar__text">Создам подобное решение под ваши задачи</p>
+                <form class="sidebar-form" id="sidebarForm">
+                    <input type="text" name="name" placeholder="Ваше имя" class="sidebar-form__input" required>
+                    <input type="tel" name="phone" placeholder="Телефон" class="sidebar-form__input" required>
+                    <button type="submit" class="sidebar-form__submit">Обсудить проект</button>
+                </form>
+            </div>
+        </div>
+    </aside>
 
-    <main style="padding: 120px 60px 60px;">
+    <main class="project-main">
         
         <nav class="breadcrumbs">
             <a href="../../index.html" class="breadcrumbs__link">Главная</a>
@@ -49,308 +66,269 @@
                 <span>Назад к проектам</span>
             </a>
             
-            <div class="project-hero__content">
-                <span class="project-hero__label">SaaS / Образование</span>
-                <h1 class="project-hero__title">
-                    LogoCRM
-                    <span class="beta-badge">Beta</span>
-                </h1>
-                <p class="project-hero__desc">Современная SaaS-платформа для управления логопедическими центрами и кабинетами. Автоматизация всех процессов: от записи клиентов до финансового учета</p>
+            <div class="project-hero__sidebar">
+                <div class="project-hero__info">
+                    <div class="project-info__items">
+                        <div class="project-info__item">
+                            <span class="project-info__label">Тип</span>
+                            <span class="project-info__value">SaaS платформа</span>
+                        </div>
+                        <div class="project-info__item">
+                            <span class="project-info__label">Заказчик</span>
+                            <span class="project-info__value">Личный проект</span>
+                        </div>
+                        <div class="project-info__item">
+                            <span class="project-info__label">Статус</span>
+                            <span class="project-info__value">Beta-тестирование</span>
+                        </div>
+                        <div class="project-info__item">
+                            <span class="project-info__label">Сайт</span>
+                            <span class="project-info__value">В разработке</span>
+                        </div>
+                        <div class="project-info__item">
+                            <span class="project-info__label">Год</span>
+                            <span class="project-info__value">2025</span>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="project-hero__meta">
-                    <div class="project-meta">
-                        <span class="project-meta__label">Год</span>
-                        <span class="project-meta__value">2024-2025</span>
-                    </div>
-                    <div class="project-meta">
-                        <span class="project-meta__label">Роль</span>
-                        <span class="project-meta__value">Full-stack разработчик</span>
-                    </div>
-                    <div class="project-meta">
-                        <span class="project-meta__label">Статус</span>
-                        <span class="project-meta__value">Beta-тестирование</span>
+                <div class="project-hero__tech">
+                    <div class="tech-logos-grid">
+                        <div class="tech-logo-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" class="tech-logo">
+                        </div>
+                        <div class="tech-logo-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-logo">
+                        </div>
+                        <div class="tech-logo-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" alt="Alpine.js" class="tech-logo">
+                        </div>
+                        <div class="tech-logo-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="tech-logo">
+                        </div>
+                        <div class="tech-logo-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="tech-logo">
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Technologies -->
-        <section class="project-section mt-20">
-            <h2 class="project-section__title">Технологии</h2>
-            <div class="project-tech-grid">
-                <div class="tech-card">
-                    <div class="tech-card__icon">🔧</div>
-                    <h3 class="tech-card__title">Laravel 11</h3>
-                    <p class="tech-card__desc">Современный PHP-фреймворк</p>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-card__icon">💾</div>
-                    <h3 class="tech-card__title">PostgreSQL</h3>
-                    <p class="tech-card__desc">Надежная база данных</p>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-card__icon">📄</div>
-                    <h3 class="tech-card__title">Blade + Alpine.js</h3>
-                    <p class="tech-card__desc">Серверный рендеринг</p>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-card__icon">🎨</div>
-                    <h3 class="tech-card__title">Tailwind CSS</h3>
-                    <p class="tech-card__desc">Адаптивный дизайн</p>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-card__icon">🐳</div>
-                    <h3 class="tech-card__title">Docker</h3>
-                    <p class="tech-card__desc">Контейнеризация</p>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-card__icon">⚡</div>
-                    <h3 class="tech-card__title">Easypanel</h3>
-                    <p class="tech-card__desc">Простой деплой</p>
-                </div>
+            
+            <div class="project-hero__content">
+                <span class="project-hero__label">SaaS / Образование</span>
+                
+                <h1 class="project-hero__title">LogoCRM</h1>
+                
+                <p class="project-hero__desc">SaaS-платформа для автоматизации работы логопедических центров. Управление клиентами, расписанием и финансами в одном месте</p>
             </div>
         </section>
 
         <!-- About -->
-        <section class="mt-32">
+        <section id="about" style="margin-top: 40px;">
             <div class="section__header">
                 <span class="section__number">01</span>
                 <h2 class="section__title">О проекте</h2>
             </div>
             
-            <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 mt-8">
-                <p class="text-lg leading-relaxed">
+            <div class="project-about-card">
+                <p>
                     <strong>LogoCRM</strong> — это современная SaaS-платформа для управления логопедическими центрами и кабинетами. Система автоматизирует все ключевые процессы: от записи клиентов до финансового учета, позволяя специалистам сосредоточиться на главном — работе с детьми.
+                </p>
+                <p style="margin-top: 24px;">
+                    Проект разработан с нуля с учетом специфики работы логопедов и дефектологов. Архитектура построена на принципах мультитенантности, что позволяет одновременно обслуживать множество организаций с полной изоляцией данных. Система включает гибкую ролевую модель, финансовый модуль с автоматическим расчетом задолженностей и удобный календарь для управления расписанием.
+                </p>
+                <p style="margin-top: 24px;">
+                    Особое внимание уделено UX — интерфейс интуитивно понятен даже пользователям без технического опыта. Все критические операции выполняются в несколько кликов, а система подсказок помогает быстро освоить функционал.
                 </p>
             </div>
             
-            <div class="mt-12">
-                <h3 class="text-xl font-semibold mb-6">🎯 Целевая аудитория</h3>
-                <div class="flex flex-wrap gap-3">
-                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Логопедические центры</span>
-                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Частнопрактикующие логопеды</span>
-                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Дефектологи</span>
-                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Центры развития речи</span>
+            <div style="margin-top: 48px;">
+                <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl);">Для кого</h3>
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <div class="audience-card__number">01</div>
+                        <h4 class="audience-card__title">Логопедические центры</h4>
+                        <p class="audience-card__desc">Автоматизация всех процессов для центров с несколькими специалистами</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-card__number">02</div>
+                        <h4 class="audience-card__title">Частные специалисты</h4>
+                        <p class="audience-card__desc">Удобное ведение клиентов и расписания для логопедов и дефектологов</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-card__number">03</div>
+                        <h4 class="audience-card__title">Центры развития</h4>
+                        <p class="audience-card__desc">Комплексное управление для центров развития речи и коррекции</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Features -->
-        <section class="mt-32">
+        <section id="features" style="margin-top: 120px;">
             <div class="section__header">
                 <span class="section__number">02</span>
                 <h2 class="section__title">Возможности</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">👥</div>
-                    <h3 class="text-lg font-semibold mb-3">Управление клиентами</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Карточки детей с историей</li>
-                        <li>→ Профили родителей</li>
-                        <li>→ История специалистов</li>
-                        <li>→ Направления к врачам</li>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Управление клиентами</h3>
+                    <ul class="feature-card__list">
+                        <li>Карточки детей с историей</li>
+                        <li>Профили родителей</li>
+                        <li>История специалистов</li>
+                        <li>Направления к врачам</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">📅</div>
-                    <h3 class="text-lg font-semibold mb-3">Расписание</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Календарь занятий</li>
-                        <li>→ Индивидуальные/групповые</li>
-                        <li>→ Онлайн и офлайн</li>
-                        <li>→ Переносы занятий</li>
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Расписание</h3>
+                    <ul class="feature-card__list">
+                        <li>Календарь занятий</li>
+                        <li>Индивидуальные/групповые</li>
+                        <li>Онлайн и офлайн</li>
+                        <li>Переносы занятий</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">📝</div>
-                    <h3 class="text-lg font-semibold mb-3">Ведение занятий</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Заключения специалистов</li>
-                        <li>→ Отчеты по занятиям</li>
-                        <li>→ Домашние задания</li>
-                        <li>→ История занятий</li>
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Ведение занятий</h3>
+                    <ul class="feature-card__list">
+                        <li>Заключения специалистов</li>
+                        <li>Отчеты по занятиям</li>
+                        <li>Домашние задания</li>
+                        <li>История занятий</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="text-lg font-semibold mb-3">Финансовый учет</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Дашборд со статистикой</li>
-                        <li>→ Управление оплатами</li>
-                        <li>→ Фильтр должников</li>
-                        <li>→ Автоподсчет задолженностей</li>
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Финансовый учет</h3>
+                    <ul class="feature-card__list">
+                        <li>Дашборд со статистикой</li>
+                        <li>Управление оплатами</li>
+                        <li>Фильтр должников</li>
+                        <li>Автоподсчет задолженностей</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">👨‍💼</div>
-                    <h3 class="text-lg font-semibold mb-3">Управление командой</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Профили специалистов</li>
-                        <li>→ Публичные страницы</li>
-                        <li>→ Управление ролями</li>
-                        <li>→ История работы</li>
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Управление командой</h3>
+                    <ul class="feature-card__list">
+                        <li>Профили специалистов</li>
+                        <li>Публичные страницы</li>
+                        <li>Управление ролями</li>
+                        <li>История работы</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
-                    <div class="text-4xl mb-4">🏢</div>
-                    <h3 class="text-lg font-semibold mb-3">Мультитенантность</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>→ Множество организаций</li>
-                        <li>→ Изолированные данные</li>
-                        <li>→ 4 роли пользователей</li>
-                        <li>→ Безопасность данных</li>
+                <div class="feature-card">
+                    <h3 class="feature-card__title">Гибкая архитектура</h3>
+                    <ul class="feature-card__list">
+                        <li>Поддержка нескольких организаций</li>
+                        <li>Изолированные данные</li>
+                        <li>Гибкая система ролей</li>
+                        <li>Безопасность данных</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <!-- Screenshots -->
-        <section class="mt-32">
+        <section id="screenshots" style="margin-top: 120px;">
             <div class="section__header">
                 <span class="section__number">03</span>
                 <h2 class="section__title">Интерфейс</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+            <div class="screenshots-grid">
                 <!-- Большая карточка -->
-                <div class="md:col-span-2 md:row-span-2 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-full min-h-[400px] bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="screenshot-card screenshot-card--large">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--purple"></div>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[var(--card-bg)] to-transparent">
-                        <h3 class="font-semibold text-lg">Дашборд с финансовой статистикой</h3>
-                        <p class="text-sm text-[var(--text-secondary)] mt-1">Полный обзор финансов центра</p>
+                    <div class="screenshot-info screenshot-info--overlay">
+                        <h3 class="screenshot-title screenshot-title--large">Дашборд с финансовой статистикой</h3>
+                        <p class="screenshot-desc">Полный обзор финансов центра</p>
                     </div>
                 </div>
                 
                 <!-- Маленькие карточки -->
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--blue"></div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-sm">Управление клиентами</h3>
-                    </div>
-                </div>
-                
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-sm">Календарь занятий</h3>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Управление клиентами</h3>
                     </div>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--green"></div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-sm">Карточка ребенка</h3>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Календарь занятий</h3>
                     </div>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--orange"></div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-sm">Финансовый учет</h3>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Карточка ребенка</h3>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--yellow"></div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Финансовый учет</h3>
                     </div>
                 </div>
                 
                 <!-- Широкая карточка -->
-                <div class="md:col-span-2 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
-                    <div class="h-64 bg-[var(--border)] relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="screenshot-card screenshot-card--wide">
+                    <div class="screenshot-placeholder">
+                        <div class="screenshot-gradient screenshot-gradient--indigo"></div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold">Профили специалистов</h3>
-                        <p class="text-sm text-[var(--text-secondary)] mt-1">Публичные страницы и управление командой</p>
+                    <div class="screenshot-info">
+                        <h3 class="screenshot-title">Профили специалистов</h3>
+                        <p class="screenshot-desc">Публичные страницы и управление командой</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="mt-32">
-            <div class="section__header">
-                <span class="section__number">04</span>
-                <h2 class="section__title">Статистика</h2>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mt-8">
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
-                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">4</div>
-                    <div class="text-sm text-[var(--text-secondary)]">Роли</div>
-                </div>
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
-                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">8+</div>
-                    <div class="text-sm text-[var(--text-secondary)]">Модулей</div>
-                </div>
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
-                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">20+</div>
-                    <div class="text-sm text-[var(--text-secondary)]">Таблиц БД</div>
-                </div>
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
-                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">50+</div>
-                    <div class="text-sm text-[var(--text-secondary)]">Страниц</div>
-                </div>
-                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
-                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">100+</div>
-                    <div class="text-sm text-[var(--text-secondary)]">API</div>
                 </div>
             </div>
         </section>
 
         <!-- Roadmap -->
-        <section class="mt-32">
+        <section id="roadmap" style="margin-top: 120px;">
             <div class="section__header">
-                <span class="section__number">05</span>
-                <h2 class="section__title">Roadmap</h2>
+                <span class="section__number">04</span>
+                <h2 class="section__title">В планах</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-[var(--card-bg)] border-l-4 border-l-green-500 border border-[var(--border)] rounded-xl p-6">
-                    <h3 class="text-lg font-semibold mb-4">✅ Реализовано</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
-                        <li>• Мультитенантность</li>
-                        <li>• Управление клиентами</li>
-                        <li>• Расписание и календарь</li>
-                        <li>• Финансовый учет</li>
-                        <li>• Заключения и отчеты</li>
-                        <li>• Публичные страницы</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-[var(--card-bg)] border-l-4 border-l-orange-500 border border-[var(--border)] rounded-xl p-6">
-                    <h3 class="text-lg font-semibold mb-4">🚧 В разработке</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+            <div class="roadmap-grid">
+                <div class="roadmap-card roadmap-card--progress">
+                    <h3 class="roadmap-title">🚧 В разработке</h3>
+                    <ul class="roadmap-list">
                         <li>• Платежные системы</li>
                         <li>• Мобильное приложение</li>
                         <li>• Уведомления</li>
-                        <li>• Видеозвонки</li>
+                        <li>• Видеоуроки</li>
                         <li>• Расширенная аналитика</li>
                         <li>• Экспорт отчетов</li>
                     </ul>
                 </div>
                 
-                <div class="bg-[var(--card-bg)] border-l-4 border-l-blue-500 border border-[var(--border)] rounded-xl p-6">
-                    <h3 class="text-lg font-semibold mb-4">📝 Планируется</h3>
-                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                <div class="roadmap-card roadmap-card--planned">
+                    <h3 class="roadmap-title">📝 Планируется</h3>
+                    <ul class="roadmap-list">
                         <li>• Интеграция с календарями</li>
                         <li>• Автонапоминания</li>
-                        <li>• Конструктор заданий</li>
-                        <li>• Библиотека материалов</li>
+                        <li>• Домашние задания</li>
+                        <li>• Готовые развивающие игры</li>
                         <li>• Чат специалист-родитель</li>
                         <li>• Групповые занятия</li>
                     </ul>
@@ -359,52 +337,41 @@
         </section>
 
         <!-- Beta Form -->
-        <section class="mt-32">
+        <section id="beta" style="margin-top: 120px;">
             <div class="section__header">
-                <span class="section__number">06</span>
+                <span class="section__number">05</span>
                 <h2 class="section__title">Заявка на тестирование</h2>
             </div>
             
-            <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 md:p-12 mt-8">
-                <p class="text-center text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
+            <div class="beta-form-container">
+                <p class="beta-form-intro">
                     LogoCRM находится в стадии бета-тестирования. Оставьте заявку, и мы свяжемся с вами для предоставления доступа к системе.
                 </p>
                 
-                <form id="betaForm" class="max-w-3xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Ваше имя *</label>
-                            <input type="text" name="name" required placeholder="Иван Иванов"
-                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                <form id="betaForm" class="beta-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Ваше имя *</label>
+                            <input type="text" name="name" required placeholder="Иван Иванов" class="form-input">
                         </div>
                         
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Email *</label>
-                            <input type="email" name="email" required placeholder="ivan@example.com"
-                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Телефон</label>
-                            <input type="tel" name="phone" placeholder="+7 (999) 123-45-67"
-                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Организация</label>
-                            <input type="text" name="organization" placeholder="Название центра"
-                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                        <div class="form-group">
+                            <label>Телефон *</label>
+                            <input type="tel" name="phone" required placeholder="+7 (999) 123-45-67" class="form-input">
                         </div>
                     </div>
                     
-                    <div class="mb-6">
-                        <label class="block text-sm font-semibold mb-2">Расскажите о вашем центре</label>
-                        <textarea name="message" rows="4" placeholder="Количество специалистов, клиентов, особенности работы..."
-                            class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition resize-none"></textarea>
+                    <div class="form-group">
+                        <label>Организация</label>
+                        <input type="text" name="organization" placeholder="Название центра или кабинета" class="form-input">
                     </div>
                     
-                    <button type="submit" 
-                        class="w-full bg-[var(--accent)] hover:opacity-90 text-white font-semibold py-4 px-8 rounded-lg transition">
+                    <div class="form-group">
+                        <label>Расскажите о вашем центре</label>
+                        <textarea name="message" rows="4" placeholder="Количество специалистов, клиентов, особенности работы..." class="form-textarea"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">
                         Отправить заявку
                     </button>
                 </form>
@@ -412,7 +379,7 @@
         </section>
 
         <!-- Back -->
-        <section class="project-next mt-20">
+        <section class="project-next" style="margin-top: 80px;">
             <a href="../../index.html#work" class="project-next__link">
                 <span class="project-next__label">Все проекты</span>
                 <span class="project-next__arrow">→</span>
@@ -433,10 +400,11 @@
         </div>
     </footer>
 
-    <script src="../../src/js/components.js?v=6" defer></script>
-    <script src="../../src/js/script.js?v=2" defer></script>
+    <script src="../../src/js/components.js?v=7" defer></script>
+    <script src="../../src/js/script.js?v=9" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Beta form handler
             const form = document.getElementById('betaForm');
             if (form) {
                 form.addEventListener('submit', function(e) {
@@ -448,6 +416,60 @@
                     form.reset();
                 });
             }
+            
+            // Sidebar form handler
+            const sidebarForm = document.getElementById('sidebarForm');
+            if (sidebarForm) {
+                sidebarForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(sidebarForm);
+                    const data = Object.fromEntries(formData);
+                    console.log('Заявка из sidebar:', data);
+                    alert('Спасибо! Свяжусь с вами в ближайшее время для обсуждения проекта.');
+                    sidebarForm.reset();
+                });
+            }
+            
+            // Project sidebar navigation
+            const sections = document.querySelectorAll('section[id]');
+            const sidebarLinks = document.querySelectorAll('.project-sidebar__link');
+            
+            function setActiveNav() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', setActiveNav);
+            setActiveNav();
+            
+            // Smooth scroll
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
