@@ -32,33 +32,43 @@
     <link rel="icon" type="image/svg+xml" href="public/logo.svg">
     <link rel="icon" type="image/x-icon" href="public/favicon.ico">
     <link rel="apple-touch-icon" href="public/logo.svg">
-    <meta name="theme-color" content="#FF0000">
+    <meta name="theme-color" content="#0D4CD3">
+    
+    <!-- Preconnect для внешних ресурсов -->
+    <link rel="preconnect" href="https://mc.yandex.ru" crossorigin>
+    <link rel="preconnect" href="https://code.jivo.ru" crossorigin>
+    <link rel="dns-prefetch" href="https://mc.yandex.ru">
+    <link rel="dns-prefetch" href="https://code.jivo.ru">
     
     <!-- Preload критических ресурсов -->
-    <link rel="preload" href="src/css/styles.css?v=2" as="style">
-    <link rel="preload" href="src/assets/photo.webp" as="image" type="image/webp">
-    <link rel="preload" href="src/fonts/fonts.css" as="style">
-    <link rel="preload" href="src/fonts/space-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="src/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="src/fonts/space-grotesk-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="src/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="src/css/styles.css?v=3" as="style">
+    <link rel="preload" href="src/js/components.js?v=7" as="script">
+    <link rel="preload" href="src/js/script.js?v=9" as="script">
     
     <link rel="stylesheet" href="src/fonts/fonts.css">
-    <link rel="stylesheet" href="src/css/styles.css?v=2">
+    <link rel="stylesheet" href="src/css/styles.css?v=3">
     
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        // Загружаем метрику после полной загрузки страницы
-        window.addEventListener('load', function() {
-            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=70314580', 'ym');
-            
-            ym(70314580, 'init', {
-                clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true
-            });
+    <!-- Yandex.Metrika counter - отложенная загрузка -->
+    <script>
+        // Загружаем метрику через 3 секунды после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+                
+                if (typeof ym !== 'undefined') {
+                    ym(70314580, 'init', {
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                }
+            }, 3000);
         });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/70314580" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
@@ -107,10 +117,13 @@
                         <span class="word">Создаю</span>
                     </span>
                     <span class="hero__title-line title-animate">
+                        <span class="word hero__accent">эффективные</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
                         <span class="word">цифровые</span>
                     </span>
                     <span class="hero__title-line title-animate">
-                        <span class="word hero__accent">шедевры</span>
+                        <span class="word">решения</span>
                     </span>
                 </h1>
                 <p class="hero__desc">
@@ -342,42 +355,290 @@
                 </h2>
             </div>
             <div class="services__list">
-                <div class="service">
+                <div class="service service--featured">
                     <div class="service__number">01</div>
                     <div class="service__content">
-                        <h3 class="service__title">Веб-разработка</h3>
-                        <p class="service__desc">Создаю быстрые, адаптивные сайты и веб-приложения с чистым кодом и современным стеком технологий.</p>
+                        <div class="service__header">
+                            <div class="service__icon">⚡</div>
+                            <div>
+                                <span class="service__badge">Хит продаж</span>
+                                <h3 class="service__title">Экспресс-лендинг</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Быстрый запуск за 1 день. Готовый лендинг с адаптивной версткой и хостингом на нашей стороне. Идеально для быстрого старта бизнеса.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>5 секций (главная, услуги, о компании, контакты, отзывы)</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Адаптивная верстка под все устройства</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Форма обратной связи с кнопкой звонка</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Размещение на нашем хостинге (первый год бесплатно)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service__tags">
-                        <span>React</span>
-                        <span>Next.js</span>
-                        <span>Node.js</span>
+                    <div class="service__right">
+                        <div class="service__price-badge">
+                            <span class="service__price-value">30 000 ₽</span>
+                            <span class="service__price-label">Фиксированная цена</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag service__tag--time">⚡ 1 день</span>
+                            <span class="service__tag">💎 Премиум</span>
+                            <span class="service__tag">🚀 Быстрый старт</span>
+                        </div>
                     </div>
                 </div>
-                <div class="service">
+                
+                <div class="service service--featured">
                     <div class="service__number">02</div>
                     <div class="service__content">
-                        <h3 class="service__title">UI/UX Дизайн</h3>
-                        <p class="service__desc">Проектирую интерфейсы, которые не только красиво выглядят, но и решают бизнес-задачи.</p>
+                        <div class="service__header">
+                            <div class="service__icon">🌐</div>
+                            <div>
+                                <h3 class="service__title">Полноценный сайт</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Многостраничный сайт с индивидуальным дизайном и функционалом. Проект обсуждается индивидуально под ваши задачи.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Любое количество страниц</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Админ-панель для управления</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Интеграции по требованию</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Техподдержка при запуске</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service__tags">
-                        <span>Figma</span>
-                        <span>Прототипы</span>
-                        <span>Дизайн-системы</span>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 80 000 ₽</span>
+                            <span class="service__price-label">Индивидуально</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">от 1 недели</span>
+                            <span class="service__tag">CMS</span>
+                            <span class="service__tag">Индивидуально</span>
+                        </div>
                     </div>
                 </div>
-                <div class="service">
+                
+                <div class="service service--featured">
                     <div class="service__number">03</div>
                     <div class="service__content">
-                        <h3 class="service__title">Креативные решения</h3>
-                        <p class="service__desc">Интерактивные элементы, микроанимации, WebGL и 3D — всё, что делает сайт запоминающимся.</p>
+                        <div class="service__header">
+                            <div class="service__icon">🛒</div>
+                            <div>
+                                <h3 class="service__title">Интернет-магазин</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Полнофункциональный интернет-магазин на CMS с интеграцией 1С и собственной CRM-системой. Готовое решение для e-commerce.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>CMS для управления товарами</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Интеграция с 1С и CRM</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Личный кабинет покупателя</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Платежные системы</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service__tags">
-                        <span>GSAP</span>
-                        <span>Three.js</span>
-                        <span>Motion</span>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 120 000 ₽</span>
+                            <span class="service__price-label">Под ключ</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">от 1 недели</span>
+                            <span class="service__tag">1С</span>
+                            <span class="service__tag">CRM</span>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">04</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">💼</div>
+                            <div>
+                                <h3 class="service__title">SaaS-система</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Разработка SaaS-платформы с нуля. Полный цикл от аналитики до запуска с масштабируемой архитектурой.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Разработка с нуля</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Аналитика и проектирование</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Масштабируемая архитектура</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Поддержка оплачивается отдельно</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 100 000 ₽</span>
+                            <span class="service__price-label">В месяц</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Индивидуально</span>
+                            <span class="service__tag">Full-stack</span>
+                            <span class="service__tag">Масштабируемость</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">05</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">📈</div>
+                            <div>
+                                <span class="service__badge service__badge--promo">Для малого бизнеса</span>
+                                <h3 class="service__title">Сайт + Продвижение</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Абонемент для малого бизнеса: лендинг + комплексное продвижение. Идеально для салонов, фитнес-клубов, кафе.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Лендинг (в первый месяц)</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Продвижение на картах</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>SEO-оптимизация</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Контекстная реклама (бюджет включен)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">50 000 ₽</span>
+                            <span class="service__price-label">В месяц (мин. 3 мес)</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Минимум 3 мес</span>
+                            <span class="service__tag">SEO</span>
+                            <span class="service__tag">Реклама</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">06</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">🔧</div>
+                            <div>
+                                <h3 class="service__title">Доработки и консультации</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Исправление ошибок, добавление функционала, техническая консультация и оптимизация существующих проектов.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Исправление ошибок</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Добавление функционала</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Техническая консультация</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Оптимизация производительности</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 3 000 ₽</span>
+                            <span class="service__price-label">За час</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Почасовая оплата</span>
+                            <span class="service__tag">Поддержка</span>
+                            <span class="service__tag">Консультации</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-cta-block">
+                <div class="service-cta-block__icon">💬</div>
+                <h3 class="service-cta-block__title">Не нашли нужную услугу?</h3>
+                <p class="service-cta-block__desc">Обсудим ваш проект и найдем оптимальное решение. Работаю с проектами любой сложности — от простых лендингов до сложных веб-приложений.</p>
+                
+                <div class="service-cta-block__benefits">
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">💰</div>
+                        <h4 class="cta-benefit__title">Без миллионных бюджетов</h4>
+                        <p class="cta-benefit__text">Не нужно тратить миллионы на старт. Создам полноценное решение быстро и по адекватной цене.</p>
+                    </div>
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">🚀</div>
+                        <h4 class="cta-benefit__title">Идеально для стартапов</h4>
+                        <p class="cta-benefit__text">Быстрый запуск MVP, чтобы протестировать идею. Доработаем функционал по мере роста.</p>
+                    </div>
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">🎯</div>
+                        <h4 class="cta-benefit__title">Помогу определиться</h4>
+                        <p class="cta-benefit__text">Не знаете, что должно быть на сайте? Проконсультирую и предложу оптимальное решение.</p>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="service-cta-block__button">
+                    <span>Обсудить проект</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
             </div>
         </section>
 
@@ -474,10 +735,19 @@
     }
     </script>
 
-    <!-- JivoSite -->
-    <script src="//code.jivo.ru/widget/TFV7onkuoN" async></script>
+    <!-- JivoSite - отложенная загрузка -->
+    <script>
+        if (window.location.protocol !== 'file:') {
+            setTimeout(function() {
+                var s = document.createElement('script');
+                s.src = '//code.jivo.ru/widget/TFV7onkuoN';
+                s.async = true;
+                document.body.appendChild(s);
+            }, 3000);
+        }
+    </script>
 
-    <script src="src/js/components.js?v=6" defer></script>
-    <script src="src/js/script.js?v=2" defer></script>
+    <script src="src/js/components.js?v=7" defer></script>
+    <script src="src/js/script.js?v=9" defer></script>
 </body>
 </html>

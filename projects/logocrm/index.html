@@ -4,25 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>LogoCRM — CRM-система для управления клиентами | Антон Двинянинов</title>
-    <meta name="description" content="LogoCRM — современная CRM-система для управления клиентами и продажами. Разработка: Vue.js, Laravel, MySQL.">
-    <meta name="keywords" content="LogoCRM, CRM система, управление клиентами, веб-приложение, Vue.js, Laravel">
+    <title>LogoCRM — Система управления логопедическими центрами | Антон Двинянинов</title>
+    <meta name="description" content="LogoCRM — современная SaaS-платформа для управления логопедическими центрами. Автоматизация записи, расписания, финансов и отчетности.">
     
-    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="../../public/logo.svg">
     <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
     
     <link rel="stylesheet" href="../../src/fonts/fonts.css">
     <link rel="stylesheet" href="../../src/css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent': '#ff006e',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="noise"></div>
     
-    <!-- Header -->
     <site-header></site-header>
 
-    <main class="project-page">
-        <!-- Хлебные крошки -->
+    <main style="padding: 120px 60px 60px;">
+        
         <nav class="breadcrumbs">
             <a href="../../index.html" class="breadcrumbs__link">Главная</a>
             <span class="breadcrumbs__separator">/</span>
@@ -31,7 +41,6 @@
             <span class="breadcrumbs__current">LogoCRM</span>
         </nav>
         
-        <!-- Hero проекта -->
         <section class="project-hero">
             <a href="../../index.html#work" class="back-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -41,14 +50,17 @@
             </a>
             
             <div class="project-hero__content">
-                <span class="project-hero__label">CRM / Бизнес</span>
-                <h1 class="project-hero__title">LogoCRM</h1>
-                <p class="project-hero__desc">Современная CRM-система для управления клиентами, продажами и автоматизации бизнес-процессов</p>
+                <span class="project-hero__label">SaaS / Образование</span>
+                <h1 class="project-hero__title">
+                    LogoCRM
+                    <span class="beta-badge">Beta</span>
+                </h1>
+                <p class="project-hero__desc">Современная SaaS-платформа для управления логопедическими центрами и кабинетами. Автоматизация всех процессов: от записи клиентов до финансового учета</p>
                 
                 <div class="project-hero__meta">
                     <div class="project-meta">
                         <span class="project-meta__label">Год</span>
-                        <span class="project-meta__value">2024</span>
+                        <span class="project-meta__value">2024-2025</span>
                     </div>
                     <div class="project-meta">
                         <span class="project-meta__label">Роль</span>
@@ -56,72 +68,351 @@
                     </div>
                     <div class="project-meta">
                         <span class="project-meta__label">Статус</span>
-                        <span class="project-meta__value">В разработке</span>
+                        <span class="project-meta__value">Beta-тестирование</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="project-hero__image">
-                <div class="project-hero__bg" style="background: linear-gradient(135deg, #8338ec, #ff006e);"></div>
-            </div>
         </section>
 
-        <!-- Технологии -->
-        <section class="project-section">
+        <!-- Technologies -->
+        <section class="project-section mt-20">
             <h2 class="project-section__title">Технологии</h2>
             <div class="project-tech-grid">
                 <div class="tech-card">
-                    <div class="tech-card__icon">⚡</div>
-                    <h3 class="tech-card__title">Vue.js 3</h3>
-                    <p class="tech-card__desc">Composition API, Pinia для state management</p>
-                </div>
-                <div class="tech-card">
                     <div class="tech-card__icon">🔧</div>
-                    <h3 class="tech-card__title">Laravel 10</h3>
-                    <p class="tech-card__desc">REST API, аутентификация, бизнес-логика</p>
+                    <h3 class="tech-card__title">Laravel 11</h3>
+                    <p class="tech-card__desc">Современный PHP-фреймворк</p>
                 </div>
                 <div class="tech-card">
                     <div class="tech-card__icon">💾</div>
-                    <h3 class="tech-card__title">MySQL</h3>
-                    <p class="tech-card__desc">Реляционная база данных</p>
+                    <h3 class="tech-card__title">PostgreSQL</h3>
+                    <p class="tech-card__desc">Надежная база данных</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">📄</div>
+                    <h3 class="tech-card__title">Blade + Alpine.js</h3>
+                    <p class="tech-card__desc">Серверный рендеринг</p>
                 </div>
                 <div class="tech-card">
                     <div class="tech-card__icon">🎨</div>
                     <h3 class="tech-card__title">Tailwind CSS</h3>
-                    <p class="tech-card__desc">Utility-first CSS фреймворк</p>
+                    <p class="tech-card__desc">Адаптивный дизайн</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">🐳</div>
+                    <h3 class="tech-card__title">Docker</h3>
+                    <p class="tech-card__desc">Контейнеризация</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card__icon">⚡</div>
+                    <h3 class="tech-card__title">Easypanel</h3>
+                    <p class="tech-card__desc">Простой деплой</p>
                 </div>
             </div>
         </section>
 
-        <!-- Описание -->
-        <section class="project-section">
-            <h2 class="project-section__title">О проекте</h2>
-            <div class="project-content">
-                <p>LogoCRM — это комплексная система управления взаимоотношениями с клиентами, разработанная для малого и среднего бизнеса. Система позволяет эффективно управлять клиентской базой, отслеживать продажи и автоматизировать рутинные процессы.</p>
-                
-                <h3>Основные возможности:</h3>
-                <ul>
-                    <li>Управление клиентской базой и контактами</li>
-                    <li>Воронка продаж с визуализацией этапов</li>
-                    <li>Система задач и напоминаний</li>
-                    <li>Аналитика и отчеты по продажам</li>
-                    <li>Интеграция с email и мессенджерами</li>
-                    <li>Мобильная адаптация для работы в пути</li>
-                </ul>
-
-                <h3>Решаемые задачи:</h3>
-                <ul>
-                    <li>Централизация данных о клиентах</li>
-                    <li>Повышение конверсии продаж</li>
-                    <li>Автоматизация рутинных операций</li>
-                    <li>Контроль работы менеджеров</li>
-                    <li>Прогнозирование продаж</li>
-                </ul>
+        <!-- About -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">01</span>
+                <h2 class="section__title">О проекте</h2>
+            </div>
+            
+            <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 mt-8">
+                <p class="text-lg leading-relaxed">
+                    <strong>LogoCRM</strong> — это современная SaaS-платформа для управления логопедическими центрами и кабинетами. Система автоматизирует все ключевые процессы: от записи клиентов до финансового учета, позволяя специалистам сосредоточиться на главном — работе с детьми.
+                </p>
+            </div>
+            
+            <div class="mt-12">
+                <h3 class="text-xl font-semibold mb-6">🎯 Целевая аудитория</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Логопедические центры</span>
+                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Частнопрактикующие логопеды</span>
+                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Дефектологи</span>
+                    <span class="px-6 py-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-full text-sm hover:border-[var(--accent)] transition cursor-pointer">Центры развития речи</span>
+                </div>
             </div>
         </section>
 
-        <!-- Следующий проект -->
-        <section class="project-next">
+        <!-- Features -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">02</span>
+                <h2 class="section__title">Возможности</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h3 class="text-lg font-semibold mb-3">Управление клиентами</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Карточки детей с историей</li>
+                        <li>→ Профили родителей</li>
+                        <li>→ История специалистов</li>
+                        <li>→ Направления к врачам</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="text-lg font-semibold mb-3">Расписание</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Календарь занятий</li>
+                        <li>→ Индивидуальные/групповые</li>
+                        <li>→ Онлайн и офлайн</li>
+                        <li>→ Переносы занятий</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h3 class="text-lg font-semibold mb-3">Ведение занятий</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Заключения специалистов</li>
+                        <li>→ Отчеты по занятиям</li>
+                        <li>→ Домашние задания</li>
+                        <li>→ История занятий</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-lg font-semibold mb-3">Финансовый учет</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Дашборд со статистикой</li>
+                        <li>→ Управление оплатами</li>
+                        <li>→ Фильтр должников</li>
+                        <li>→ Автоподсчет задолженностей</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">👨‍💼</div>
+                    <h3 class="text-lg font-semibold mb-3">Управление командой</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Профили специалистов</li>
+                        <li>→ Публичные страницы</li>
+                        <li>→ Управление ролями</li>
+                        <li>→ История работы</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] transition-all duration-300">
+                    <div class="text-4xl mb-4">🏢</div>
+                    <h3 class="text-lg font-semibold mb-3">Мультитенантность</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>→ Множество организаций</li>
+                        <li>→ Изолированные данные</li>
+                        <li>→ 4 роли пользователей</li>
+                        <li>→ Безопасность данных</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">03</span>
+                <h2 class="section__title">Интерфейс</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+                <!-- Большая карточка -->
+                <div class="md:col-span-2 md:row-span-2 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-full min-h-[400px] bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[var(--card-bg)] to-transparent">
+                        <h3 class="font-semibold text-lg">Дашборд с финансовой статистикой</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mt-1">Полный обзор финансов центра</p>
+                    </div>
+                </div>
+                
+                <!-- Маленькие карточки -->
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm">Управление клиентами</h3>
+                    </div>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm">Календарь занятий</h3>
+                    </div>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm">Карточка ребенка</h3>
+                    </div>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-48 bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm">Финансовый учет</h3>
+                    </div>
+                </div>
+                
+                <!-- Широкая карточка -->
+                <div class="md:col-span-2 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden hover:border-[var(--accent)] transition-all duration-300 group">
+                    <div class="h-64 bg-[var(--border)] relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold">Профили специалистов</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mt-1">Публичные страницы и управление командой</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">04</span>
+                <h2 class="section__title">Статистика</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mt-8">
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">4</div>
+                    <div class="text-sm text-[var(--text-secondary)]">Роли</div>
+                </div>
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">8+</div>
+                    <div class="text-sm text-[var(--text-secondary)]">Модулей</div>
+                </div>
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">20+</div>
+                    <div class="text-sm text-[var(--text-secondary)]">Таблиц БД</div>
+                </div>
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">50+</div>
+                    <div class="text-sm text-[var(--text-secondary)]">Страниц</div>
+                </div>
+                <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold text-[var(--accent)] mb-2">100+</div>
+                    <div class="text-sm text-[var(--text-secondary)]">API</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">05</span>
+                <h2 class="section__title">Roadmap</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="bg-[var(--card-bg)] border-l-4 border-l-green-500 border border-[var(--border)] rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4">✅ Реализовано</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>• Мультитенантность</li>
+                        <li>• Управление клиентами</li>
+                        <li>• Расписание и календарь</li>
+                        <li>• Финансовый учет</li>
+                        <li>• Заключения и отчеты</li>
+                        <li>• Публичные страницы</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border-l-4 border-l-orange-500 border border-[var(--border)] rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4">🚧 В разработке</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>• Платежные системы</li>
+                        <li>• Мобильное приложение</li>
+                        <li>• Уведомления</li>
+                        <li>• Видеозвонки</li>
+                        <li>• Расширенная аналитика</li>
+                        <li>• Экспорт отчетов</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-[var(--card-bg)] border-l-4 border-l-blue-500 border border-[var(--border)] rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4">📝 Планируется</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+                        <li>• Интеграция с календарями</li>
+                        <li>• Автонапоминания</li>
+                        <li>• Конструктор заданий</li>
+                        <li>• Библиотека материалов</li>
+                        <li>• Чат специалист-родитель</li>
+                        <li>• Групповые занятия</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beta Form -->
+        <section class="mt-32">
+            <div class="section__header">
+                <span class="section__number">06</span>
+                <h2 class="section__title">Заявка на тестирование</h2>
+            </div>
+            
+            <div class="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 md:p-12 mt-8">
+                <p class="text-center text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
+                    LogoCRM находится в стадии бета-тестирования. Оставьте заявку, и мы свяжемся с вами для предоставления доступа к системе.
+                </p>
+                
+                <form id="betaForm" class="max-w-3xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Ваше имя *</label>
+                            <input type="text" name="name" required placeholder="Иван Иванов"
+                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Email *</label>
+                            <input type="email" name="email" required placeholder="ivan@example.com"
+                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Телефон</label>
+                            <input type="tel" name="phone" placeholder="+7 (999) 123-45-67"
+                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Организация</label>
+                            <input type="text" name="organization" placeholder="Название центра"
+                                class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Расскажите о вашем центре</label>
+                        <textarea name="message" rows="4" placeholder="Количество специалистов, клиентов, особенности работы..."
+                            class="w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:outline-none focus:border-[var(--accent)] transition resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit" 
+                        class="w-full bg-[var(--accent)] hover:opacity-90 text-white font-semibold py-4 px-8 rounded-lg transition">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Back -->
+        <section class="project-next mt-20">
             <a href="../../index.html#work" class="project-next__link">
                 <span class="project-next__label">Все проекты</span>
                 <span class="project-next__arrow">→</span>
@@ -129,7 +420,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer__left">
             <span>© 2026</span>
@@ -145,5 +435,20 @@
 
     <script src="../../src/js/components.js?v=6" defer></script>
     <script src="../../src/js/script.js?v=2" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('betaForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+                    console.log('Заявка:', data);
+                    alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>

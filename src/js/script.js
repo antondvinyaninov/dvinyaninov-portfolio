@@ -128,13 +128,22 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Применяем анимацию к элементам
-const animatedElements = document.querySelectorAll('.project, .work__more-card, .service, .section__header');
+// Применяем быструю анимацию к элементам
+const animatedElements = document.querySelectorAll('.project, .work__more-card, .section__header');
 
 animatedElements.forEach((el, index) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(50px)';
-    el.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
+    el.style.transition = `opacity 0.4s ease ${index * 0.03}s, transform 0.4s ease ${index * 0.03}s`;
+    observer.observe(el);
+});
+
+// Услуги с быстрой анимацией без задержек
+const services = document.querySelectorAll('.service');
+services.forEach((el) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     observer.observe(el);
 });
 
@@ -148,69 +157,93 @@ words.forEach((word, index) => {
     word.style.transform = 'translateY(50px)';
     
     setTimeout(() => {
-        word.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        word.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         word.style.opacity = '1';
         word.style.transform = 'translateY(0)';
-    }, index * 200);
+    }, index * 100);
 });
 
 // ============================================
-// ЭФФЕКТ ЦИФР НА HERO ЗАГОЛОВКЕ
+// ЭФФЕКТ ЦИФР НА ЛОГОТИПЕ
 // ============================================
-const heroTitleLines = document.querySelectorAll('.hero__title .title-animate');
-
-heroTitleLines.forEach(line => {
-    // Сохраняем оригинальный текст
-    const originalText = line.textContent;
-    let isAnimating = false;
-    let animationFrame;
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo');
     
-    line.addEventListener('mouseenter', () => {
-        if (isAnimating) return;
-        isAnimating = true;
+    if (logo) {
+        // Получаем все текстовые ноды внутри логотипа (исключая скобки)
+        const textNodes = [];
+        const walker = document.createTreeWalker(
+            logo,
+            NodeFilter.SHOW_TEXT,
+            null,
+            false
+        );
         
-        let iterations = 0;
-        const maxIterations = 15;
-        
-        const animate = () => {
-            if (iterations < maxIterations) {
-                // Заменяем символы на цифры
-                const newText = originalText
-                    .split('')
-                    .map((char, index) => {
-                        // Пропускаем пробелы
-                        if (char === ' ') return char;
-                        
-                        // В последних итерациях возвращаем оригинальные символы
-                        if (iterations >= maxIterations - 3) {
-                            return originalText[index];
-                        }
-                        
-                        // Показываем случайные цифры
-                        return Math.floor(Math.random() * 10);
-                    })
-                    .join('');
-                
-                line.textContent = newText;
-                iterations++;
-                animationFrame = requestAnimationFrame(animate);
-            } else {
-                // Восстанавливаем оригинальный текст
-                line.textContent = originalText;
-                isAnimating = false;
+        let node;
+        while (node = walker.nextNode()) {
+            if (node.textContent.trim() && !node.parentElement.classList.contains('logo__bracket')) {
+                textNodes.push(node);
             }
-        };
-        
-        animate();
-    });
-    
-    line.addEventListener('mouseleave', () => {
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
         }
-        line.textContent = originalText;
-        isAnimating = false;
-    });
+        
+        let isAnimating = false;
+        let animationFrame;
+        const originalTexts = textNodes.map(node => node.textContent);
+        
+        logo.addEventListener('mouseenter', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            let iterations = 0;
+            const maxIterations = 15;
+            
+            const animate = () => {
+                if (iterations < maxIterations) {
+                    textNodes.forEach((node, nodeIndex) => {
+                        const originalText = originalTexts[nodeIndex];
+                        const newText = originalText
+                            .split('')
+                            .map((char, index) => {
+                                // Пропускаем пробелы
+                                if (char === ' ') return char;
+                                
+                                // В последних итерациях возвращаем оригинальные символы
+                                if (iterations >= maxIterations - 3) {
+                                    return originalText[index];
+                                }
+                                
+                                // Показываем случайные цифры
+                                return Math.floor(Math.random() * 10);
+                            })
+                            .join('');
+                        
+                        node.textContent = newText;
+                    });
+                    
+                    iterations++;
+                    animationFrame = requestAnimationFrame(animate);
+                } else {
+                    // Восстанавливаем оригинальный текст
+                    textNodes.forEach((node, index) => {
+                        node.textContent = originalTexts[index];
+                    });
+                    isAnimating = false;
+                }
+            };
+            
+            animate();
+        });
+        
+        logo.addEventListener('mouseleave', () => {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            textNodes.forEach((node, index) => {
+                node.textContent = originalTexts[index];
+            });
+            isAnimating = false;
+        });
+    }
 });
 
 // ============================================
@@ -484,9 +517,9 @@ if (photoWrapper) {
 // ============================================
 // HOVER ЭФФЕКТ ДЛЯ УСЛУГ
 // ============================================
-const services = document.querySelectorAll('.service');
+const serviceElements = document.querySelectorAll('.service');
 
-services.forEach(service => {
+serviceElements.forEach(service => {
     service.addEventListener('mouseenter', function() {
         this.style.background = 'var(--bg)';
     });
@@ -535,14 +568,6 @@ window.addEventListener('resize', () => {
 // ============================================
 // ЗАГРУЗКА
 // ============================================
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
 console.log('🚀 Portfolio loaded!');
 console.log('Made with ❤️ by Anton Dvinyaninov');
 
