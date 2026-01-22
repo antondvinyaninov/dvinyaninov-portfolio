@@ -2015,8 +2015,105 @@ body {
         padding: 30px 20px;
     }
     
+    .service--featured {
+        padding: 30px 20px;
+        margin: 0;
+    }
+    
     .service__number {
         font-size: 40px;
+    }
+    
+    .service__title {
+        font-size: 24px;
+    }
+    
+    .service__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .service__icon {
+        font-size: 36px;
+    }
+    
+    .service__right {
+        width: 100%;
+    }
+    
+    .service__price-badge {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 16px 20px;
+    }
+    
+    .service__price-value {
+        font-size: 28px;
+    }
+    
+    .service__tags {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .service__tag {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    /* CTA блок */
+    .service-cta-block {
+        padding: 30px 20px;
+        margin-top: 30px;
+    }
+    
+    .service-cta-block__icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+    }
+    
+    .service-cta-block__title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .service-cta-block__desc {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+    
+    .service-cta-block__benefits {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    .cta-benefit {
+        padding: 24px 20px;
+    }
+    
+    .cta-benefit__icon {
+        font-size: 40px;
+        margin-bottom: 12px;
+    }
+    
+    .cta-benefit__title {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    .cta-benefit__text {
+        font-size: 14px;
+    }
+    
+    .service-cta-block__button {
+        padding: 14px 28px;
+        font-size: 15px;
     }
     
     .contact__title {
@@ -2096,6 +2193,79 @@ body {
     
     .section__title {
         font-size: 36px;
+    }
+    
+    /* Услуги на маленьких экранах */
+    .service {
+        padding: 20px 15px;
+    }
+    
+    .service--featured {
+        padding: 20px 15px;
+    }
+    
+    .service__number {
+        font-size: 32px;
+    }
+    
+    .service__title {
+        font-size: 20px;
+    }
+    
+    .service__desc {
+        font-size: 14px;
+    }
+    
+    .service__icon {
+        font-size: 32px;
+    }
+    
+    .service__price-value {
+        font-size: 24px;
+    }
+    
+    .service__feature {
+        font-size: 13px;
+    }
+    
+    /* CTA блок на маленьких экранах */
+    .service-cta-block {
+        padding: 24px 15px;
+    }
+    
+    .service-cta-block__icon {
+        font-size: 40px;
+    }
+    
+    .service-cta-block__title {
+        font-size: 20px;
+    }
+    
+    .service-cta-block__desc {
+        font-size: 14px;
+    }
+    
+    .cta-benefit {
+        padding: 20px 15px;
+    }
+    
+    .cta-benefit__icon {
+        font-size: 36px;
+    }
+    
+    .cta-benefit__title {
+        font-size: 16px;
+    }
+    
+    .cta-benefit__text {
+        font-size: 13px;
+    }
+    
+    .service-cta-block__button {
+        padding: 12px 24px;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
     }
     
     .contact__title {
