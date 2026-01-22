@@ -1028,19 +1028,21 @@
         "sidebar content";
 }
 
-.back-link {
-    grid-area: back;
-}
+@media (min-width: 769px) {
+    .back-link {
+        grid-area: back;
+    }
 
-.project-hero__sidebar {
-    grid-area: sidebar;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
+    .project-hero__sidebar {
+        grid-area: sidebar;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 
-.project-hero__content {
-    grid-area: content;
+    .project-hero__content {
+        grid-area: content;
+    }
 }
 
 .project-hero__label {
