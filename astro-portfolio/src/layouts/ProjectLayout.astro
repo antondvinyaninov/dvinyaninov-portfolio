@@ -58,6 +58,10 @@ const {
     author={seo?.author}
     canonical={seo?.canonical}
 >
+    <!-- Preload project page CSS -->
+    <link rel="preload" href="/styles/project-page.css" as="style" slot="head">
+    <link rel="stylesheet" href="/styles/project-page.css" slot="head">
+    
     <Header />
     
     <!-- Project Sidebar -->
@@ -138,7 +142,15 @@ const {
                     <div class="tech-logos-grid">
                         {techStack.map(tech => (
                             <div class="tech-logo-item">
-                                <img src={tech.icon} alt={tech.name} class="tech-logo">
+                                <img 
+                                    src={tech.icon} 
+                                    alt={tech.name} 
+                                    class="tech-logo"
+                                    width="48"
+                                    height="48"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
                             </div>
                         ))}
                     </div>
@@ -170,8 +182,6 @@ const {
             </a>
         </section>
     </main>
-    
-    <link rel="stylesheet" href="/styles/project-page.css">
 </BaseLayout>
 
 <script>

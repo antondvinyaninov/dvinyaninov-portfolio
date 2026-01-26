@@ -110,6 +110,9 @@ const currentUrl = canonical || Astro.url.href;
     <!-- Загружаем CSS синхронно для стабильности -->
     <link rel="stylesheet" href="/styles/global.css">
     
+    <!-- Named slot для дополнительных стилей -->
+    <slot name="head" />
+    
     <!-- Google Tag Manager -->
     <script is:inline>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
