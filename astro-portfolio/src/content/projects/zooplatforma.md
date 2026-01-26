@@ -278,19 +278,19 @@ screenshots:
     desc: "Посты о животных, событиях приютов и активности волонтёров."
     gradient: "purple"
     large: true
-    image: "/images/screenshots/zooplatforma/glavnaya.png"
+    image: "/images/screenshots/zooplatforma/glavnaya.webp"
   - title: "Карточка PetID"
     gradient: "blue"
-    image: "/images/screenshots/zooplatforma/petid.png"
+    image: "/images/screenshots/zooplatforma/petid.webp"
   - title: "Кабинет ветклиники"
     gradient: "green"
-    image: "/images/screenshots/zooplatforma/clinic.png"
+    image: "/images/screenshots/zooplatforma/clinic.webp"
   - title: "Справочник организаций"
     gradient: "orange"
-    image: "/images/screenshots/zooplatforma/organizations.png"
+    image: "/images/screenshots/zooplatforma/organizations.webp"
   - title: "Профиль пользователя"
     gradient: "indigo"
-    image: "/images/screenshots/zooplatforma/volunteer.png"
+    image: "/images/screenshots/zooplatforma/volunteer.webp"
 
 # Roadmap
 roadmap:
