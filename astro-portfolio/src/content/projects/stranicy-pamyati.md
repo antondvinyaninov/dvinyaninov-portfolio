@@ -59,7 +59,7 @@ navigation:
 
 # === SEO (опционально) ===
 seo:
-  ogImage: "/projects/memory-og.jpg"
+  ogImage: "https://dvinyaninov.ru/og-image-stranicy-pamyati.webp"
   ogType: "article"
   twitterCard: "summary_large_image"
   keywords:

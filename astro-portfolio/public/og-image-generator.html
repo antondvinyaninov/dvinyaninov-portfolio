@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OG Image Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .og-image {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0D4CD3 0%, #0A3BA8 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .og-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        
+        .og-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E");
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .og-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px;
+        }
+        
+        .og-logo {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .og-title {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .og-subtitle {
+            font-size: 32px;
+            opacity: 0.9;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .og-url {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-size: 24px;
+            opacity: 0.8;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Для страниц проектов */
+        .og-image.project {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .og-image.project .og-title {
+            font-size: 96px;
+        }
+        
+        .og-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .instructions {
+            max-width: 1200px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .instructions h2 {
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            line-height: 1.8;
+        }
+        
+        .controls {
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .control-group input[type="file"] {
+            display: block;
+            padding: 10px;
+            border: 2px dashed #0D4CD3;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .control-group button {
+            padding: 10px 20px;
+            background: #0D4CD3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .control-group button:hover {
+            background: #0A3BA8;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+            max-width: 300px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>📸 Инструкция по созданию OG изображений</h2>
+        <ol>
+            <li><strong>Загрузи изображение</strong> (опционально) - используй поле ниже</li>
+            <li>Открой DevTools (F12 или Cmd+Option+I)</li>
+            <li>Включи Device Toolbar (Cmd+Shift+M)</li>
+            <li>Установи размер: 1200 x 630</li>
+            <li>Сделай скриншот каждого блока (Cmd+Shift+P → "Capture node screenshot")</li>
+            <li>Сохрани как:
+                <ul>
+                    <li><code>public/og-image.jpg</code> - главная страница</li>
+                    <li><code>public/og-image-logocrm.jpg</code> - LogoCRM</li>
+                    <li><code>public/og-image-zooplatforma.jpg</code> - ЗооПлатформа</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="controls">
+        <h3>🖼️ Загрузить фоновые изображения</h3>
+        <p style="color: #666; margin-bottom: 20px;">Загрузи отдельное изображение для каждой страницы или оставь градиенты по умолчанию</p>
+        
+        <div class="control-group">
+            <label for="imageMain">Главная страница:</label>
+            <input type="file" id="imageMain" accept="image/*" data-target="main">
+        </div>
+        
+        <div class="control-group">
+            <label for="imageLogocrm">LogoCRM:</label>
+            <input type="file" id="imageLogocrm" accept="image/*" data-target="logocrm">
+        </div>
+        
+        <div class="control-group">
+            <label for="imageZooplatforma">ЗооПлатформа:</label>
+            <input type="file" id="imageZooplatforma" accept="image/*" data-target="zooplatforma">
+        </div>
+        
+        <div class="control-group">
+            <label for="imageKarty">Карты помощи:</label>
+            <input type="file" id="imageKarty" accept="image/*" data-target="karty">
+        </div>
+        
+        <div class="control-group">
+            <label for="imageStranicy">Страницы памяти:</label>
+            <input type="file" id="imageStranicy" accept="image/*" data-target="stranicy">
+        </div>
+        
+        <div class="control-group">
+            <button onclick="clearAllImages()">Очистить все изображения</button>
+        </div>
+    </div>
+
+    <!-- Главная страница -->
+    <div class="og-image" id="main">
+        <div class="og-content">
+            <div class="og-logo">[dvinyaninov]</div>
+            <div class="og-title">Антон Двинянинов</div>
+            <div class="og-subtitle">Full-stack разработчик и UI/UX дизайнер</div>
+        </div>
+        <div class="og-url">dvinyaninov.ru</div>
+    </div>
+
+    <!-- LogoCRM -->
+    <div class="og-image project" id="logocrm" style="background: linear-gradient(135deg, #8338ec 0%, #ff006e 100%);">
+        <div class="og-content">
+            <div class="og-badge">SaaS / Образование</div>
+            <div class="og-title">LogoCRM</div>
+            <div class="og-subtitle">Платформа для логопедических центров</div>
+        </div>
+        <div class="og-url">dvinyaninov.ru/projects/logocrm</div>
+    </div>
+
+    <!-- ЗооПлатформа -->
+    <div class="og-image project" id="zooplatforma" style="background: linear-gradient(135deg, #00d4ff 0%, #06ffa5 100%);">
+        <div class="og-content">
+            <div class="og-badge">Соцсеть / SaaS / Зоозащита</div>
+            <div class="og-title">ЗооПлатформа</div>
+            <div class="og-subtitle">Экосистема для любителей животных</div>
+        </div>
+        <div class="og-url">dvinyaninov.ru/projects/zooplatforma</div>
+    </div>
+
+    <!-- Карты помощи -->
+    <div class="og-image project" id="karty" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="og-content">
+            <div class="og-badge">Медицина / Безопасность</div>
+            <div class="og-title">Карты помощи</div>
+            <div class="og-subtitle">Медицинская информация для экстренных случаев</div>
+        </div>
+        <div class="og-url">dvinyaninov.ru/projects/karty-pomoshchi</div>
+    </div>
+
+    <!-- Страницы памяти -->
+    <div class="og-image project" id="stranicy" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="og-content">
+            <div class="og-badge">Социальный проект</div>
+            <div class="og-title">Страницы памяти</div>
+            <div class="og-subtitle">Цифровые мемориалы близких людей</div>
+        </div>
+        <div class="og-url">dvinyaninov.ru/projects/stranicy-pamyati</div>
+    </div>
+
+    <script>
+        const images = {};
+
+        // Обработчик для всех input файлов
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                const targetId = this.getAttribute('data-target');
+                
+                if (file && targetId) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        images[targetId] = event.target.result;
+                        applyImageToBlock(targetId, event.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        function applyImageToBlock(blockId, imageUrl) {
+            const block = document.getElementById(blockId);
+            if (block && imageUrl) {
+                block.style.backgroundImage = `url(${imageUrl})`;
+                block.style.backgroundSize = 'cover';
+                block.style.backgroundPosition = 'center';
+                console.log(`✅ Изображение применено к блоку: ${blockId}`);
+            }
+        }
+
+        function clearAllImages() {
+            // Очищаем все input
+            document.querySelectorAll('input[type="file"]').forEach(input => {
+                input.value = '';
+            });
+            
+            // Очищаем объект с изображениями
+            Object.keys(images).forEach(key => delete images[key]);
+            
+            // Возвращаем градиенты
+            document.querySelectorAll('.og-image').forEach(img => {
+                img.style.backgroundImage = '';
+            });
+            
+            console.log('🧹 Все изображения очищены');
+        }
+
+        console.log('📸 OG Image Generator готов!');
+        console.log('Размер каждого блока: 1200x630px');
+        console.log('Загрузи изображения для каждой страницы отдельно');
+    </script>
+</body>
+</html>

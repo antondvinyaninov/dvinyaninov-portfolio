@@ -62,6 +62,51 @@ const {
     <link rel="preload" href="/styles/project-page.css" as="style" slot="head">
     <link rel="stylesheet" href="/styles/project-page.css" slot="head">
     
+    <!-- Breadcrumbs Schema -->
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://dvinyaninov.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Проекты",
+          "item": "https://dvinyaninov.ru/projects/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": projectName,
+          "item": seo?.canonical || `https://dvinyaninov.ru/projects/${Astro.url.pathname.split('/').filter(Boolean).pop()}/`
+        }
+      ]
+    })} />
+    
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": projectName,
+      "description": projectDesc,
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Антон Двинянинов"
+      }
+    })} />
+    
     <Header />
     
     <!-- Project Sidebar -->

@@ -54,6 +54,45 @@ const currentUrl = canonical || Astro.url.href;
     <!-- Schema.org -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Антон Двинянинов",
+      "jobTitle": "Full-stack разработчик и UI/UX дизайнер",
+      "url": "https://dvinyaninov.ru",
+      "email": "anton@dvinyaninov.ru",
+      "image": "https://dvinyaninov.ru/logo.svg",
+      "sameAs": [
+        "https://t.me/dvinyaninov",
+        "https://vk.com/dvinyaninov",
+        "https://dzen.ru/dvinyaninov",
+        "https://youtube.com/@dvinyaninov"
+      ],
+      "knowsAbout": [
+        "Web Development",
+        "UI/UX Design",
+        "Frontend Development",
+        "Backend Development",
+        "DevOps",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Vue.js",
+        "Node.js",
+        "Laravel",
+        "Go"
+      ],
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "Веб-разработка"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Фриланс"
+      }
+    })} />
+    
+    <!-- WebPage Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
       "@type": "WebPage",
       "name": title,
       "description": description,

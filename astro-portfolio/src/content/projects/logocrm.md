@@ -16,7 +16,7 @@ featured: true
 betaForm: true
 
 seo:
-  ogImage: "/logo.svg"
+  ogImage: "https://dvinyaninov.ru/og-image-logocrm.webp"
   ogType: "article"
   twitterCard: "summary_large_image"
   keywords:

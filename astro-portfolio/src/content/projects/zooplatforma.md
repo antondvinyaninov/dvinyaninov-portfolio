@@ -67,7 +67,7 @@ navigation:
 
 # === SEO (опционально) ===
 seo:
-  ogImage: "/projects/zooplatform-og.jpg"
+  ogImage: "https://dvinyaninov.ru/og-image-zooplatforma.webp"
   ogType: "article"
   twitterCard: "summary_large_image"
   keywords:

@@ -57,7 +57,7 @@ navigation:
 
 # === SEO (опционально) ===
 seo:
-  ogImage: "/projects/help-card-og.jpg"
+  ogImage: "https://dvinyaninov.ru/og-image-karty-pomoshchi.webp"
   ogType: "article"
   twitterCard: "summary_large_image"
   keywords:

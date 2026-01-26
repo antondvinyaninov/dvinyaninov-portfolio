@@ -25,7 +25,32 @@ const gradients = [
 <BaseLayout 
     title="Антон Двинянинов — Веб-разработчик и UI/UX дизайнер | Создание сайтов и веб-приложений"
     description="Антон Двинянинов — профессиональный веб-разработчик и UI/UX дизайнер. Создаю современные сайты, веб-приложения и интерактивные цифровые продукты. Frontend, Backend, DevOps."
+    ogImage="https://dvinyaninov.ru/og-image.webp"
 >
+    <!-- ProfessionalService Schema -->
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Антон Двинянинов - Веб-разработка",
+      "description": "Профессиональная веб-разработка, UI/UX дизайн, создание сайтов и веб-приложений",
+      "url": "https://dvinyaninov.ru",
+      "telephone": "+7-XXX-XXX-XX-XX",
+      "email": "anton@dvinyaninov.ru",
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Россия"
+      },
+      "serviceType": [
+        "Веб-разработка",
+        "UI/UX дизайн",
+        "Frontend разработка",
+        "Backend разработка",
+        "Создание сайтов",
+        "Разработка веб-приложений"
+      ]
+    })} />
+    
     <Header />
     
     <!-- Вертикальная навигация -->
