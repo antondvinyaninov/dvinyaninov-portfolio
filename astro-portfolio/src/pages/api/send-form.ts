@@ -40,6 +40,10 @@ export const POST: APIRoute = async ({ request }) => {
             message += `📱 <b>Телефон:</b> ${data.phone}\n`;
         }
         
+        if (data.contact) {
+            message += `📱 <b>Контакт:</b> ${data.contact}\n`;
+        }
+        
         if (data.email) {
             message += `📧 <b>Email:</b> ${data.email}\n`;
         }

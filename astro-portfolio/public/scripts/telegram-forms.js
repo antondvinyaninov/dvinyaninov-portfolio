@@ -67,6 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const betaForm = document.getElementById('betaForm');
     if (betaForm) {
         const projectName = document.querySelector('h1')?.textContent || 'Проект';
-        betaForm.addEventListener('submit', (e) => handleFormSubmit(e, projectName));
+        betaForm.addEventListener('submit', (e) => handleFormSubmit(e, `Бета-тест: ${projectName}`));
+    }
+    
+    // Боковая форма на страницах проектов
+    const sidebarForm = document.getElementById('sidebarForm');
+    if (sidebarForm) {
+        const projectName = document.querySelector('h1')?.textContent || 'Проект';
+        sidebarForm.addEventListener('submit', (e) => handleFormSubmit(e, `Похожий проект: ${projectName}`));
+    }
+    
+    // Модальная форма в Header
+    const modalForm = document.querySelector('.contact-modal__form');
+    if (modalForm) {
+        modalForm.id = 'modalForm';
+        modalForm.addEventListener('submit', (e) => handleFormSubmit(e, 'Модальное окно'));
     }
 });
