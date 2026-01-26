@@ -4,12 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run postbuild",
+    "postbuild": "cp dist/client/sitemap-0.xml dist/client/sitemap.xml",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/node": "^9.1.0",
+    "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.16.14"
   }
 }
