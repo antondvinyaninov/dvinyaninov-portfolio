@@ -1,0 +1,756 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+
+// Получаем проекты из content collections
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+    .filter(p => p.data.featured)
+    .sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+    .slice(0, 4);
+
+// Градиенты для карточек проектов
+const gradients = [
+    'linear-gradient(135deg, #00d4ff, #06ffa5)',
+    'linear-gradient(135deg, #8338ec, #ff006e)',
+    'linear-gradient(135deg, #667eea, #764ba2)',
+    'linear-gradient(135deg, #f093fb, #f5576c)',
+];
+---
+
+<BaseLayout 
+    title="Антон Двинянинов — Веб-разработчик и UI/UX дизайнер | Создание сайтов и веб-приложений"
+    description="Антон Двинянинов — профессиональный веб-разработчик и UI/UX дизайнер. Создаю современные сайты, веб-приложения и интерактивные цифровые продукты. Frontend, Backend, DevOps."
+>
+    <Header />
+    
+    <!-- Вертикальная навигация -->
+    <nav class="vertical-nav">
+        <a href="#home" class="nav-dot active" data-section="01">
+            <span class="nav-label">Главная</span>
+        </a>
+        <a href="#work" class="nav-dot" data-section="02">
+            <span class="nav-label">Проекты</span>
+        </a>
+        <a href="#services" class="nav-dot" data-section="03">
+            <span class="nav-label">Услуги</span>
+        </a>
+        <a href="#contact" class="nav-dot" data-section="04">
+            <span class="nav-label">Контакт</span>
+        </a>
+    </nav>
+    
+    <main>
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero__content">
+                <div class="hero__label">
+                    <span class="hero__line"></span>
+                    <span>Антон Двинянинов</span>
+                </div>
+                <h1 class="hero__title">
+                    <span class="hero__title-line title-animate">
+                        <span class="word">Создаю</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
+                        <span class="word hero__accent">эффективные</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
+                        <span class="word">цифровые</span>
+                    </span>
+                    <span class="hero__title-line title-animate">
+                        <span class="word">решения</span>
+                    </span>
+                </h1>
+                <p class="hero__desc">
+                    Превращаю идеи в интерактивные веб-продукты
+                </p>
+                <div class="hero__skills">
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">01</span>
+                        <span class="hero__skill-text">Вайбкодинг</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">02</span>
+                        <span class="hero__skill-text">Frontend</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">03</span>
+                        <span class="hero__skill-text">Backend</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">04</span>
+                        <span class="hero__skill-text">UI/UX</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                    <div class="hero__skill">
+                        <span class="hero__skill-number">05</span>
+                        <span class="hero__skill-text">DevOps</span>
+                        <span class="hero__skill-line"></span>
+                    </div>
+                </div>
+                <a href="#work" class="hero__cta">
+                    <span class="cta__text">Смотреть проекты</span>
+                    <span class="cta__arrow">→</span>
+                </a>
+            </div>
+            <div class="hero__visual">
+                <div class="photo-container">
+                    <div class="photo-orbit photo-orbit--1"></div>
+                    <div class="photo-orbit photo-orbit--2"></div>
+                    <div class="photo-orbit photo-orbit--3"></div>
+                    <div class="photo-wrapper">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="/src/assets/photo-mobile.webp" type="image/webp">
+                            <source srcset="/src/assets/photo.webp" type="image/webp">
+                            <img src="/src/assets/photo.webp" alt="Anton Dvinyaninov" class="hero-photo" loading="eager" fetchpriority="high" width="800" height="450">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__scroll">
+                <span class="scroll__text">Скролл</span>
+                <div class="scroll__line"></div>
+            </div>
+        </section>
+
+        <!-- Бегущая строка -->
+        <div class="marquee">
+            <div class="marquee__track">
+                <div class="marquee__content">
+                    <span>Веб-разработка</span>
+                    <span class="marquee__star">✦</span>
+                    <span>UI/UX Дизайн</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Анимации</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Интерактив</span>
+                    <span class="marquee__star">✦</span>
+                </div>
+                <div class="marquee__content" aria-hidden="true">
+                    <span>Веб-разработка</span>
+                    <span class="marquee__star">✦</span>
+                    <span>UI/UX Дизайн</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Анимации</span>
+                    <span class="marquee__star">✦</span>
+                    <span>Интерактив</span>
+                    <span class="marquee__star">✦</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Работы -->
+        <section class="work" id="work">
+            <div class="section__header">
+                <span class="section__number">01</span>
+                <h2 class="section__title">
+                    <span class="title-animate">Проекты</span>
+                </h2>
+            </div>
+            <div class="work__grid">
+                {featuredProjects.map((project, index) => (
+                    <article class={`project project-3d ${project.slug === 'zooplatforma' ? 'project--large' : ''}`}>
+                        <div class="project__inner">
+                            <div class="project__front">
+                                <div class="project__image">
+                                    {project.data.projectImage ? (
+                                        <img src={project.data.projectImage} alt={project.data.projectName} class={`project__photo ${project.slug === 'logocrm' ? 'project__photo--top' : ''}`} />
+                                    ) : (
+                                        <div class="project__bg" style={`--gradient: ${gradients[index % gradients.length]};`}></div>
+                                    )}
+                                    <div class="project__title-wrapper">
+                                        {project.data.projectLogo && (
+                                            <img src={project.data.projectLogo} alt={project.data.projectName} class="project__logo" />
+                                        )}
+                                        <h3 class="project__title">{project.data.projectName}</h3>
+                                    </div>
+                                </div>
+                                <div class="project__info">
+                                    <p class="project__description-short">{project.data.projectDesc}</p>
+                                </div>
+                            </div>
+                            <div class="project__back">
+                                <div class="project__details">
+                                    <h4>О проекте</h4>
+                                    <div class={`project__description ${project.slug === 'zooplatforma' ? 'project__description--large' : ''}`}>
+                                        {project.data.about?.text ? (
+                                            project.data.about.text.map(paragraph => (
+                                                <p>{paragraph}</p>
+                                            ))
+                                        ) : (
+                                            <p>{project.data.projectAbout || project.data.projectDesc}</p>
+                                        )}
+                                    </div>
+                                    <div class="project__tech">
+                                        {project.data.techStack.slice(0, 3).map(tech => (
+                                            <span>{tech.name}</span>
+                                        ))}
+                                    </div>
+                                    <a href={`/projects/${project.slug}/`} class="project__link">Смотреть →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+
+                <div class="work__more-card">
+                    <a href="/projects/" class="work__more-link">
+                        <span class="work__more-text">Все проекты</span>
+                        <span class="work__more-arrow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Услуги -->
+        <section class="services" id="services">
+            <div class="section__header">
+                <span class="section__number">02</span>
+                <h2 class="section__title">
+                    <span class="title-animate">Чем могу</span><br>
+                    <span class="title-animate">быть полезен</span>
+                </h2>
+            </div>
+            <div class="services__list">
+                <div class="service service--featured">
+                    <div class="service__number">01</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">⚡</div>
+                            <div>
+                                <span class="service__badge">Хит продаж</span>
+                                <h3 class="service__title">Экспресс-лендинг</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Быстрый запуск за 1 день. Готовый лендинг с адаптивной версткой и хостингом на нашей стороне. Идеально для быстрого старта бизнеса.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>5 секций (главная, услуги, о компании, контакты, отзывы)</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Адаптивная верстка под все устройства</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Форма обратной связи с кнопкой звонка</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Размещение на нашем хостинге (первый год бесплатно)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge">
+                            <span class="service__price-value">30 000 ₽</span>
+                            <span class="service__price-label">Фиксированная цена</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag service__tag--time">⚡ 1 день</span>
+                            <span class="service__tag">💎 Премиум</span>
+                            <span class="service__tag">🚀 Быстрый старт</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">02</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">🌐</div>
+                            <div>
+                                <h3 class="service__title">Полноценный сайт</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Многостраничный сайт с индивидуальным дизайном и функционалом. Проект обсуждается индивидуально под ваши задачи.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Любое количество страниц</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Админ-панель для управления</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Интеграции по требованию</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Техподдержка при запуске</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 80 000 ₽</span>
+                            <span class="service__price-label">Индивидуально</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">от 1 недели</span>
+                            <span class="service__tag">CMS</span>
+                            <span class="service__tag">Индивидуально</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">03</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">🛒</div>
+                            <div>
+                                <h3 class="service__title">Интернет-магазин</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Полнофункциональный интернет-магазин на CMS с интеграцией 1С и собственной CRM-системой. Готовое решение для e-commerce.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>CMS для управления товарами</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Интеграция с 1С и CRM</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Личный кабинет покупателя</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Платежные системы</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 120 000 ₽</span>
+                            <span class="service__price-label">Под ключ</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">от 1 недели</span>
+                            <span class="service__tag">1С</span>
+                            <span class="service__tag">CRM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">04</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">💼</div>
+                            <div>
+                                <h3 class="service__title">Корпоративная платформа</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Разработка корпоративной платформы с нуля. Полный цикл от аналитики до запуска с масштабируемой архитектурой.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Разработка с нуля</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Аналитика и проектирование</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Масштабируемая архитектура</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Поддержка оплачивается отдельно</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 100 000 ₽</span>
+                            <span class="service__price-label">В месяц</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Индивидуально</span>
+                            <span class="service__tag">Full-stack</span>
+                            <span class="service__tag">Масштабируемость</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">05</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">📈</div>
+                            <div>
+                                <span class="service__badge service__badge--promo">Для малого бизнеса</span>
+                                <h3 class="service__title">Сайт + Продвижение</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Абонемент для малого бизнеса: лендинг + комплексное продвижение. Идеально для салонов, фитнес-клубов, кафе.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Лендинг (в первый месяц)</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Продвижение на картах</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>SEO-оптимизация</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Контекстная реклама (бюджет включен)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">50 000 ₽</span>
+                            <span class="service__price-label">В месяц (мин. 3 мес)</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Минимум 3 мес</span>
+                            <span class="service__tag">SEO</span>
+                            <span class="service__tag">Реклама</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service service--featured">
+                    <div class="service__number">06</div>
+                    <div class="service__content">
+                        <div class="service__header">
+                            <div class="service__icon">🔧</div>
+                            <div>
+                                <h3 class="service__title">Доработки и консультации</h3>
+                            </div>
+                        </div>
+                        <p class="service__desc">Исправление ошибок, добавление функционала, техническая консультация и оптимизация существующих проектов.</p>
+                        <div class="service__features">
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Исправление ошибок</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Добавление функционала</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Техническая консультация</span>
+                            </div>
+                            <div class="service__feature">
+                                <span class="feature__icon">✓</span>
+                                <span>Оптимизация производительности</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service__right">
+                        <div class="service__price-badge service__price-badge--secondary">
+                            <span class="service__price-value">от 3 000 ₽</span>
+                            <span class="service__price-label">За час</span>
+                        </div>
+                        <div class="service__tags">
+                            <span class="service__tag">Почасовая оплата</span>
+                            <span class="service__tag">Поддержка</span>
+                            <span class="service__tag">Консультации</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-cta-block">
+                <div class="service-cta-block__icon">💬</div>
+                <h3 class="service-cta-block__title">Не нашли нужную услугу?</h3>
+                <p class="service-cta-block__desc">Обсудим ваш проект и найдем оптимальное решение. Работаю с проектами любой сложности — от простых лендингов до сложных веб-приложений.</p>
+                
+                <div class="service-cta-block__benefits">
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">💰</div>
+                        <h4 class="cta-benefit__title">Без миллионных бюджетов</h4>
+                        <p class="cta-benefit__text">Не нужно тратить миллионы на старт. Создам полноценное решение быстро и по адекватной цене.</p>
+                    </div>
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">🚀</div>
+                        <h4 class="cta-benefit__title">Идеально для стартапов</h4>
+                        <p class="cta-benefit__text">Быстрый запуск MVP, чтобы протестировать идею. Доработаем функционал по мере роста.</p>
+                    </div>
+                    <div class="cta-benefit">
+                        <div class="cta-benefit__icon">🎯</div>
+                        <h4 class="cta-benefit__title">Помогу определиться</h4>
+                        <p class="cta-benefit__text">Не знаете, что должно быть на сайте? Проконсультирую и предложу оптимальное решение.</p>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="service-cta-block__button">
+                    <span>Обсудить проект</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Контакт -->
+        <section class="contact" id="contact">
+            <div class="contact__content">
+                <span class="section__number">03</span>
+                <h2 class="contact__title">
+                    <span class="title-animate">Есть проект?</span><br>
+                    <span class="title-animate contact__accent">Давайте создадим</span><br>
+                    <span class="title-animate">что-то крутое</span><br>
+                    <span class="title-animate">вместе</span>
+                </h2>
+                <div class="contact__info">
+                    <a href="mailto:anton@dvinyaninov.ru" class="contact__email">
+                        anton@dvinyaninov.ru
+                    </a>
+                    <div class="contact__links">
+                        <a href="https://t.me/dvinyaninov" target="_blank" rel="noopener noreferrer" class="contact__link">Telegram</a>
+                        <a href="https://vk.com/dvinyaninov" target="_blank" rel="noopener noreferrer" class="contact__link">VK</a>
+                        <a href="https://dzen.ru/dvinyaninov" target="_blank" rel="noopener noreferrer" class="contact__link">Дзен</a>
+                        <a href="https://youtube.com/@dvinyaninov" target="_blank" rel="noopener noreferrer" class="contact__link">YouTube</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact__form-wrapper">
+                <form class="contact__form">
+                    <div class="form__group">
+                        <input type="text" class="form__input" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="text" class="form__input" placeholder="Телефон или Email" required>
+                    </div>
+                    <div class="form__group">
+                        <textarea class="form__textarea" placeholder="Расскажите о проекте..." rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="form__submit">
+                        <span>Отправить</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Person Schema для SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Антон Двинянинов",
+      "jobTitle": "Full-stack разработчик и UI/UX дизайнер",
+      "url": "https://dvinyaninov.ru",
+      "email": "anton@dvinyaninov.ru",
+      "sameAs": [
+        "https://t.me/dvinyaninov",
+        "https://vk.com/dvinyaninov",
+        "https://dzen.ru/dvinyaninov",
+        "https://youtube.com/@dvinyaninov"
+      ],
+      "knowsAbout": [
+        "Веб-разработка",
+        "UI/UX дизайн",
+        "Frontend разработка",
+        "Backend разработка",
+        "DevOps",
+        "React",
+        "Next.js",
+        "Laravel",
+        "Go",
+        "TypeScript"
+      ],
+      "description": "Профессиональный веб-разработчик и UI/UX дизайнер. Создаю современные сайты, веб-приложения и интерактивные цифровые продукты."
+    }
+    </script>
+</BaseLayout>
+
+<style>
+.project__image {
+    position: relative;
+    height: 100% !important;
+}
+
+.project__image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project--large .project__image {
+    min-height: 400px;
+    height: 100% !important;
+}
+
+.project__bg {
+    position: relative;
+    z-index: 1;
+}
+
+.project__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.project__photo--top {
+    object-position: top center;
+    transform: scale(1.2) translateY(-10%);
+}
+
+.project__title-wrapper {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 3;
+}
+
+.project__logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    background: rgba(240, 240, 240, 0.95);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.project__title {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+.project__info {
+    display: none;
+}
+
+.project--large .project__info {
+    display: none;
+}
+
+.project__description-short {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    display: block;
+}
+
+.project--large .project__description-short {
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.project__description {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.project__description--large {
+    max-height: 400px;
+}
+
+.project__description p {
+    margin-bottom: 8px;
+}
+
+.project__description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .project__image {
+        min-height: 100%;
+        position: relative;
+    }
+    
+    .project--large .project__image {
+        min-height: 100%;
+    }
+    
+    .project__info {
+        display: none;
+    }
+    
+    .project {
+        aspect-ratio: 1 / 1;
+        height: auto;
+    }
+    
+    .project:nth-child(1) {
+        height: auto;
+    }
+    
+    .project__description-short {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    .project__title {
+        font-size: 18px;
+    }
+    
+    .project__logo {
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+    }
+    
+    .project__title-wrapper {
+        position: absolute !important;
+        bottom: 16px !important;
+        left: 16px !important;
+        gap: 10px;
+        display: flex !important;
+        align-items: center;
+        z-index: 10 !important;
+    }
+    
+    .project__year {
+        z-index: 5;
+    }
+    
+    .project__description {
+        max-height: 120px;
+    }
+    
+    .project__description--large {
+        max-height: 120px;
+    }
+}
+</style>

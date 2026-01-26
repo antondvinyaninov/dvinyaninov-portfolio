@@ -1,0 +1,621 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => {
+    const orderA = a.data.order || 999;
+    const orderB = b.data.order || 999;
+    return orderA - orderB;
+});
+
+// Собираем уникальные категории и технологии
+const categories = [...new Set(projects.map(p => p.data.projectLabel))];
+const allTech = projects.flatMap(p => p.data.techStack.map(t => t.name));
+const technologies = [...new Set(allTech)].sort();
+
+// Фильтруем только крупные фреймворки и языки
+const majorTech = ['Laravel', 'Go', 'Next.js', 'React', 'Vue.js', 'Node.js', 'TypeScript', 'JavaScript', 'Python', 'PHP', 'Astro', 'Nuxt', 'Angular', 'Svelte', 'Django', 'FastAPI'];
+const filteredTechnologies = technologies.filter(tech => 
+    majorTech.some(major => tech.toLowerCase().includes(major.toLowerCase()))
+).sort();
+---
+
+<BaseLayout 
+    title="Все проекты — Антон Двинянинов"
+    description="Портфолио проектов: веб-разработка, UI/UX дизайн, SaaS-платформы и веб-приложения"
+>
+    <Header />
+    
+    <main class="projects-page">
+        <div class="projects-hero">
+            <a href="/" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>На главную</span>
+            </a>
+            
+            <div class="projects-hero__content">
+                <span class="projects-hero__label">Портфолио</span>
+                <h1 class="projects-hero__title">Все проекты</h1>
+                <p class="projects-hero__desc">
+                    Веб-разработка, UI/UX дизайн и создание цифровых продуктов
+                </p>
+            </div>
+        </div>
+        
+        <div class="projects-container">
+            <section class="projects-grid-section">
+                <div class="projects-list" id="projectsList">
+                    {sortedProjects.map((project, index) => (
+                        <article class="project-item" data-type={project.data.projectType} data-category={project.data.projectLabel} data-client={project.data.projectClient} data-year={project.data.projectYear} data-tech={project.data.techStack.map(t => t.name).join(',')}>
+                            <a href={`/projects/${project.slug}/`} class="project-item__link">
+                                <div class="project-item__image">
+                                    {project.data.projectImage ? (
+                                        <img src={project.data.projectImage} alt={project.data.projectName} class="project-item__photo" />
+                                    ) : project.data.projectLogo ? (
+                                        <img src={project.data.projectLogo} alt={`${project.data.projectName} logo`} class="project-item__logo" />
+                                    ) : (
+                                        <div class="project-item__placeholder">
+                                            {project.data.projectName.charAt(0)}
+                                        </div>
+                                    )}
+                                </div>
+                                
+                                <div class="project-item__content">
+                                    <div class="project-item__header">
+                                        <h2 class="project-item__title">{project.data.projectName}</h2>
+                                        <span class="project-item__label">{project.data.projectLabel}</span>
+                                    </div>
+                                    <p class="project-item__desc">{project.data.projectDesc}</p>
+                                    <div class="project-item__tech">
+                                        {project.data.techStack.slice(0, 6).map(tech => (
+                                            <img src={tech.icon} alt={tech.name} class="tech-icon" title={tech.name} />
+                                        ))}
+                                        {project.data.techStack.length > 6 && (
+                                            <span class="tech-more">+{project.data.techStack.length - 6}</span>
+                                        )}
+                                    </div>
+                                </div>
+                                
+                                <div class="project-item__arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </article>
+                    ))}
+                </div>
+            </section>
+            
+            <aside class="projects-sidebar">
+                <div class="projects-sidebar__sticky">
+                    <div class="filter-card">
+                        <div class="filter-card__header">
+                            <h3 class="filter-card__title">Фильтры</h3>
+                            <button class="filter-reset" id="resetFilters">Сбросить</button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-group__title">Тип проекта</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="type" value="Экспресс-лендинг" class="filter-checkbox" />
+                                    <span class="filter-label">Экспресс-лендинг</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="type" value="Полноценный сайт" class="filter-checkbox" />
+                                    <span class="filter-label">Полноценный сайт</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="type" value="Интернет-магазин" class="filter-checkbox" />
+                                    <span class="filter-label">Интернет-магазин</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="type" value="Корпоративная платформа" class="filter-checkbox" />
+                                    <span class="filter-label">Корпоративная платформа</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="type" value="Сайт + Продвижение" class="filter-checkbox" />
+                                    <span class="filter-label">Сайт + Продвижение</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-group__title">Категория</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="Личный" class="filter-checkbox" />
+                                    <span class="filter-label">Личный</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="Заказной" class="filter-checkbox" />
+                                    <span class="filter-label">Заказной</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-group__title">Технологии</h4>
+                            <div class="filter-options">
+                                {filteredTechnologies.map(tech => (
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="technology" value={tech} class="filter-checkbox" />
+                                        <span class="filter-label">{tech}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-results">
+                        <span id="resultsCount">{sortedProjects.length}</span> проектов
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+</BaseLayout>
+
+<style>
+.projects-page {
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.projects-hero {
+    padding: 60px 60px 80px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--accent);
+    transform: translateX(-5px);
+}
+
+.back-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.projects-hero__content {
+    max-width: 800px;
+}
+
+.projects-hero__label {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.projects-hero__title {
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.projects-hero__desc {
+    font-size: 20px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.projects-grid-section {
+    padding: 0 0 120px 60px;
+    flex: 1;
+    min-width: 0;
+}
+
+.projects-container {
+    display: flex;
+    gap: 60px;
+    padding-right: 60px;
+}
+
+.projects-sidebar {
+    width: 380px;
+    flex-shrink: 0;
+}
+
+.projects-sidebar__sticky {
+    position: sticky;
+    top: 120px;
+}
+
+.filter-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.filter-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-card__title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+.filter-reset {
+    font-size: var(--font-size-sm);
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.filter-reset:hover {
+    opacity: 0.7;
+}
+
+.filter-group {
+    margin-bottom: var(--spacing-xl);
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-group__title {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    padding: var(--spacing-xs) 0;
+    transition: all 0.3s ease;
+}
+
+.filter-option:hover {
+    padding-left: var(--spacing-xs);
+}
+
+.filter-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.filter-label {
+    font-size: var(--font-size-sm);
+    color: var(--text);
+    user-select: none;
+}
+
+.filter-results {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+}
+
+.filter-results span {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: var(--font-size-xl);
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.project-item {
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+.project-item:hover {
+    background: var(--card-bg);
+}
+
+.project-item__link {
+    display: grid;
+    grid-template-columns: 180px 1fr 60px;
+    align-items: center;
+    gap: 40px;
+    padding: 35px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover .project-item__link {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.project-item__image {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.project-item:hover .project-item__image {
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+.project-item__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-item__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-item__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    font-size: 64px;
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+}
+
+.project-item__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-item__header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.project-item__title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.project-item:hover .project-item__title {
+    color: var(--accent);
+}
+
+.project-item__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.project-item__desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.project-item__tech {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tech-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.project-item:hover .tech-icon {
+    opacity: 1;
+}
+
+.tech-more {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 4px 10px;
+    background: var(--card-bg);
+    border-radius: 6px;
+}
+
+.project-item__arrow {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.project-item:hover .project-item__arrow {
+    border-color: var(--accent);
+    background: var(--accent);
+    transform: translateX(5px);
+}
+
+.project-item__arrow svg {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover .project-item__arrow svg {
+    stroke: white;
+}
+
+@media (max-width: 1024px) {
+    .projects-container {
+        flex-direction: column;
+        padding-right: 30px;
+    }
+    
+    .projects-sidebar {
+        width: 100%;
+        order: -1;
+    }
+    
+    .projects-sidebar__sticky {
+        position: static;
+    }
+    
+    .projects-grid-section {
+        padding-left: 30px;
+    }
+    
+    .project-item__link {
+        grid-template-columns: 120px 1fr 50px;
+        gap: 20px;
+    }
+    
+    .project-item__image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-hero {
+        padding: 40px 30px 60px;
+    }
+    
+    .projects-grid-section {
+        padding: 0 30px 80px;
+    }
+    
+    .project-item__link {
+        grid-template-columns: 1fr 40px;
+        gap: 16px;
+        padding: 30px 0;
+    }
+    
+    .project-item__image {
+        display: none;
+    }
+    
+    .project-item__title {
+        font-size: 22px;
+    }
+    
+    .project-item__label {
+        display: block;
+        margin-top: 4px;
+    }
+}
+</style>
+
+<script>
+    const projectItems = document.querySelectorAll('.project-item');
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+    const resetButton = document.getElementById('resetFilters');
+    const resultsCount = document.getElementById('resultsCount');
+    
+    function filterProjects() {
+        const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => (cb as HTMLInputElement).value);
+        const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => (cb as HTMLInputElement).value);
+        const selectedTech = Array.from(document.querySelectorAll('input[name="technology"]:checked')).map(cb => (cb as HTMLInputElement).value);
+        
+        let visibleCount = 0;
+        
+        projectItems.forEach(item => {
+            const htmlItem = item as HTMLElement;
+            const type = htmlItem.getAttribute('data-type') || '';
+            const client = htmlItem.getAttribute('data-client') || '';
+            const tech = htmlItem.getAttribute('data-tech')?.split(',') || [];
+            
+            // Проверяем тип проекта (частичное совпадение)
+            const typeMatch = selectedTypes.length === 0 || selectedTypes.some(t => type.toLowerCase().includes(t.toLowerCase()));
+            const clientMatch = selectedCategories.length === 0 || selectedCategories.some(c => client.toLowerCase().includes(c.toLowerCase()));
+            const techMatch = selectedTech.length === 0 || selectedTech.some(t => tech.includes(t));
+            
+            if (typeMatch && clientMatch && techMatch) {
+                htmlItem.style.display = '';
+                visibleCount++;
+            } else {
+                htmlItem.style.display = 'none';
+            }
+        });
+        
+        if (resultsCount) {
+            resultsCount.textContent = String(visibleCount);
+        }
+    }
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterProjects);
+    });
+    
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            checkboxes.forEach(cb => (cb as HTMLInputElement).checked = false);
+            filterProjects();
+        });
+    }
+</script>

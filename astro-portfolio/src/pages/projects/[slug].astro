@@ -1,0 +1,584 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map(project => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+const { title, description, projectName, projectLabel, projectDesc, projectLogo, h1Title, projectType, projectClient, projectStatus, projectSite, projectYear, techStack, navigation, about, features, screenshots, roadmap, betaForm, seo, problem, solution, modules, petid, personas, architecture, metrics, beta, servicesSummary, hideSidebarForm, team, audience } = project.data;
+
+// Динамическая нумерация секций
+let sectionNumber = 0;
+const getNextNumber = () => {
+    sectionNumber++;
+    return String(sectionNumber).padStart(2, '0');
+};
+
+// Debug
+console.log('Project:', projectName);
+console.log('About:', about ? 'exists' : 'missing');
+console.log('Features:', features ? `${features.length} items` : 'missing');
+console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missing');
+---
+
+<ProjectLayout
+    title={title}
+    description={description}
+    projectName={projectName}
+    projectLabel={projectLabel}
+    projectDesc={projectDesc}
+    projectLogo={projectLogo}
+    h1Title={h1Title}
+    projectType={projectType}
+    projectClient={projectClient}
+    projectStatus={projectStatus}
+    projectSite={projectSite}
+    projectYear={projectYear}
+    techStack={techStack}
+    navigation={navigation}
+    hideSidebarForm={hideSidebarForm}
+    seo={seo}
+>
+    <!-- About -->
+    {about && (
+        <section id="about" style="margin-top: 40px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">О проекте</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {about.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+            
+            {about.audience && (
+                <div style="margin-top: 48px;">
+                    <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl);">Для кого</h3>
+                    <div class="audience-grid">
+                        {about.audience.map((item, index) => (
+                            <div class="audience-card">
+                                <div class="audience-card__number">{String(index + 1).padStart(2, '0')}</div>
+                                <h4 class="audience-card__title">{item.title}</h4>
+                                <p class="audience-card__desc">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </section>
+    )}
+
+    <!-- Problem -->
+    {problem && (
+        <section id="problem" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Проблема</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {problem.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Solution -->
+    {solution && (
+        <section id="solution" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Решение</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {solution.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Audience -->
+    {audience && (
+        <section id="audience" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Для кого</h2>
+            </div>
+            
+            <div class="audience-grid">
+                {audience.map((item, index) => (
+                    <div class="audience-card">
+                        <div class="audience-card__number">{String(index + 1).padStart(2, '0')}</div>
+                        <h4 class="audience-card__title">{item.title}</h4>
+                        <p class="audience-card__desc">{item.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Modules -->
+    {modules && (
+        <section id="modules" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Модули</h2>
+            </div>
+            
+            <div class="features-grid">
+                {modules.map(module => (
+                    <div class="feature-card">
+                        <h3 class="feature-card__title">{module.title}</h3>
+                        <ul class="feature-card__list">
+                            {module.items.map(item => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Features -->
+    {features && (
+        <section id="features" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Возможности</h2>
+            </div>
+            
+            <div class="features-grid">
+                {features.map(feature => (
+                    <div class="feature-card">
+                        <h3 class="feature-card__title">{feature.title}</h3>
+                        <ul class="feature-card__list">
+                            {feature.items.map(item => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Services Summary -->
+    {servicesSummary && (
+        <section id="services-summary" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Экосистема сервисов</h2>
+            </div>
+            
+            <div class="project-about-card" style="margin-bottom: 48px;">
+                <div style="display: flex; gap: 48px; margin-bottom: 24px;">
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; color: var(--accent);">{servicesSummary.totalPlanned}</div>
+                        <div style="color: var(--text-secondary); margin-top: 8px;">Всего сервисов</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; font-weight: 700; color: var(--accent);">{servicesSummary.activeOnTest}</div>
+                        <div style="color: var(--text-secondary); margin-top: 8px;">Доступно в тесте</div>
+                    </div>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.6;">{servicesSummary.description}</p>
+            </div>
+            
+            <div style="margin-bottom: 48px;">
+                <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl); color: var(--accent);">
+                    ✓ Доступно сейчас ({servicesSummary.activeModules.length})
+                </h3>
+                <div class="features-grid">
+                    {servicesSummary.activeModules.map((module, index) => (
+                        <div class="feature-card" style="border-left: 3px solid var(--accent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 14px; font-weight: 700; color: var(--accent);">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <h3 class="feature-card__title" style="margin: 0;">{module.name}</h3>
+                            </div>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin: 0;">{module.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl); color: var(--text-secondary);">
+                    ⏳ В планах ({servicesSummary.plannedModules.length})
+                </h3>
+                <div class="features-grid">
+                    {servicesSummary.plannedModules.map((module, index) => (
+                        <div class="feature-card" style="opacity: 0.7; border-left: 3px solid var(--border);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 14px; font-weight: 700; color: var(--text-secondary);">
+                                    {String(servicesSummary.activeModules.length + index + 1).padStart(2, '0')}
+                                </span>
+                                <h3 class="feature-card__title" style="margin: 0;">{module.name}</h3>
+                            </div>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin: 0;">{module.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- PetID -->
+    {petid && (
+        <section id="petid" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">PetID</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {petid.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Personas -->
+    {personas && (
+        <section id="personas" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Роли и сценарии</h2>
+            </div>
+            
+            <div class="features-grid">
+                {personas.map(persona => (
+                    <div class="feature-card">
+                        <h3 class="feature-card__title">{persona.title}</h3>
+                        <p style="margin-top: 12px; color: var(--color-text-secondary); line-height: 1.6;">{persona.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Architecture -->
+    {architecture && (
+        <section id="architecture" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Архитектура</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {architecture.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Screenshots -->
+    {screenshots && (
+        <section id="screenshots" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Интерфейс</h2>
+            </div>
+            
+            <div class="screenshots-grid">
+                {screenshots.map((screenshot, index) => (
+                    <div class={`screenshot-card ${screenshot.large ? 'screenshot-card--large' : ''} ${screenshot.wide ? 'screenshot-card--wide' : ''}`} data-screenshot-index={index}>
+                        <div class="screenshot-placeholder">
+                            {screenshot.image ? (
+                                <img src={screenshot.image} alt={screenshot.title} class="screenshot-image" />
+                            ) : (
+                                <div class={`screenshot-gradient screenshot-gradient--${screenshot.gradient}`}></div>
+                            )}
+                        </div>
+                        <div class={`screenshot-info ${screenshot.large ? 'screenshot-info--overlay' : ''}`}>
+                            <h3 class={`screenshot-title ${screenshot.large ? 'screenshot-title--large' : ''}`}>{screenshot.title}</h3>
+                            {screenshot.desc && <p class="screenshot-desc">{screenshot.desc}</p>}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <!-- Lightbox для галереи -->
+            <div id="screenshotLightbox" class="lightbox">
+                <button class="lightbox__close" aria-label="Закрыть">&times;</button>
+                <button class="lightbox__prev" aria-label="Предыдущее">‹</button>
+                <button class="lightbox__next" aria-label="Следующее">›</button>
+                <div class="lightbox__content">
+                    <img src="" alt="" class="lightbox__image" />
+                    <div class="lightbox__caption">
+                        <h3 class="lightbox__title"></h3>
+                        <p class="lightbox__desc"></p>
+                    </div>
+                </div>
+                <div class="lightbox__counter"></div>
+            </div>
+        </section>
+    )}
+
+    <!-- Roadmap -->
+    {roadmap && (
+        <section id="roadmap" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">В планах</h2>
+            </div>
+            
+            <div class="roadmap-grid">
+                {roadmap.map(item => (
+                    <div class={`roadmap-card roadmap-card--${item.type}`}>
+                        <h3 class="roadmap-title">{item.title}</h3>
+                        <ul class="roadmap-list">
+                            {item.items.map(task => (
+                                <li>• {task}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Metrics -->
+    {metrics && (
+        <section id="metrics" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Метрики MVP</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {metrics.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Team -->
+    {team && (
+        <section id="team" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Команда и кого не хватает</h2>
+            </div>
+            
+            <div class="project-about-card" style="margin-bottom: 48px;">
+                {team.intro.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+            
+            <div style="margin-bottom: 32px;">
+                <h3 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-xl); color: var(--accent);">
+                    🤝 Ищем в команду
+                </h3>
+                <div class="features-grid">
+                    {team.needed.map((member, index) => (
+                        <div class="feature-card" style="border-left: 3px solid var(--accent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 14px; font-weight: 700; color: var(--accent);">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <h3 class="feature-card__title" style="margin: 0;">{member.role}</h3>
+                            </div>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin: 0;">{member.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            
+            <div class="project-about-card" style="background: linear-gradient(135deg, rgba(13, 76, 211, 0.05), rgba(10, 59, 168, 0.05)); border: 2px solid var(--accent); padding: var(--spacing-2xl);">
+                {team.contact.map((paragraph, index) => (
+                    <p style={`${index > 0 ? "margin-top: 16px;" : ""} font-size: var(--font-size-lg); line-height: 1.6; text-align: center;`} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Beta Text Block -->
+    {beta && (
+        <section id="beta-info" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Бета-доступ</h2>
+            </div>
+            
+            <div class="project-about-card">
+                {beta.text.map((paragraph, index) => (
+                    <p style={index > 0 ? "margin-top: 24px;" : ""} set:html={paragraph} />
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Beta Form -->
+    {betaForm && (
+        <section id="beta" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Заявка на тестирование</h2>
+            </div>
+            
+            <div class="beta-form-container">
+                <p class="beta-form-intro">
+                    {projectName} находится в стадии бета-тестирования. Оставьте заявку, и мы свяжемся с вами для предоставления доступа к системе.
+                </p>
+                
+                <form id="betaForm" class="beta-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Ваше имя *</label>
+                            <input type="text" name="name" required placeholder="Иван Иванов" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Телефон *</label>
+                            <input type="tel" name="phone" required placeholder="+7 (999) 123-45-67" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Организация</label>
+                        <input type="text" name="organization" placeholder="Название центра или кабинета" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Расскажите о вашем центре</label>
+                        <textarea name="message" rows="4" placeholder="Количество специалистов, клиентов, особенности работы..." class="form-textarea"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </section>
+    )}
+</ProjectLayout>
+
+<script>
+    const form = document.getElementById('betaForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form as HTMLFormElement);
+            const data = Object.fromEntries(formData);
+            console.log('Заявка:', data);
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            (form as HTMLFormElement).reset();
+        });
+    }
+
+    // Lightbox Gallery
+    const lightbox = document.getElementById('screenshotLightbox');
+    if (lightbox) {
+        const screenshotCards = document.querySelectorAll('.screenshot-card[data-screenshot-index]');
+        const lightboxImage = lightbox.querySelector('.lightbox__image') as HTMLImageElement;
+        const lightboxTitle = lightbox.querySelector('.lightbox__title') as HTMLElement;
+        const lightboxDesc = lightbox.querySelector('.lightbox__desc') as HTMLElement;
+        const lightboxCounter = lightbox.querySelector('.lightbox__counter') as HTMLElement;
+        const closeBtn = lightbox.querySelector('.lightbox__close') as HTMLButtonElement;
+        const prevBtn = lightbox.querySelector('.lightbox__prev') as HTMLButtonElement;
+        const nextBtn = lightbox.querySelector('.lightbox__next') as HTMLButtonElement;
+
+        let currentIndex = 0;
+        const screenshots: Array<{image: string, title: string, desc?: string}> = [];
+
+        // Собираем данные о скриншотах
+        screenshotCards.forEach((card) => {
+            const img = card.querySelector('.screenshot-image') as HTMLImageElement;
+            if (img) {
+                const title = card.querySelector('.screenshot-title')?.textContent || '';
+                const desc = card.querySelector('.screenshot-desc')?.textContent || '';
+                screenshots.push({
+                    image: img.src,
+                    title: title,
+                    desc: desc
+                });
+            }
+        });
+
+        // Открытие lightbox при клике на карточку
+        screenshotCards.forEach((card, index) => {
+            const img = card.querySelector('.screenshot-image');
+            if (img) {
+                card.addEventListener('click', () => {
+                    currentIndex = index;
+                    showLightbox();
+                });
+            }
+        });
+
+        function showLightbox() {
+            if (screenshots.length === 0 || !lightbox) return;
+            
+            const screenshot = screenshots[currentIndex];
+            lightboxImage.src = screenshot.image;
+            lightboxImage.alt = screenshot.title;
+            lightboxTitle.textContent = screenshot.title;
+            if (lightboxDesc) {
+                lightboxDesc.textContent = screenshot.desc || '';
+                lightboxDesc.style.display = screenshot.desc ? 'block' : 'none';
+            }
+            lightboxCounter.textContent = `${currentIndex + 1} / ${screenshots.length}`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideLightbox() {
+            if (!lightbox) return;
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % screenshots.length;
+            showLightbox();
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+            showLightbox();
+        }
+
+        // Обработчики событий
+        closeBtn?.addEventListener('click', hideLightbox);
+        nextBtn?.addEventListener('click', showNext);
+        prevBtn?.addEventListener('click', showPrev);
+
+        // Закрытие по клику на фон
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                hideLightbox();
+            }
+        });
+
+        // Клавиатурная навигация
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                hideLightbox();
+            } else if (e.key === 'ArrowRight') {
+                showNext();
+            } else if (e.key === 'ArrowLeft') {
+                showPrev();
+            }
+        });
+    }
+</script>
