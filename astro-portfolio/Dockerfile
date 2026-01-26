@@ -3,13 +3,13 @@ WORKDIR /app
 
 # Install dependencies
 FROM base AS deps
-COPY package.json package-lock.json ./
+COPY astro-portfolio/package.json astro-portfolio/package-lock.json ./
 RUN npm ci
 
 # Build the app
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY astro-portfolio/ .
 RUN npm run build
 
 # Production image with Node.js server
