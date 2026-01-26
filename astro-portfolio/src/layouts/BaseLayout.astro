@@ -113,13 +113,27 @@ const currentUrl = canonical || Astro.url.href;
     <!-- Named slot для дополнительных стилей -->
     <slot name="head" />
     
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager - отложенная загрузка -->
     <script is:inline>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NTP4Z73');
+    // Загружаем GTM после взаимодействия пользователя или через 3 секунды
+    function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NTP4Z73');
+    }
+    
+    // Загружаем при первом взаимодействии
+    ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(function(event) {
+        window.addEventListener(event, loadGTM, { once: true, passive: true });
+    });
+    
+    // Или через 3 секунды если нет взаимодействия
+    setTimeout(loadGTM, 3000);
     </script>
     <!-- End Google Tag Manager -->
 </head>
