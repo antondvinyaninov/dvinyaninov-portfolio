@@ -103,71 +103,90 @@ async function handleFormSubmit(event, projectName = '', formType = '') {
 
 // Инициализация форм при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    // Форма на главной странице
-    const mainForm = document.getElementById('contactForm');
-    if (mainForm) {
-        // Отслеживаем фокус на форме (начало заполнения)
-        mainForm.addEventListener('focusin', () => {
-            pushGTMEvent('form_start', {
-                form_name: 'Главная страница',
-                form_type: 'contact',
-                form_id: 'contactForm'
-            });
-        }, { once: true });
+    // Используем requestIdleCallback для некритичной инициализации
+    const initForms = () => {
+        // Форма на главной странице
+        const mainForm = document.getElementById('contactForm');
+        if (mainForm) {
+            // Отслеживаем фокус на форме (начало заполнения)
+            mainForm.addEventListener('focusin', () => {
+                pushGTMEvent('form_start', {
+                    form_name: 'Главная страница',
+                    form_type: 'contact',
+                    form_id: 'contactForm'
+                });
+            }, { once: true });
+            
+            mainForm.addEventListener('submit', (e) => handleFormSubmit(e, 'Главная страница', 'contact'));
+        }
         
-        mainForm.addEventListener('submit', (e) => handleFormSubmit(e, 'Главная страница', 'contact'));
-    }
+        // Бета-форма на страницах проектов
+        const betaForm = document.getElementById('betaForm');
+        if (betaForm) {
+            const projectName = document.querySelector('h1')?.textContent || 'Проект';
+            
+            betaForm.addEventListener('focusin', () => {
+                pushGTMEvent('form_start', {
+                    form_name: `Бета-тест: ${projectName}`,
+                    form_type: 'beta',
+                    form_id: 'betaForm'
+                });
+            }, { once: true });
+            
+            betaForm.addEventListener('submit', (e) => handleFormSubmit(e, `Бета-тест: ${projectName}`, 'beta'));
+        }
+        
+        // Боковая форма на страницах проектов
+        const sidebarForm = document.getElementById('sidebarForm');
+        if (sidebarForm) {
+            const projectName = document.querySelector('h1')?.textContent || 'Проект';
+            
+            sidebarForm.addEventListener('focusin', () => {
+                pushGTMEvent('form_start', {
+                    form_name: `Похожий проект: ${projectName}`,
+                    form_type: 'sidebar',
+                    form_id: 'sidebarForm'
+                });
+            }, { once: true });
+            
+            sidebarForm.addEventListener('submit', (e) => handleFormSubmit(e, `Похожий проект: ${projectName}`, 'sidebar'));
+        }
+        
+        // Модальная форма в Header
+        const modalForm = document.querySelector('.contact-modal__form');
+        if (modalForm) {
+            modalForm.id = 'modalForm';
+            
+            modalForm.addEventListener('focusin', () => {
+                pushGTMEvent('form_start', {
+                    form_name: 'Модальное окно',
+                    form_type: 'modal',
+                    form_id: 'modalForm'
+                });
+            }, { once: true });
+            
+            modalForm.addEventListener('submit', (e) => handleFormSubmit(e, 'Модальное окно', 'modal'));
+        }
+    };
     
-    // Бета-форма на страницах проектов
-    const betaForm = document.getElementById('betaForm');
-    if (betaForm) {
-        const projectName = document.querySelector('h1')?.textContent || 'Проект';
-        
-        betaForm.addEventListener('focusin', () => {
-            pushGTMEvent('form_start', {
-                form_name: `Бета-тест: ${projectName}`,
-                form_type: 'beta',
-                form_id: 'betaForm'
-            });
-        }, { once: true });
-        
-        betaForm.addEventListener('submit', (e) => handleFormSubmit(e, `Бета-тест: ${projectName}`, 'beta'));
-    }
+    // Отслеживание кликов - отложенная инициализация
+    const initTracking = () => {
+        trackButtonClicks();
+    };
     
-    // Боковая форма на страницах проектов
-    const sidebarForm = document.getElementById('sidebarForm');
-    if (sidebarForm) {
-        const projectName = document.querySelector('h1')?.textContent || 'Проект';
-        
-        sidebarForm.addEventListener('focusin', () => {
-            pushGTMEvent('form_start', {
-                form_name: `Похожий проект: ${projectName}`,
-                form_type: 'sidebar',
-                form_id: 'sidebarForm'
-            });
-        }, { once: true });
-        
-        sidebarForm.addEventListener('submit', (e) => handleFormSubmit(e, `Похожий проект: ${projectName}`, 'sidebar'));
+    // Используем requestIdleCallback для некритичных задач
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            initForms();
+            initTracking();
+        });
+    } else {
+        // Fallback для браузеров без поддержки
+        setTimeout(() => {
+            initForms();
+            initTracking();
+        }, 1);
     }
-    
-    // Модальная форма в Header
-    const modalForm = document.querySelector('.contact-modal__form');
-    if (modalForm) {
-        modalForm.id = 'modalForm';
-        
-        modalForm.addEventListener('focusin', () => {
-            pushGTMEvent('form_start', {
-                form_name: 'Модальное окно',
-                form_type: 'modal',
-                form_id: 'modalForm'
-            });
-        }, { once: true });
-        
-        modalForm.addEventListener('submit', (e) => handleFormSubmit(e, 'Модальное окно', 'modal'));
-    }
-    
-    // Отслеживание кликов по важным кнопкам
-    trackButtonClicks();
 });
 
 // Функция отслеживания кликов по кнопкам

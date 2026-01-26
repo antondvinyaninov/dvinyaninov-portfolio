@@ -68,9 +68,13 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="theme-color" content="#0D4CD3">
     
+    <!-- DNS prefetch для внешних ресурсов -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
     <!-- Preload критичных ресурсов -->
     <link rel="preload" href="/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/space-grotesk-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/styles/global.css" as="style">
     
     <!-- Загружаем CSS обычным способом -->
     <link rel="stylesheet" href="/fonts/fonts.css">

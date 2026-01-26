@@ -162,13 +162,27 @@ const gradients = [
                             <div class="project__front">
                                 <div class="project__image">
                                     {project.data.projectImage ? (
-                                        <img src={project.data.projectImage} alt={project.data.projectName} class={`project__photo ${project.slug === 'logocrm' ? 'project__photo--top' : ''}`} />
+                                        <img 
+                                            src={project.data.projectImage} 
+                                            alt={project.data.projectName} 
+                                            class={`project__photo ${project.slug === 'logocrm' ? 'project__photo--top' : ''}`}
+                                            loading="lazy"
+                                            decoding="async"
+                                            width="800"
+                                            height="800"
+                                        />
                                     ) : (
                                         <div class="project__bg" style={`--gradient: ${gradients[index % gradients.length]};`}></div>
                                     )}
                                     <div class="project__title-wrapper">
                                         {project.data.projectLogo && (
-                                            <img src={project.data.projectLogo} alt={project.data.projectName} class="project__logo" />
+                                            <img 
+                                                src={project.data.projectLogo} 
+                                                alt={project.data.projectName} 
+                                                class="project__logo"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
                                         )}
                                         <h3 class="project__title">{project.data.projectName}</h3>
                                     </div>
