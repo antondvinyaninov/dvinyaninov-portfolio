@@ -3,5 +3,8 @@ Disallow: /api/
 Disallow: /config/
 Disallow: /docs/
 Disallow: /.git/
+Disallow: /fonts/
+Disallow: /scripts/
+Disallow: /_astro/
 
 Sitemap: https://dvinyaninov.ru/sitemap.xml
