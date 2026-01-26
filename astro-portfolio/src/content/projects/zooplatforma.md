@@ -26,7 +26,7 @@ hideSidebarForm: true
 # === ТЕХНОЛОГИИ ===
 techStack:
   - name: "Go"
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg"
   - name: "Next.js"
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
   - name: "React"
