@@ -55,9 +55,25 @@ const filteredTechnologies = technologies.filter(tech =>
                             <a href={`/projects/${project.slug}/`} class="project-item__link">
                                 <div class="project-item__image">
                                     {project.data.projectImage ? (
-                                        <img src={project.data.projectImage} alt={project.data.projectName} class="project-item__photo" />
+                                        <img 
+                                            src={project.data.projectImage} 
+                                            alt={project.data.projectName} 
+                                            class="project-item__photo"
+                                            loading={index === 0 ? "eager" : "lazy"}
+                                            decoding="async"
+                                            width="180"
+                                            height="180"
+                                        />
                                     ) : project.data.projectLogo ? (
-                                        <img src={project.data.projectLogo} alt={`${project.data.projectName} logo`} class="project-item__logo" />
+                                        <img 
+                                            src={project.data.projectLogo} 
+                                            alt={`${project.data.projectName} logo`} 
+                                            class="project-item__logo"
+                                            loading={index === 0 ? "eager" : "lazy"}
+                                            decoding="async"
+                                            width="180"
+                                            height="180"
+                                        />
                                     ) : (
                                         <div class="project-item__placeholder">
                                             {project.data.projectName.charAt(0)}

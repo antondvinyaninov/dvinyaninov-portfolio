@@ -302,7 +302,13 @@ console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missi
                     <div class={`screenshot-card ${screenshot.large ? 'screenshot-card--large' : ''} ${screenshot.wide ? 'screenshot-card--wide' : ''}`} data-screenshot-index={index}>
                         <div class="screenshot-placeholder">
                             {screenshot.image ? (
-                                <img src={screenshot.image} alt={screenshot.title} class="screenshot-image" />
+                                <img 
+                                    src={screenshot.image} 
+                                    alt={screenshot.title} 
+                                    class="screenshot-image"
+                                    loading={index === 0 ? "eager" : "lazy"}
+                                    decoding="async"
+                                />
                             ) : (
                                 <div class={`screenshot-gradient screenshot-gradient--${screenshot.gradient}`}></div>
                             )}
