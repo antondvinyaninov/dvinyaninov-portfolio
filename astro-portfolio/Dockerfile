@@ -20,6 +20,12 @@ ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=80
 
+# Принимаем build args и устанавливаем как ENV
+ARG TELEGRAM_BOT_TOKEN
+ARG TELEGRAM_CHAT_ID
+ENV TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+ENV TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 

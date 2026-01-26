@@ -6,11 +6,16 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
         
-        const botToken = import.meta.env.TELEGRAM_BOT_TOKEN;
-        const chatId = import.meta.env.TELEGRAM_CHAT_ID;
+        // В production используем process.env, в dev - import.meta.env
+        const botToken = process.env.TELEGRAM_BOT_TOKEN || import.meta.env.TELEGRAM_BOT_TOKEN;
+        const chatId = process.env.TELEGRAM_CHAT_ID || import.meta.env.TELEGRAM_CHAT_ID;
+        
+        console.log('Bot token exists:', !!botToken);
+        console.log('Chat ID exists:', !!chatId);
         
         if (!botToken || !chatId) {
             console.error('Telegram credentials not configured');
+            console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('TELEGRAM')));
             return new Response(JSON.stringify({ 
                 success: false, 
                 error: 'Server configuration error' 
