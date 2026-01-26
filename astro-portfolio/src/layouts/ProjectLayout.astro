@@ -198,30 +198,33 @@ const {
         });
     }
     
-    // Project sidebar navigation
+    // Project sidebar navigation - оптимизировано с IntersectionObserver
     const sections = document.querySelectorAll('section[id]');
     const sidebarLinks = document.querySelectorAll('.project-sidebar__link');
     
-    function setActiveNav() {
-        let current = '';
+    // Используем IntersectionObserver вместо scroll event для лучшей производительности
+    if (sections.length > 0 && sidebarLinks.length > 0) {
+        const observerOptions = {
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
         
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-            if (window.pageYOffset >= sectionTop - 200) {
-                current = section.getAttribute('id') || '';
-            }
-        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    sidebarLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
         
-        sidebarLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
+        sections.forEach(section => observer.observe(section));
     }
-    
-    window.addEventListener('scroll', setActiveNav);
-    setActiveNav();
     
     // Smooth scroll
     sidebarLinks.forEach(link => {
