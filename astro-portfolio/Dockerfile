@@ -11,6 +11,8 @@ FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY astro-portfolio/ .
 RUN npm run build
+RUN ls -la dist/
+RUN ls -la dist/client/ || echo "No client folder"
 
 # Production image with Node.js server
 FROM base AS runtime
@@ -20,7 +22,6 @@ ENV PORT=80
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/public ./dist/client
 
 EXPOSE 80
 CMD ["node", "./dist/server/entry.mjs"]
