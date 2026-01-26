@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
     return projects.map(project => ({
@@ -472,18 +474,6 @@ console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missi
 </ProjectLayout>
 
 <script>
-    const form = document.getElementById('betaForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(form as HTMLFormElement);
-            const data = Object.fromEntries(formData);
-            console.log('Заявка:', data);
-            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
-            (form as HTMLFormElement).reset();
-        });
-    }
-
     // Lightbox Gallery
     const lightbox = document.getElementById('screenshotLightbox');
     if (lightbox) {

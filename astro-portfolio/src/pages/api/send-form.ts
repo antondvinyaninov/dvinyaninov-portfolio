@@ -1,0 +1,95 @@
+import type { APIRoute } from 'astro';
+
+export const prerender = false;
+
+export const POST: APIRoute = async ({ request }) => {
+    try {
+        const data = await request.json();
+        
+        const botToken = import.meta.env.TELEGRAM_BOT_TOKEN;
+        const chatId = import.meta.env.TELEGRAM_CHAT_ID;
+        
+        if (!botToken || !chatId) {
+            console.error('Telegram credentials not configured');
+            return new Response(JSON.stringify({ 
+                success: false, 
+                error: 'Server configuration error' 
+            }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        // Форматируем сообщение для Telegram
+        let message = '🔔 <b>Новая заявка с сайта</b>\n\n';
+        
+        if (data.projectName) {
+            message += `📋 <b>Проект:</b> ${data.projectName}\n\n`;
+        }
+        
+        if (data.name) {
+            message += `👤 <b>Имя:</b> ${data.name}\n`;
+        }
+        
+        if (data.phone) {
+            message += `📱 <b>Телефон:</b> ${data.phone}\n`;
+        }
+        
+        if (data.email) {
+            message += `📧 <b>Email:</b> ${data.email}\n`;
+        }
+        
+        if (data.organization) {
+            message += `🏢 <b>Организация:</b> ${data.organization}\n`;
+        }
+        
+        if (data.message) {
+            message += `\n💬 <b>Сообщение:</b>\n${data.message}\n`;
+        }
+        
+        message += `\n⏰ ${new Date().toLocaleString('ru-RU')}`;
+        
+        // Отправляем в Telegram
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        
+        const response = await fetch(telegramUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'HTML',
+            }),
+        });
+        
+        const result = await response.json();
+        
+        if (!result.ok) {
+            console.error('Telegram API error:', result);
+            return new Response(JSON.stringify({ 
+                success: false, 
+                error: 'Failed to send message' 
+            }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        
+        return new Response(JSON.stringify({ success: true }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+    } catch (error) {
+        console.error('Error processing form:', error);
+        return new Response(JSON.stringify({ 
+            success: false, 
+            error: 'Internal server error' 
+        }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+};
