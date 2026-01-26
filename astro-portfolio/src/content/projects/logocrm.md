@@ -106,22 +106,30 @@ features:
       - "Безопасность данных"
 
 screenshots:
-  - title: "Дашборд с финансовой статистикой"
-    desc: "Полный обзор финансов центра"
+  - title: "Главная страница"
+    desc: "Дашборд с финансовой статистикой и обзором центра"
     gradient: "purple"
     large: true
-  - title: "Управление клиентами"
+    image: "/images/screenshots/logocrm/glavnaya.png"
+  - title: "Расписание занятий"
     gradient: "blue"
-  - title: "Календарь занятий"
+    image: "/images/screenshots/logocrm/schedule.png"
+  - title: "Список занятий"
     gradient: "green"
-  - title: "Карточка ребенка"
+    image: "/images/screenshots/logocrm/sessions.png"
+  - title: "Добавление занятия"
     gradient: "orange"
+    image: "/images/screenshots/logocrm/add-session.png"
   - title: "Финансовый учет"
     gradient: "yellow"
-  - title: "Профили специалистов"
-    desc: "Публичные страницы и управление командой"
+    image: "/images/screenshots/logocrm/finance.png"
+  - title: "Профиль специалиста"
+    desc: "Публичная страница и управление профилем"
     gradient: "indigo"
-    wide: true
+    image: "/images/screenshots/logocrm/profile.png"
+  - title: "Настройки системы"
+    gradient: "purple"
+    image: "/images/screenshots/logocrm/settings.png"
 
 roadmap:
   - title: "🚧 В разработке"
