@@ -166,7 +166,8 @@ const gradients = [
                                             src={project.data.projectImage} 
                                             alt={project.data.projectName} 
                                             class={`project__photo ${project.slug === 'logocrm' ? 'project__photo--top' : ''}`}
-                                            loading="lazy"
+                                            loading={index === 0 ? "eager" : "lazy"}
+                                            fetchpriority={index === 0 ? "high" : "auto"}
                                             decoding="async"
                                             width="800"
                                             height="800"
@@ -180,7 +181,7 @@ const gradients = [
                                                 src={project.data.projectLogo} 
                                                 alt={project.data.projectName} 
                                                 class="project__logo"
-                                                loading="lazy"
+                                                loading={index === 0 ? "eager" : "lazy"}
                                                 decoding="async"
                                             />
                                         )}
