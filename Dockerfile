@@ -1,52 +1,27 @@
-# Build Node.js API and serve static files with nginx
-FROM node:18-alpine
+FROM node:20-alpine AS base
+WORKDIR /app
 
-# Установка nginx и supervisor
-RUN apk add --no-cache nginx supervisor
+# Install dependencies
+FROM base AS deps
+COPY astro-portfolio/package.json astro-portfolio/package-lock.json ./
+RUN npm ci
 
-# Копируем и устанавливаем зависимости API
-WORKDIR /app/api
-COPY src/api/package.json package.json
-COPY src/api/package-lock.json package-lock.json
-RUN npm install --production
-COPY src/api/*.js ./
+# Build the app
+FROM base AS build
+COPY --from=deps /app/node_modules ./node_modules
+COPY astro-portfolio/ .
+RUN npm run build
+RUN ls -la dist/
+RUN ls -la dist/client/ || echo "No client folder"
 
-# Создаём .env файл с переменными окружения
-RUN echo "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}" > .env && \
-    echo "TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}" >> .env && \
-    echo "YANDEX_WEBMASTER_TOKEN=${YANDEX_WEBMASTER_TOKEN}" >> .env && \
-    echo "YANDEX_USER_ID=${YANDEX_USER_ID}" >> .env && \
-    echo "PORT=3001" >> .env
+# Production image with Node.js server
+FROM base AS runtime
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=80
 
-# Устанавливаем cronie для cron задач
-RUN apk add --no-cache cronie && \
-    echo "0 9 * * * cd /app/api && node seo-automation.js >> /var/log/seo-automation.log 2>&1" > /etc/crontabs/root && \
-    mkdir -p /var/log
-
-# Копируем статические файлы
-WORKDIR /usr/share/nginx/html
-COPY index.html ./
-COPY seo-dashboard.html ./
-COPY public/ ./public/
-COPY projects/ ./projects/
-
-# Создаем директории для src
-RUN mkdir -p ./src/css ./src/js ./src/assets ./src/fonts
-
-COPY src/css/ ./src/css/
-COPY src/js/ ./src/js/
-COPY src/assets/*.webp ./src/assets/
-COPY src/fonts/ ./src/fonts/
-
-# Настройка nginx
-COPY config/nginx.conf /etc/nginx/http.d/default.conf
-
-# Создаем директорию для логов nginx
-RUN mkdir -p /run/nginx
-
-# Настройка supervisor для запуска nginx, Node.js и cron
-COPY config/supervisord.conf /etc/supervisord.conf
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
 
 EXPOSE 80
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["node", "./dist/server/entry.mjs"]
