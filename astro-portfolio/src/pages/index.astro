@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import photoDesktop from '../assets/photo.webp';
+import photoMobile from '../assets/photo-mobile.webp';
 
 export const prerender = true;
 // Получаем проекты из content collections
@@ -106,9 +108,9 @@ const gradients = [
                     <div class="photo-orbit photo-orbit--3"></div>
                     <div class="photo-wrapper">
                         <picture>
-                            <source media="(max-width: 768px)" srcset="/src/assets/photo-mobile.webp" type="image/webp">
-                            <source srcset="/src/assets/photo.webp" type="image/webp">
-                            <img src="/src/assets/photo.webp" alt="Anton Dvinyaninov" class="hero-photo" loading="eager" fetchpriority="high" width="800" height="450">
+                            <source media="(max-width: 768px)" srcset={photoMobile.src} type="image/webp">
+                            <source srcset={photoDesktop.src} type="image/webp">
+                            <img src={photoDesktop.src} alt="Anton Dvinyaninov" class="hero-photo" loading="eager" fetchpriority="high" width="800" height="450">
                         </picture>
                     </div>
                 </div>

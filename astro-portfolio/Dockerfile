@@ -3,13 +3,13 @@ WORKDIR /app
 
 # Install dependencies
 FROM base AS deps
-COPY astro-portfolio/package.json astro-portfolio/package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 # Build the app
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
-COPY astro-portfolio/ .
+COPY . .
 RUN npm run build
 RUN ls -la dist/
 RUN ls -la dist/client/ || echo "No client folder"
