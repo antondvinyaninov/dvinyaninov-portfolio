@@ -534,15 +534,15 @@ const gradients = [
                 </div>
             </div>
             <div class="contact__form-wrapper">
-                <form class="contact__form">
+                <form class="contact__form" id="contactForm">
                     <div class="form__group">
-                        <input type="text" class="form__input" placeholder="Ваше имя" required>
+                        <input type="text" name="name" class="form__input" placeholder="Ваше имя" required>
                     </div>
                     <div class="form__group">
-                        <input type="text" class="form__input" placeholder="Телефон или Email" required>
+                        <input type="text" name="phone" class="form__input" placeholder="Телефон или Email" required>
                     </div>
                     <div class="form__group">
-                        <textarea class="form__textarea" placeholder="Расскажите о проекте..." rows="6" required></textarea>
+                        <textarea name="message" class="form__textarea" placeholder="Расскажите о проекте..." rows="6" required></textarea>
                     </div>
                     <button type="submit" class="form__submit">
                         <span>Отправить</span>
