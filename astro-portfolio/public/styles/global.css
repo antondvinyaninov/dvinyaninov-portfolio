@@ -2009,6 +2009,38 @@ body {
         min-height: 300px;
     }
     
+    /* Отключаем 3D эффект на мобильных */
+    .project-3d .project__inner {
+        transform: none !important;
+        transform-style: flat;
+    }
+    
+    .project-3d.flipped .project__inner {
+        transform: none !important;
+    }
+    
+    .project__back {
+        display: none !important;
+    }
+    
+    .project__front {
+        position: relative !important;
+        backface-visibility: visible !important;
+    }
+    
+    /* Делаем всю карточку кликабельной ссылкой */
+    .project {
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .project::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+    }
+    
     .work__more-card {
         grid-column: span 1;
         aspect-ratio: 1 / 1;

@@ -831,3 +831,24 @@ const gradients = [
     }
 }
 </style>
+
+<script>
+// Делаем карточки проектов кликабельными на мобильных
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.project-3d').forEach(card => {
+        const link = card.querySelector('.project__link') as HTMLAnchorElement;
+        if (link) {
+            const href = link.getAttribute('href');
+            if (href) {
+                (card as HTMLElement).style.cursor = 'pointer';
+                
+                card.addEventListener('click', (e) => {
+                    // Не переходим, если кликнули на саму ссылку
+                    if ((e.target as HTMLElement).closest('.project__link')) return;
+                    window.location.href = href;
+                });
+            }
+        }
+    });
+}
+</script>
