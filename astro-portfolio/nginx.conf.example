@@ -58,6 +58,12 @@ server {
     location / {
         try_files $uri $uri.html $uri/ =404;
     }
+    
+    # Кастомная страница 404
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
 
     # Кеширование статических файлов
     location ~* \.(jpg|jpeg|png|gif|webp|svg|ico|css|js|woff|woff2|ttf|eot)$ {
