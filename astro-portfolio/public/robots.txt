@@ -7,4 +7,19 @@ Disallow: /fonts/
 Disallow: /scripts/
 Disallow: /_astro/
 
+# Блокируем технические параметры аналитики и трекинга
+Disallow: /*?gtm_latency=*
+Disallow: /*?utm_source=*
+Disallow: /*?utm_medium=*
+Disallow: /*?utm_campaign=*
+Disallow: /*?utm_term=*
+Disallow: /*?utm_content=*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+Disallow: /*?yclid=*
+Disallow: /*?_ga=*
+Disallow: /*?_ym_*
+Disallow: /*?mc_cid=*
+Disallow: /*?mc_eid=*
+
 Sitemap: https://dvinyaninov.ru/sitemap.xml
