@@ -22,4 +22,37 @@ Disallow: /*?_ym_*
 Disallow: /*?mc_cid=*
 Disallow: /*?mc_eid=*
 
+# Разрешаем доступ для ИИ-ботов
+User-agent: GPTBot
+Allow: /
+Allow: /ai.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /ai.txt
+
+User-agent: CCBot
+Allow: /
+Allow: /ai.txt
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /ai.txt
+
+User-agent: Claude-Web
+Allow: /
+Allow: /ai.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /ai.txt
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /ai.txt
+
+User-agent: Bytespider
+Allow: /
+Allow: /ai.txt
+
 Sitemap: https://dvinyaninov.ru/sitemap.xml
