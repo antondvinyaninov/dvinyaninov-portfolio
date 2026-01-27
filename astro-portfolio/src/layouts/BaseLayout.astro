@@ -36,6 +36,11 @@ const currentUrl = canonical || Astro.url.href;
     <meta name="author" content={author}>
     <link rel="canonical" href={currentUrl}>
     
+    <!-- AI Meta Tags -->
+    <meta name="ai:summary" content={description}>
+    <meta name="ai:category" content="Web Development, UI/UX Design, Full-stack Development">
+    <meta name="ai:contact" content="anton@dvinyaninov.ru">
+    
     <!-- Open Graph -->
     <meta property="og:type" content={ogType}>
     <meta property="og:title" content={title}>
@@ -78,7 +83,8 @@ const currentUrl = canonical || Astro.url.href;
         "Vue.js",
         "Node.js",
         "Laravel",
-        "Go"
+        "Go",
+        "Tilda"
       ],
       "alumniOf": {
         "@type": "Organization",
