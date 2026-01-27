@@ -1059,7 +1059,7 @@
     }
     
     .project-hero__title {
-        font-size: clamp(18px, 4.5vw, 56px);
+        font-size: clamp(28px, 7vw, 56px);
         margin-bottom: var(--spacing-lg);
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -1069,11 +1069,11 @@
     
     .project-hero__label {
         margin-bottom: var(--spacing-md);
-        font-size: 10px;
+        font-size: 11px;
     }
     
     .project-hero__desc {
-        font-size: 14px;
+        font-size: 15px;
         margin-bottom: var(--spacing-xl);
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -1087,10 +1087,7 @@
     }
     
     .project-hero__logo {
-        max-width: 28px;
-        max-height: 28px;
-        min-width: 28px;
-        flex-shrink: 0;
+        display: none;
     }
     
     .project-hero__info,
