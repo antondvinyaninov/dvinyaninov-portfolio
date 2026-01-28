@@ -7,7 +7,6 @@ const html = document.documentElement;
 if (themeToggle) {
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.setAttribute('data-theme', savedTheme);
-    console.log('🎨 Theme initialized:', savedTheme);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = html.getAttribute('data-theme');
@@ -15,10 +14,7 @@ if (themeToggle) {
         
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        console.log('🎨 Theme switched to:', newTheme);
     });
-} else {
-    console.error('❌ Theme toggle button not found!');
 }
 
 // ============================================
@@ -108,14 +104,9 @@ function isMobileDevice() {
     return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-console.log('3D Projects found:', projects3d.length);
-console.log('Window width:', window.innerWidth);
-console.log('Is mobile:', isMobileDevice());
-
 projects3d.forEach((project, index) => {
     // На мобильных делаем всю карточку кликабельной ссылкой
     if (isMobileDevice()) {
-        console.log(`Project ${index}: Mobile mode`);
         project.style.cursor = 'pointer';
         project.addEventListener('click', (e) => {
             // Если кликнули не по ссылке - переходим на страницу проекта
@@ -129,15 +120,11 @@ projects3d.forEach((project, index) => {
         return; // Пропускаем 3D эффекты на мобильных
     }
     
-    console.log(`Project ${index}: Desktop mode - adding 3D flip`);
-    
     // Десктоп: 3D flip эффект
     project.addEventListener('click', (e) => {
-        console.log('Project clicked!', e.target);
         
         // Если кликнули по ссылке - не переворачиваем, даем ссылке сработать
         if (e.target.tagName === 'A' || e.target.closest('a')) {
-            console.log('Link clicked, not flipping');
             e.stopPropagation(); // Останавливаем всплытие события
             return;
         }
@@ -150,8 +137,6 @@ projects3d.forEach((project, index) => {
         if (inner) {
             inner.style.transform = '';
         }
-        
-        console.log('Flipped:', project.classList.contains('flipped'));
     });
     
     // 3D tilt эффект при наведении (только если не перевернута) - throttled
@@ -476,7 +461,6 @@ function initContactModal() {
                 message: formData.get('message')
             };
 
-            console.log('Форма отправлена:', data);
             alert('Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.');
             form.reset();
             closeModal();
@@ -510,8 +494,6 @@ function initContactForm() {
             submitBtn.innerHTML = '<span>Отправка...</span>';
             submitBtn.disabled = true;
             
-            console.log('Контактная форма:', { name, contact, description });
-            
             setTimeout(() => {
                 submitBtn.innerHTML = '<span>✓ Отправлено!</span>';
                 contactForm.reset();
@@ -531,6 +513,3 @@ if ('requestIdleCallback' in window) {
 } else {
     setTimeout(initContactForm, 1000);
 }
-
-console.log('🚀 Astro Portfolio loaded!');
-console.log('Made with ❤️ by Anton Dvinyaninov');
