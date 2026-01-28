@@ -74,7 +74,7 @@ console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missi
                         {about.audience.map((item, index) => (
                             <div class="audience-card">
                                 <div class="audience-card__number">{String(index + 1).padStart(2, '0')}</div>
-                                <h4 class="audience-card__title">{item.title}</h4>
+                                <h3 class="audience-card__title">{item.title}</h3>
                                 <p class="audience-card__desc">{item.desc}</p>
                             </div>
                         ))}
@@ -128,7 +128,7 @@ console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missi
                 {audience.map((item, index) => (
                     <div class="audience-card">
                         <div class="audience-card__number">{String(index + 1).padStart(2, '0')}</div>
-                        <h4 class="audience-card__title">{item.title}</h4>
+                        <h3 class="audience-card__title">{item.title}</h3>
                         <p class="audience-card__desc">{item.desc}</p>
                     </div>
                 ))}

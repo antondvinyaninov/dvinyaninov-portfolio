@@ -113,34 +113,23 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="theme-color" content="#0D4CD3">
     
-    <!-- DNS prefetch и preconnect для внешних ресурсов -->
+    <!-- DNS prefetch и preconnect для критичных ресурсов -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload критичных шрифтов для ускорения FCP/LCP -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" fetchpriority="high">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;7 00&display=swap"></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"></noscript>
     
+    <!-- DNS prefetch для некритичных внешних ресурсов (без preconnect для экономии) -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    
     <link rel="dns-prefetch" href="https://code.jivosite.com">
-    <link rel="preconnect" href="https://code.jivosite.com" crossorigin>
-    
     <link rel="dns-prefetch" href="https://mc.yandex.ru">
-    <link rel="preconnect" href="https://mc.yandex.ru" crossorigin>
-    
     <link rel="dns-prefetch" href="https://privacy-cs.mail.ru">
-    <link rel="preconnect" href="https://privacy-cs.mail.ru" crossorigin>
-    
     <link rel="dns-prefetch" href="https://top-fwz1.mail.ru">
-    <link rel="preconnect" href="https://top-fwz1.mail.ru" crossorigin>
-    
-    <!-- Preload критичных ресурсов -->
-    <link rel="preload" href="/images/projects/zooplatforma.webp" as="image" type="image/webp">
     
     <!-- Inline критичный CSS для мгновенного рендеринга -->
     <style>
