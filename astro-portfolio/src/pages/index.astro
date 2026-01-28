@@ -1064,6 +1064,11 @@ const gradients = [
     user-select: none;
     list-style: none;
     transition: all 0.3s ease;
+    gap: 16px;
+}
+
+.faq__question span {
+    flex: 1;
 }
 
 .faq__question::-webkit-details-marker {
@@ -1077,6 +1082,8 @@ const gradients = [
 .faq__icon {
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    max-width: 24px;
     flex-shrink: 0;
     transition: transform 0.3s ease;
 }
@@ -1124,6 +1131,7 @@ const gradients = [
     }
     
     .faq__question span {
+        flex: 1;
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
@@ -1137,6 +1145,7 @@ const gradients = [
         width: 20px;
         height: 20px;
         min-width: 20px;
+        max-width: 20px;
     }
 }
 </style>
