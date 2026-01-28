@@ -22,6 +22,58 @@ const {
 } = Astro.props;
 
 const currentUrl = canonical || Astro.url.href;
+
+// Подготовка Schema.org данных для отложенной загрузки
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Антон Двинянинов",
+  "jobTitle": "Full-stack разработчик и UI/UX дизайнер",
+  "url": "https://dvinyaninov.ru",
+  "email": "anton@dvinyaninov.ru",
+  "image": "https://dvinyaninov.ru/logo.svg",
+  "sameAs": [
+    "https://t.me/dvinyaninov",
+    "https://vk.com/dvinyaninov",
+    "https://dzen.ru/dvinyaninov",
+    "https://youtube.com/@dvinyaninov"
+  ],
+  "knowsAbout": [
+    "Web Development",
+    "UI/UX Design",
+    "Frontend Development",
+    "Backend Development",
+    "DevOps",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Vue.js",
+    "Node.js",
+    "Laravel",
+    "Go",
+    "Tilda"
+  ],
+  "alumniOf": {
+    "@type": "Organization",
+    "name": "Веб-разработка"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Фриланс"
+  }
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": currentUrl,
+  "author": {
+    "@type": "Person",
+    "name": author
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -56,75 +108,9 @@ const currentUrl = canonical || Astro.url.href;
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={ogImage}>
     
-    <!-- Schema.org -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Антон Двинянинов",
-      "jobTitle": "Full-stack разработчик и UI/UX дизайнер",
-      "url": "https://dvinyaninov.ru",
-      "email": "anton@dvinyaninov.ru",
-      "image": "https://dvinyaninov.ru/logo.svg",
-      "sameAs": [
-        "https://t.me/dvinyaninov",
-        "https://vk.com/dvinyaninov",
-        "https://dzen.ru/dvinyaninov",
-        "https://youtube.com/@dvinyaninov"
-      ],
-      "knowsAbout": [
-        "Web Development",
-        "UI/UX Design",
-        "Frontend Development",
-        "Backend Development",
-        "DevOps",
-        "JavaScript",
-        "TypeScript",
-        "React",
-        "Vue.js",
-        "Node.js",
-        "Laravel",
-        "Go",
-        "Tilda"
-      ],
-      "alumniOf": {
-        "@type": "Organization",
-        "name": "Веб-разработка"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Фриланс"
-      }
-    })} />
-    
-    <!-- WebPage Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": title,
-      "description": description,
-      "url": currentUrl,
-      "author": {
-        "@type": "Person",
-        "name": author
-      }
-    })} />
-    
     <link rel="icon" type="image/svg+xml" href="/logo.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="theme-color" content="#0D4CD3">
-    
-    <!-- DNS prefetch и preconnect для критичных ресурсов -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- DNS prefetch для некритичных внешних ресурсов (без preconnect для экономии) -->
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://code.jivosite.com">
-    <link rel="dns-prefetch" href="https://mc.yandex.ru">
-    <link rel="dns-prefetch" href="https://privacy-cs.mail.ru">
-    <link rel="dns-prefetch" href="https://top-fwz1.mail.ru">
     
     <!-- Inline критичный CSS для мгновенного рендеринга и предотвращения CLS -->
     <style>
@@ -178,12 +164,11 @@ const currentUrl = canonical || Astro.url.href;
         }
     </style>
     
-    <!-- Preload критичных шрифтов с font-display: swap -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap"></noscript>
+    <!-- Отложенная загрузка шрифтов (не блокирует FCP) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=optional" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=optional"></noscript>
     
-    <!-- Загружаем остальной CSS асинхронно -->
+    <!-- Асинхронная загрузка остального CSS -->
     <link rel="preload" href="/styles/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
     
@@ -245,5 +230,9 @@ const currentUrl = canonical || Astro.url.href;
     <!-- Defer скриптов для ускорения загрузки -->
     <script src="/scripts/main.js" is:inline defer></script>
     <script src="/scripts/telegram-forms.js" is:inline defer></script>
+    
+    <!-- Schema.org - отложенная загрузка для ускорения FCP -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 </body>
 </html>
