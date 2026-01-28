@@ -111,6 +111,13 @@ projects3d.forEach((project, index) => {
         
         // Переворачиваем карточку
         project.classList.toggle('flipped');
+        
+        // Очищаем inline стили от mousemove
+        const inner = project.querySelector('.project__inner');
+        if (inner) {
+            inner.style.transform = '';
+        }
+        
         console.log('Flipped:', project.classList.contains('flipped'));
     });
     

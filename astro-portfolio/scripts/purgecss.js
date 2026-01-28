@@ -52,6 +52,7 @@ const purgeCSSResults = await new PurgeCSS().purge({
       /hidden/,
       /visible/,
       /overflow/,
+      /flipped/, // Для 3D flip эффекта карточек
     ],
     deep: [
       /project__/,
