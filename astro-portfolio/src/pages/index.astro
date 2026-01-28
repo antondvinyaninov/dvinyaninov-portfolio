@@ -30,6 +30,9 @@ const gradients = [
     <!-- Preload hero image для LCP (только на десктопе, на мобильных hero скрыт) -->
     <link slot="head" rel="preload" as="image" href={photoDesktop.src} type="image/webp" media="(min-width: 769px)">
     
+    <!-- FAQ styles -->
+    <link slot="head" rel="stylesheet" href="/styles/faq.css">
+    
     <!-- ProfessionalService Schema -->
     <script type="application/ld+json" slot="head" set:html={JSON.stringify({
       "@context": "https://schema.org",
