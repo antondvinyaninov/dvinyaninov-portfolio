@@ -58,16 +58,21 @@
 }
 
 [data-theme="dark"] {
-    --bg: #0a0a0a;
-    --text: #ffffff;
-    --text-secondary: #a0a0a0;
-    --accent: #0D4CD3;
-    --accent-hover: #1557E5;
-    --border: #2a2a2a;
-    --card-bg: #151515;
-    --success: #3AAA35;
-    --warning: #FF9F3C;
-    --error: #D84339;
+    --bg: #0a0a0a !important;
+    --text: #ffffff !important;
+    --text-secondary: #a0a0a0 !important;
+    --accent: #0D4CD3 !important;
+    --accent-hover: #1557E5 !important;
+    --border: #2a2a2a !important;
+    --card-bg: #151515 !important;
+    --success: #3AAA35 !important;
+    --warning: #FF9F3C !important;
+    --error: #D84339 !important;
+}
+
+[data-theme="dark"] body {
+    background: var(--bg) !important;
+    color: var(--text) !important;
 }
 
 body {
@@ -2000,13 +2005,15 @@ body {
     .project {
         grid-column: span 1 !important;
         grid-row: span 1 !important;
-        min-height: 300px !important;
+        aspect-ratio: 1 / 1 !important;
+        height: auto !important;
     }
     
     .project:nth-child(1) {
         grid-column: span 1;
         grid-row: span 1;
-        min-height: 300px;
+        aspect-ratio: 1 / 1;
+        height: auto;
     }
     
     /* Отключаем 3D эффект на мобильных */
