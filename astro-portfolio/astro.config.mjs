@@ -10,6 +10,11 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone'
   }),
+  vite: {
+    css: {
+      postcss: './postcss.config.cjs',
+    },
+  },
   integrations: [
     sitemap({
       filter: (page) => 
