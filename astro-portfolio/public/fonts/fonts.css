@@ -1,3 +1,29 @@
-/* Шрифты загружаются через Google Fonts API в BaseLayout.astro */
-/* Space Grotesk 600, 700 и Space Mono 700 */
-/* Этот файл оставлен для совместимости */
+/* Локальные шрифты для максимальной производительности */
+
+/* Space Grotesk 600 */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-600.woff2') format('woff2');
+}
+
+/* Space Grotesk 700 */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-700.woff2') format('woff2');
+}
+
+/* Space Mono 700 */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-mono-700.woff2') format('woff2');
+}
+
