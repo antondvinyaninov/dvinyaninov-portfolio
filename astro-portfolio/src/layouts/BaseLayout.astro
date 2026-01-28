@@ -119,6 +119,11 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
+    <!-- Preload критичных шрифтов для ускорения FCP/LCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;7 00&display=swap"></noscript>
+    
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
@@ -136,6 +141,26 @@ const currentUrl = canonical || Astro.url.href;
     
     <!-- Preload критичных ресурсов -->
     <link rel="preload" href="/images/projects/zooplatforma.webp" as="image" type="image/webp">
+    
+    <!-- Inline критичные шрифты для мгновенной загрузки -->
+    <style>
+        /* Space Grotesk 600 и 700 - самые используемые веса */
+        /* Минимальный inline CSS для критичного рендеринга */
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: local('Space Grotesk SemiBold'), local('SpaceGrotesk-SemiBold');
+        }
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: local('Space Grotesk Bold'), local('SpaceGrotesk-Bold');
+        }
+    </style>
     
     <!-- Остальные шрифты загружаем асинхронно -->
     <link rel="preload" href="/fonts/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
