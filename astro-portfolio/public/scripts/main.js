@@ -515,6 +515,6 @@ if ('requestIdleCallback' in window) {
 }
 
 // Красивое приветствие в консоли
-console.log('%c🚀 Astro Portfolio', 'font-size: 20px; font-weight: bold; color: #0D4CD3;');
+console.log('%c👋 Добро пожаловать!', 'font-size: 20px; font-weight: bold; color: #0D4CD3;');
 console.log('%cMade with ❤️ by Anton Dvinyaninov', 'font-size: 14px; color: #666;');
 console.log('%c💼 Доступен для проектов', 'font-size: 12px; color: #3AAA35; font-weight: bold;');
