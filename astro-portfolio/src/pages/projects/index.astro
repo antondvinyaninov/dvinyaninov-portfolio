@@ -27,7 +27,29 @@ const filteredTechnologies = technologies.filter(tech =>
     title="Все проекты — Антон Двинянинов"
     description="Портфолио проектов: веб-разработка, UI/UX дизайн, SaaS-платформы и веб-приложения"
 >
-    <link slot="head" rel="stylesheet" href="/styles/projects.css">
+    <link slot="head" rel="stylesheet" href="/styles/projects.css?v=3">
+    <script slot="head">
+        console.log('🎨 Projects CSS version: v=3');
+        console.log('📁 CSS URL:', '/styles/projects.css?v=3');
+        
+        // Проверяем загруженные стили
+        window.addEventListener('load', () => {
+            const link = document.querySelector('link[href*="projects.css"]');
+            if (link) {
+                console.log('✅ Projects CSS loaded:', link.href);
+            } else {
+                console.error('❌ Projects CSS not found!');
+            }
+            
+            // Проверяем flex-direction
+            const container = document.querySelector('.projects-container');
+            if (container) {
+                const styles = window.getComputedStyle(container);
+                console.log('📐 Container flex-direction:', styles.flexDirection);
+                console.log('📐 Container display:', styles.display);
+            }
+        });
+    </script>
     <Header />
     
     <main class="projects-page">
