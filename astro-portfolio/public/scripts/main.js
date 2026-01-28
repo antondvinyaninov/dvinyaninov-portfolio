@@ -69,11 +69,15 @@ window.addEventListener('scroll', () => {
 // 3D ПРОЕКТЫ
 // ============================================
 const projects3d = document.querySelectorAll('.project-3d');
-const isMobile = window.innerWidth <= 768;
+
+// Функция проверки мобильного устройства
+function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
 projects3d.forEach(project => {
     // На мобильных делаем всю карточку кликабельной ссылкой
-    if (isMobile) {
+    if (isMobileDevice()) {
         project.style.cursor = 'pointer';
         project.addEventListener('click', (e) => {
             // Если кликнули не по ссылке - переходим на страницу проекта
@@ -91,6 +95,7 @@ projects3d.forEach(project => {
     project.addEventListener('click', (e) => {
         // Если кликнули по ссылке - не переворачиваем, даем ссылке сработать
         if (e.target.tagName === 'A' || e.target.closest('a')) {
+            e.stopPropagation(); // Останавливаем всплытие события
             return;
         }
         
