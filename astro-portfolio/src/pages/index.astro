@@ -27,8 +27,8 @@ const gradients = [
     description="Антон Двинянинов — профессиональный веб-разработчик и UI/UX дизайнер. Создаю современные сайты, веб-приложения и интерактивные цифровые продукты. Frontend, Backend, DevOps."
     ogImage="https://dvinyaninov.ru/og-image.webp"
 >
-    <!-- Preload hero image для LCP -->
-    <link slot="head" rel="preload" as="image" href={photoDesktop.src} type="image/webp">
+    <!-- Preload hero image для LCP (только на десктопе, на мобильных hero скрыт) -->
+    <link slot="head" rel="preload" as="image" href={photoDesktop.src} type="image/webp" media="(min-width: 769px)">
     
     <!-- ProfessionalService Schema -->
     <script type="application/ld+json" slot="head" set:html={JSON.stringify({
