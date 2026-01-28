@@ -1,5 +1,3 @@
-/* Google Fonts - Space Grotesk & Space Mono */
-/* Критичные веса загружаются в BaseLayout через preload */
-/* Некритичные веса - с display: optional для лучшей производительности */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=optional&family=Space+Mono:wght@400;700&display=swap');
-
+/* Шрифты загружаются через Google Fonts API в BaseLayout.astro */
+/* Space Grotesk 600, 700 и Space Mono 700 */
+/* Этот файл оставлен для совместимости */

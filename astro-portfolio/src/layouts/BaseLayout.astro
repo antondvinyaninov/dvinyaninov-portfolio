@@ -119,11 +119,6 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload критичных шрифтов для ускорения FCP/LCP -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" fetchpriority="high">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"></noscript>
-    
     <!-- DNS prefetch для некритичных внешних ресурсов (без preconnect для экономии) -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://code.jivosite.com">
@@ -131,142 +126,66 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="dns-prefetch" href="https://privacy-cs.mail.ru">
     <link rel="dns-prefetch" href="https://top-fwz1.mail.ru">
     
-    <!-- Inline критичный CSS для мгновенного рендеринга -->
+    <!-- Inline критичный CSS для мгновенного рендеринга и предотвращения CLS -->
     <style>
-        /* Критичные CSS переменные и базовые стили */
+        /* Критичный CSS для FCP/LCP */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
             --bg:#fff;--text:#1F2229;--text-secondary:#5D6066;--accent:#0D4CD3;--accent-hover:#0A3BA8;
-            --border:#E5E7EB;--card-bg:#F9FAFB;--bg-secondary:#F9FAFB;
-            --font-size-xs:12px;--font-size-sm:14px;--font-size-base:16px;--font-size-lg:18px;
-            --font-size-xl:20px;--font-size-2xl:24px;--font-size-3xl:32px;--font-size-4xl:40px;--font-size-5xl:48px;
-            --spacing-xs:4px;--spacing-sm:8px;--spacing-md:16px;--spacing-lg:24px;--spacing-xl:32px;
-            --spacing-2xl:40px;--spacing-3xl:48px;--spacing-4xl:64px;
-            --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;
+            --border:#E5E7EB;--card-bg:#F9FAFB;
+            --font-size-base:16px;--font-size-xl:20px;--font-size-5xl:48px;
+            --spacing-md:16px;--spacing-xl:32px;--spacing-4xl:64px;
+            --line-height-normal:1.5;--radius-lg:12px;
+            --shadow-md:0 4px 6px rgba(0,0,0,0.07);
         }
         body{
-            font-family:'Space Grotesk',sans-serif;
-            background:var(--bg);
-            color:var(--text);
-            overflow-x:hidden;
-            font-size:var(--font-size-base);
-            line-height:1.5;
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+            background:var(--bg);color:var(--text);overflow-x:hidden;
+            font-size:var(--font-size-base);line-height:var(--line-height-normal);
         }
-        .noise{
-            position:fixed;top:0;left:0;width:100%;height:100%;opacity:0.03;z-index:-1;
-            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E");
-        }
-        /* Критичные layout стили для предотвращения CLS */
         main{display:block;min-height:100vh}
-        .project-main{
-            max-width:1400px;
-            margin:0 auto;
-            padding:40px 60px;
+        .noise{position:fixed;top:0;left:0;width:100%;height:100%;opacity:0.03;z-index:-1;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E")}
+        .hero{min-height:100vh;padding:150px 60px 100px;display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-4xl);align-items:center;position:relative}
+        .hero__content{max-width:600px}
+        .hero__label{display:flex;align-items:center;gap:15px;margin-bottom:30px;font-size:14px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px}
+        .hero__line{width:40px;height:1px;background:var(--text-secondary)}
+        .hero__title{font-size:clamp(60px,12vw,110px);font-weight:900;line-height:1.1;margin-bottom:30px;letter-spacing:-2px}
+        .hero__title-line{display:block}
+        .hero__accent{color:var(--accent);font-style:italic}
+        .hero__desc{font-size:20px;color:var(--text-secondary);margin-bottom:50px;line-height:1.6}
+        .hero__skills{display:flex;gap:40px;margin-bottom:50px;flex-wrap:wrap}
+        .hero__skill{display:flex;flex-direction:column;gap:10px;transition:transform 0.3s ease}
+        .hero__skill-number{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-secondary)}
+        .hero__skill-text{font-size:16px;font-weight:600}
+        .hero__skill-line{width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
+        .hero__cta{display:inline-flex;align-items:center;gap:15px;padding:18px 35px;background:var(--accent);color:#fff;text-decoration:none;border-radius:var(--radius-lg);font-weight:600;transition:all 0.3s ease;box-shadow:var(--shadow-md)}
+        .hero__visual{display:flex;align-items:center;justify-content:center}
+        .photo-container{position:relative;width:400px;height:400px}
+        .photo-wrapper{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;z-index:2}
+        .hero-photo{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+        @media(max-width:768px){
+            .hero{grid-template-columns:1fr;padding:100px 40px 60px}
+            .hero__visual{order:-1;margin-bottom:40px}
+            .photo-container{width:300px;height:300px}
         }
-        .breadcrumbs{
-            margin:0 0 32px 0;
-            padding:0;
-            font-size:14px;
-            color:var(--text-secondary);
-        }
-        .breadcrumbs__list{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            list-style:none;
-            margin:0;
-            padding:0;
-        }
-        .breadcrumbs__item{display:inline}
-        .project-hero{
-            margin:0 0 80px 0;
-            padding:0;
-        }
-        .project-hero__content{
-            max-width:800px;
-        }
-        .project-hero__title-wrapper{
-            display:flex;
-            align-items:center;
-            gap:16px;
-            margin-bottom:16px;
-        }
-        .project-hero__logo{
-            max-width:80px;
-            max-height:80px;
-            width:auto;
-            height:auto;
-        }
-        .project-hero__label{
-            display:inline-block;
-            padding:8px 16px;
-            font-size:12px;
-            text-transform:uppercase;
-            letter-spacing:0.05em;
-            color:var(--accent);
-            background:rgba(13,76,211,0.1);
-            border-radius:4px;
-            margin-bottom:16px;
-        }
-        .project-hero__title{
-            font-size:clamp(48px,7vw,80px);
-            font-weight:700;
-            line-height:1.1;
-            margin-bottom:24px;
-        }
-        .project-hero__desc{
-            font-size:20px;
-            line-height:1.6;
-            color:var(--text-secondary);
-            margin-bottom:32px;
-        }
-        .project-hero__sidebar{
-            display:flex;
-            flex-direction:column;
-            gap:24px;
-        }
-        .back-link{
-            display:inline-flex;
-            align-items:center;
-            gap:8px;
-            color:var(--text-secondary);
-            text-decoration:none;
-            font-size:14px;
-            margin-bottom:32px;
-        }
-        /* Мобильные стили для предотвращения CLS */
-        @media (max-width:768px){
-            .project-main{padding:20px}
-            .breadcrumbs{margin:0 0 15px 0;font-size:12px}
-            .project-hero{margin-bottom:60px}
-            .project-hero__title{font-size:clamp(28px,7vw,56px);margin-bottom:16px}
-            .project-hero__desc{font-size:15px;margin-bottom:24px}
-            .project-hero__logo{display:none}
-            .project-hero__title-wrapper{gap:8px}
-        }
-        /* Space Grotesk 600 и 700 - самые используемые веса */
-        @font-face {
-            font-family: 'Space Grotesk';
-            font-style: normal;
-            font-weight: 600;
-            font-display: swap;
-            src: local('Space Grotesk SemiBold'), local('SpaceGrotesk-SemiBold');
-        }
-        @font-face {
-            font-family: 'Space Grotesk';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: local('Space Grotesk Bold'), local('SpaceGrotesk-Bold');
+        @media(max-width:480px){
+            .hero{padding:100px 20px 60px}
+            .hero__title{font-size:clamp(40px,12vw,60px)}
+            .hero__desc{font-size:16px}
+            .hero__skills{flex-wrap:wrap;gap:15px}
+            .hero__visual{display:none}
         }
     </style>
     
-    <!-- Остальные шрифты загружаем асинхронно -->
-    <link rel="preload" href="/fonts/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+    <!-- Preload критичных шрифтов с font-display: swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@700&display=swap"></noscript>
     
-    <!-- Загружаем CSS синхронно для предотвращения CLS -->
-    <link rel="stylesheet" href="/styles/global.css">
+    <!-- Загружаем остальной CSS асинхронно -->
+    <link rel="preload" href="/styles/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
     
     <!-- Named slot для дополнительных стилей -->
     <slot name="head" />
