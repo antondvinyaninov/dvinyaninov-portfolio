@@ -141,12 +141,20 @@ const {
 
     <main class="project-main">
         
-        <nav class="breadcrumbs">
-            <a href="/" class="breadcrumbs__link">Главная</a>
-            <span class="breadcrumbs__separator">/</span>
-            <a href="/projects/" class="breadcrumbs__link">Проекты</a>
-            <span class="breadcrumbs__separator">/</span>
-            <span class="breadcrumbs__current">{projectName}</span>
+        <nav class="breadcrumbs" aria-label="Навигационная цепочка">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item">
+                    <a href="/" class="breadcrumbs__link">Главная</a>
+                </li>
+                <li class="breadcrumbs__separator" aria-hidden="true">/</li>
+                <li class="breadcrumbs__item">
+                    <a href="/projects/" class="breadcrumbs__link">Проекты</a>
+                </li>
+                <li class="breadcrumbs__separator" aria-hidden="true">/</li>
+                <li class="breadcrumbs__item">
+                    <span class="breadcrumbs__current" aria-current="page">{projectName}</span>
+                </li>
+            </ol>
         </nav>
         
         <section class="project-hero">
