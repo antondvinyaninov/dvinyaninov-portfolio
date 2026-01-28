@@ -113,8 +113,21 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="theme-color" content="#0D4CD3">
     
-    <!-- DNS prefetch для внешних ресурсов -->
+    <!-- DNS prefetch и preconnect для внешних ресурсов -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <link rel="dns-prefetch" href="https://code.jivosite.com">
+    <link rel="preconnect" href="https://code.jivosite.com" crossorigin>
+    
+    <link rel="dns-prefetch" href="https://mc.yandex.ru">
+    <link rel="preconnect" href="https://mc.yandex.ru" crossorigin>
+    
+    <link rel="dns-prefetch" href="https://privacy-cs.mail.ru">
+    <link rel="preconnect" href="https://privacy-cs.mail.ru" crossorigin>
+    
+    <link rel="dns-prefetch" href="https://top-fwz1.mail.ru">
+    <link rel="preconnect" href="https://top-fwz1.mail.ru" crossorigin>
     
     <!-- Preload критичных шрифтов -->
     <link rel="preload" href="/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
@@ -160,7 +173,7 @@ const currentUrl = canonical || Astro.url.href;
     
     <!-- Google Tag Manager - отложенная загрузка -->
     <script is:inline>
-    // Загружаем GTM после взаимодействия пользователя или через 3 секунды
+    // Загружаем GTM после взаимодействия пользователя или с задержкой
     function loadGTM() {
         if (window.gtmLoaded) return;
         window.gtmLoaded = true;
@@ -172,13 +185,16 @@ const currentUrl = canonical || Astro.url.href;
         })(window,document,'script','dataLayer','GTM-NTP4Z73');
     }
     
+    // Определяем мобильное устройство
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     // Загружаем при первом взаимодействии
     ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(function(event) {
         window.addEventListener(event, loadGTM, { once: true, passive: true });
     });
     
-    // Или через 3 секунды если нет взаимодействия
-    setTimeout(loadGTM, 3000);
+    // Для мобильных - через 5 секунд, для десктопа - через 3 секунды
+    setTimeout(loadGTM, isMobile ? 5000 : 3000);
     </script>
     <!-- End Google Tag Manager -->
 </head>
