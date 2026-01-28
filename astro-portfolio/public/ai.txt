@@ -131,4 +131,4 @@ Backend: Laravel, Go, Node.js. Frontend: React, Next.js, Vue.js, Astro. Базы
 
 ---
 
-Последнее обновление: Январь 2025
+Последнее обновление: Январь 2026
