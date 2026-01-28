@@ -15,18 +15,22 @@ export default defineConfig({
       filter: (page) => 
         !page.includes('/api/') && 
         !page.includes('/#'),
-      changefreq: 'weekly',
-      lastmod: new Date(),
       serialize(item) {
-        // Настраиваем приоритеты для разных страниц
+        // Настраиваем приоритеты и частоту обновлений для разных страниц
         if (item.url === 'https://dvinyaninov.ru/') {
           item.priority = 1.0;
+          item.changefreq = 'weekly'; // Главная обновляется часто
+          item.lastmod = new Date();
         } else if (item.url === 'https://dvinyaninov.ru/projects/') {
           item.priority = 0.9;
+          item.changefreq = 'weekly'; // Список проектов обновляется часто
+          item.lastmod = new Date();
         } else if (item.url.includes('/projects/')) {
           item.priority = 0.8;
+          item.changefreq = 'monthly'; // Страницы проектов обновляются редко
         } else {
           item.priority = 0.7;
+          item.changefreq = 'monthly';
         }
         return item;
       },
