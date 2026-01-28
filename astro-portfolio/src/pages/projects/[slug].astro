@@ -15,6 +15,12 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { title, description, projectName, projectLabel, projectDesc, projectLogo, h1Title, projectType, projectClient, projectStatus, projectSite, projectYear, techStack, navigation, about, features, screenshots, roadmap, betaForm, seo, problem, solution, modules, petid, personas, architecture, metrics, beta, servicesSummary, hideSidebarForm, team, audience } = project.data;
 
+// Получаем похожие проекты (все кроме текущего, максимум 3)
+const allProjects = await getCollection('projects');
+const relatedProjects = allProjects
+    .filter(p => p.slug !== project.slug)
+    .slice(0, 3);
+
 // Динамическая нумерация секций
 let sectionNumber = 0;
 const getNextNumber = () => {
@@ -474,6 +480,48 @@ console.log('Screenshots:', screenshots ? `${screenshots.length} items` : 'missi
                         Отправить заявку
                     </button>
                 </form>
+            </div>
+        </section>
+    )}
+
+    <!-- Related Projects -->
+    {relatedProjects.length > 0 && (
+        <section id="related-projects" style="margin-top: 120px;">
+            <div class="section__header">
+                <span class="section__number">{getNextNumber()}</span>
+                <h2 class="section__title">Другие проекты</h2>
+            </div>
+            
+            <div class="related-projects-grid">
+                {relatedProjects.map((relatedProject) => (
+                    <a href={`/projects/${relatedProject.slug}/`} class="related-project-card">
+                        <div class="related-project-image">
+                            {relatedProject.data.projectImage ? (
+                                <img 
+                                    src={relatedProject.data.projectImage} 
+                                    alt={relatedProject.data.projectName}
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            ) : (
+                                <div class="related-project-placeholder"></div>
+                            )}
+                        </div>
+                        <div class="related-project-content">
+                            <div class="related-project-label">{relatedProject.data.projectLabel}</div>
+                            <h3 class="related-project-title">{relatedProject.data.projectName}</h3>
+                            <p class="related-project-desc">{relatedProject.data.projectDesc}</p>
+                            <div class="related-project-tech">
+                                {relatedProject.data.techStack.slice(0, 3).map(tech => (
+                                    <span class="tech-badge">{tech.name}</span>
+                                ))}
+                            </div>
+                            <span class="related-project-link">
+                                Смотреть проект →
+                            </span>
+                        </div>
+                    </a>
+                ))}
             </div>
         </section>
     )}
