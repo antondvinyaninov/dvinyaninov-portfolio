@@ -178,7 +178,53 @@ const currentUrl = canonical || Astro.url.href;
             padding:0;
         }
         .breadcrumbs__item{display:inline}
-        .project-hero{margin-bottom:80px}
+        .project-hero{
+            margin:0 0 80px 0;
+            padding:0;
+        }
+        .project-hero__content{
+            max-width:800px;
+        }
+        .project-hero__title-wrapper{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            margin-bottom:16px;
+        }
+        .project-hero__logo{
+            max-width:80px;
+            max-height:80px;
+            width:auto;
+            height:auto;
+        }
+        .project-hero__label{
+            display:inline-block;
+            padding:8px 16px;
+            font-size:12px;
+            text-transform:uppercase;
+            letter-spacing:0.05em;
+            color:var(--accent);
+            background:rgba(13,76,211,0.1);
+            border-radius:4px;
+            margin-bottom:16px;
+        }
+        .project-hero__title{
+            font-size:clamp(48px,7vw,80px);
+            font-weight:700;
+            line-height:1.1;
+            margin-bottom:24px;
+        }
+        .project-hero__desc{
+            font-size:20px;
+            line-height:1.6;
+            color:var(--text-secondary);
+            margin-bottom:32px;
+        }
+        .project-hero__sidebar{
+            display:flex;
+            flex-direction:column;
+            gap:24px;
+        }
         .back-link{
             display:inline-flex;
             align-items:center;
@@ -192,6 +238,11 @@ const currentUrl = canonical || Astro.url.href;
         @media (max-width:768px){
             .project-main{padding:20px}
             .breadcrumbs{margin:0 0 15px 0;font-size:12px}
+            .project-hero{margin-bottom:60px}
+            .project-hero__title{font-size:clamp(28px,7vw,56px);margin-bottom:16px}
+            .project-hero__desc{font-size:15px;margin-bottom:24px}
+            .project-hero__logo{display:none}
+            .project-hero__title-wrapper{gap:8px}
         }
         /* Space Grotesk 600 и 700 - самые используемые веса */
         @font-face {
