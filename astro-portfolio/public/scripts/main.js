@@ -78,31 +78,29 @@ projects3d.forEach(project => {
         project.addEventListener('click', (e) => {
             // Если кликнули не по ссылке - переходим на страницу проекта
             if (!e.target.closest('a')) {
-                const link = project.querySelector('.project__link');
-                if (link) {
-                    window.location.href = link.href;
+                const projectLink = project.querySelector('.project__link');
+                if (projectLink) {
+                    window.location.href = projectLink.href;
                 }
             }
         });
         return; // Пропускаем 3D эффекты на мобильных
     }
     
-    // Десктоп: 3D эффекты
-    let isFlipped = false;
-    
-    project.addEventListener('click', () => {
-        const inner = project.querySelector('.project__inner');
-        isFlipped = !isFlipped;
-        
-        if (isFlipped) {
-            inner.style.transform = 'rotateY(180deg)';
-        } else {
-            inner.style.transform = 'rotateY(0deg)';
+    // Десктоп: 3D flip эффект
+    project.addEventListener('click', (e) => {
+        // Если кликнули по ссылке - не переворачиваем, даем ссылке сработать
+        if (e.target.tagName === 'A' || e.target.closest('a')) {
+            return;
         }
+        
+        // Переворачиваем карточку
+        project.classList.toggle('flipped');
     });
     
+    // 3D tilt эффект при наведении (только если не перевернута)
     project.addEventListener('mousemove', (e) => {
-        if (!isFlipped) {
+        if (!project.classList.contains('flipped')) {
             const rect = project.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -114,14 +112,18 @@ projects3d.forEach(project => {
             const rotateY = (centerX - x) / 50;
             
             const inner = project.querySelector('.project__inner');
-            inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            if (inner) {
+                inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }
         }
     });
     
     project.addEventListener('mouseleave', () => {
-        if (!isFlipped) {
+        if (!project.classList.contains('flipped')) {
             const inner = project.querySelector('.project__inner');
-            inner.style.transform = 'rotateX(0) rotateY(0)';
+            if (inner) {
+                inner.style.transform = 'rotateX(0) rotateY(0)';
+            }
         }
     });
 });
