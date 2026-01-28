@@ -69,8 +69,25 @@ window.addEventListener('scroll', () => {
 // 3D ПРОЕКТЫ
 // ============================================
 const projects3d = document.querySelectorAll('.project-3d');
+const isMobile = window.innerWidth <= 768;
 
 projects3d.forEach(project => {
+    // На мобильных делаем всю карточку кликабельной ссылкой
+    if (isMobile) {
+        project.style.cursor = 'pointer';
+        project.addEventListener('click', (e) => {
+            // Если кликнули не по ссылке - переходим на страницу проекта
+            if (!e.target.closest('a')) {
+                const link = project.querySelector('.project__link');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            }
+        });
+        return; // Пропускаем 3D эффекты на мобильных
+    }
+    
+    // Десктоп: 3D эффекты
     let isFlipped = false;
     
     project.addEventListener('click', () => {
@@ -386,32 +403,6 @@ if (contactForm) {
         }, 1000);
     });
 }
-
-// ============================================
-// ПЕРЕВОРОТ КАРТОЧЕК ПРОЕКТОВ
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-3d');
-    
-    projectCards.forEach((card) => {
-        card.addEventListener('click', (e) => {
-            // Если кликнули по ссылке - не переворачиваем
-            if (e.target.tagName === 'A' || e.target.closest('a')) {
-                return;
-            }
-            
-            // Если карточка уже перевернута и кликнули по обратной стороне - не переворачиваем
-            if (card.classList.contains('flipped') && e.target.closest('.project__back')) {
-                return;
-            }
-            
-            // Переворачиваем только если кликнули по передней стороне
-            if (e.target.closest('.project__front')) {
-                card.classList.add('flipped');
-            }
-        });
-    });
-});
 
 console.log('🚀 Astro Portfolio loaded!');
 console.log('Made with ❤️ by Anton Dvinyaninov');

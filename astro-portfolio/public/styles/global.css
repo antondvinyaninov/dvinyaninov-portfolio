@@ -2028,17 +2028,10 @@ body {
         backface-visibility: visible !important;
     }
     
-    /* Делаем всю карточку кликабельной ссылкой */
+    /* Делаем всю карточку кликабельной на мобильных */
     .project {
         cursor: pointer;
         position: relative;
-    }
-    
-    .project::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 10;
     }
     
     .work__more-card {
