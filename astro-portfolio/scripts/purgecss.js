@@ -14,6 +14,7 @@ const purgeCSSResults = await new PurgeCSS().purge({
   safelist: {
     standard: [
       /^project-/,
+      /^projects-/,
       /^hero-/,
       /^nav-/,
       /^mobile-/,
@@ -42,6 +43,7 @@ const purgeCSSResults = await new PurgeCSS().purge({
       /^logo/,
       /^form-/,
       /^tech-/,
+      /^filter-/,
       /active/,
       /hover/,
       /focus/,
@@ -56,6 +58,7 @@ const purgeCSSResults = await new PurgeCSS().purge({
     ],
     deep: [
       /project__/,
+      /projects__/,
       /hero__/,
       /nav__/,
       /section__/,
@@ -71,6 +74,7 @@ const purgeCSSResults = await new PurgeCSS().purge({
       /footer__/,
       /error__/,
       /form__/,
+      /filter__/,
     ],
     greedy: [/--/],
   },
