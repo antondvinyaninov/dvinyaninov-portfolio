@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
+import lighthouse from 'astro-lighthouse';
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,6 +42,13 @@ export default defineConfig({
       },
       // Генерируем один файл sitemap.xml вместо sitemap-index.xml
       entryLimit: 50000,
-    })
+    }),
+    lighthouse({
+      // Настройки для Lighthouse
+      routes: [
+        '/',
+        '/projects/',
+      ],
+    }),
   ],
 });
