@@ -75,9 +75,14 @@ function isMobileDevice() {
     return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-projects3d.forEach(project => {
+console.log('3D Projects found:', projects3d.length);
+console.log('Window width:', window.innerWidth);
+console.log('Is mobile:', isMobileDevice());
+
+projects3d.forEach((project, index) => {
     // На мобильных делаем всю карточку кликабельной ссылкой
     if (isMobileDevice()) {
+        console.log(`Project ${index}: Mobile mode`);
         project.style.cursor = 'pointer';
         project.addEventListener('click', (e) => {
             // Если кликнули не по ссылке - переходим на страницу проекта
@@ -91,16 +96,22 @@ projects3d.forEach(project => {
         return; // Пропускаем 3D эффекты на мобильных
     }
     
+    console.log(`Project ${index}: Desktop mode - adding 3D flip`);
+    
     // Десктоп: 3D flip эффект
     project.addEventListener('click', (e) => {
+        console.log('Project clicked!', e.target);
+        
         // Если кликнули по ссылке - не переворачиваем, даем ссылке сработать
         if (e.target.tagName === 'A' || e.target.closest('a')) {
+            console.log('Link clicked, not flipping');
             e.stopPropagation(); // Останавливаем всплытие события
             return;
         }
         
         // Переворачиваем карточку
         project.classList.toggle('flipped');
+        console.log('Flipped:', project.classList.contains('flipped'));
     });
     
     // 3D tilt эффект при наведении (только если не перевернута)
