@@ -265,9 +265,8 @@ const currentUrl = canonical || Astro.url.href;
     <link rel="preload" href="/fonts/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
     
-    <!-- Загружаем CSS асинхронно для ускорения FCP -->
-    <link rel="preload" href="/styles/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
+    <!-- Загружаем CSS синхронно для предотвращения CLS -->
+    <link rel="stylesheet" href="/styles/global.css">
     
     <!-- Named slot для дополнительных стилей -->
     <slot name="head" />
