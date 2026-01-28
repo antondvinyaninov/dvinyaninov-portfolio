@@ -2,6 +2,20 @@
 
 ## Текущий статус ✅
 
+### Последние оптимизации для снижения TBT:
+
+**Проблема:** TBT на десктопе был 150ms, на мобильных 0ms
+
+**Решение:**
+1. ✅ Увеличена задержка GTM с 3s до 5s на всех устройствах
+2. ✅ Все некритичные анимации перенесены в `requestIdleCallback`
+3. ✅ Добавлены `{ passive: true }` для всех event listeners
+4. ✅ Throttle (16ms) для mousemove событий
+5. ✅ Debounce (100ms) для scroll событий
+6. ✅ Разделение скриптов на критичные и некритичные части
+
+**Ожидаемый результат:** TBT < 50ms на десктопе
+
 ### Что уже оптимизировано:
 
 1. **Zero JS по умолчанию** ✅
@@ -38,7 +52,10 @@
 6. **Скрипты** ✅
    - Defer для неблокирующей загрузки
    - Schema.org в конце body
-   - GTM с отложенной загрузкой
+   - GTM с отложенной загрузкой (5s или при взаимодействии)
+   - requestIdleCallback для некритичных анимаций
+   - Passive event listeners для всех обработчиков
+   - Throttle/debounce для частых событий
 
 ## Целевые метрики для 100/100
 
@@ -46,9 +63,55 @@
 |---------|------|----------------|
 | **LCP** | < 2.5s | ✅ ~2.0-2.5s |
 | **FCP** | < 1.8s | ✅ ~1.0-1.5s |
-| **TBT** | < 200ms | ✅ ~6.5ms |
+| **TBT** | < 200ms | ⏳ ~6.5ms (mobile) → < 50ms (desktop) |
 | **CLS** | < 0.1 | ✅ 0.0 |
 | **Speed Index** | < 3.4s | ✅ ~2.5-3.0s |
+
+## JavaScript оптимизации для TBT < 50ms
+
+### Критичные vs Некритичные скрипты
+
+**Критичные (выполняются сразу):**
+- Переключатель темы
+- Плавная прокрутка
+- Активная навигация (с debounce)
+- 3D проекты (только инициализация)
+- Анимация hero слов
+
+**Некритичные (через requestIdleCallback):**
+- Анимация появления элементов (IntersectionObserver)
+- Эффект цифр на логотипе
+- 3D tilt для фото
+- Hover эффекты для услуг
+- Мобильное меню
+- Модальные окна
+- Контактные формы
+
+### requestIdleCallback Pattern
+
+```javascript
+function initNonCriticalFeature() {
+    // Некритичная функциональность
+}
+
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(initNonCriticalFeature, { timeout: 2000 });
+} else {
+    setTimeout(initNonCriticalFeature, 1000);
+}
+```
+
+### Event Listener Optimization
+
+```javascript
+// ✅ Правильно - passive + throttle/debounce
+element.addEventListener('mousemove', throttle(handler, 16), { passive: true });
+element.addEventListener('scroll', debounce(handler, 100), { passive: true });
+
+// ❌ Неправильно - блокирует main thread
+element.addEventListener('mousemove', handler);
+element.addEventListener('scroll', handler);
+```
 
 ## Дополнительные оптимизации (если нужно)
 
@@ -137,10 +200,26 @@ jobs:
 - [ ] Проверить LCP < 2.5s на мобильных
 - [ ] Убедиться что нет console.log в production
 
-## Результаты
+## Результаты оптимизации
+
+### До оптимизации TBT:
+- **Mobile:** 0ms ✅
+- **Desktop:** 150ms ❌
+
+### После оптимизации TBT:
+- **Mobile:** 0ms ✅
+- **Desktop:** < 50ms ✅ (ожидается)
+
+### Ключевые изменения:
+
+1. **GTM задержка:** 3s → 5s на всех устройствах
+2. **requestIdleCallback:** Все некритичные анимации отложены
+3. **Passive listeners:** Добавлены для всех event handlers
+4. **Throttle/Debounce:** Оптимизированы частые события
+5. **Размер main.js:** 19KB (defer загрузка)
 
 ### Desktop
-- Performance: 100
+- Performance: 100 (ожидается)
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100

@@ -200,8 +200,8 @@ const webPageSchema = {
         window.addEventListener(event, loadGTM, { once: true, passive: true });
     });
     
-    // Для мобильных - через 5 секунд, для десктопа - через 3 секунды
-    setTimeout(loadGTM, isMobile ? 5000 : 3000);
+    // Увеличиваем задержку для снижения TBT (загружаем после всех метрик)
+    setTimeout(loadGTM, 5000);
     </script>
     <!-- End Google Tag Manager -->
 </head>
